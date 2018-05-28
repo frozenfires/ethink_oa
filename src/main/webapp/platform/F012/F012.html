@@ -1,0 +1,60 @@
+<!-- 修改密码 -->
+<div class="container ">
+  <div class="tranContent">
+  <div class="tabbable tranContent" style="text-align: center;">
+  
+			<form id="pwdForm" action="" method="post">
+			<div class="line-row " style="margin-top:100px; ">
+				<div class="">
+					<label class="control-label">原密码</label><input type="password"
+						class="text" name="PASSWORD" id="PASSWORD" />
+				</div><br/>
+				<div class="">
+					<label class="control-label">新密码</label> <input type="password"
+						class="text" name="NEWPASSWORD" id="NEWPASSWORD" />
+				</div><br/>
+				<div class="">
+					<label class="control-label">确认密码</label> <input type="password"
+						class="text" name="REPASSWORD" id="REPASSWORD" />
+				</div><br/>
+				
+				<div class="" style="margin-left:9%;">
+			        <a class="btn btn-primary" style="margin-top: 70px" id="build_cancel">取消</a>
+			        <a class="btn btn-primary" style="margin-top: 70px;margin-left:37%;" id="submit">确认</a>
+                </div>
+			</div>
+			
+			</form>
+		</div>
+  </div>
+ </div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+            </ul>
+          </div>
+          <div class="pull-right">
+            <ul class="nav">
+              <li class="submit">
+                <a id="submit" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">确定</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+<script type="text/javascript" src="<%=basePath%>/platform/F012/F012.js"></script>
+
+</body>
+</html>

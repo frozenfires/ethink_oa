@@ -1,0 +1,324 @@
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #efefef;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+     #pull_down {
+        background-image: url('../oa/appwork/upfile/pulldown.PNG');
+        margin-top: -15px;
+        margin-left: 98%;
+        width: 17px;
+        height: 17px;
+    }
+</style>
+
+<!-- 工单审验-->
+<div class="context_self" style="width: 99%;">
+<div class="title_self">工单审验<div id="pull_down"></div></div>
+	<div class=" line-row context_self" style="width:99%;margin-left:0.5%;">
+	`
+        <!--<div style="width: 98%">
+        <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+            <!--<span style="margin-left: 10px">查询条件</span>
+            <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+            <span style="margin-left: 10px">查询条件</span>
+            <div class="line-row" style="margin-left: 80%;width: 10px;">
+                <div id="pull_down"/>
+            </div>
+        </div>-->
+
+<form id="orgQueryForm" style="margin-bottom:0px;" >
+
+				<div class="">
+					<label class="control-label">工单号</label> 
+					<input type="text" name="Q_WORK_ID" id="Q_WORK_ID" class="text" maxlength="11" minlength="11"/>
+				</div>
+				<div class="">
+					<label class="control-label">工单类型</label>
+					<span name="Q_WORK_TYPE" id="Q_WORK_TYPE" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				</span>
+				</div>
+			    <div class="">
+					<label class="control-label">工单状态</label>
+					<span name="Q_WORK_STATUS" id="Q_WORK_STATUS" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				</span>
+				</div>
+				<div class="serch">
+					<label class="control-label">客户名称</label> 
+					<input type="text" name=Q_CUS_ORG_NAME id="Q_CUS_ORG_NAME" class="text">
+			    </div>
+			    <div class="serch">
+					<label class="control-label">设备编号</label> 
+					<input type="text" name="Q_DEVICE_ID" id="Q_DEVICE_ID" class="text">
+			    </div>
+			    <div class="serch">
+					<label class="control-label">设备类型</label>
+					<span name="Q_DEVICE_TYPE" id="Q_DEVICE_TYPE" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				</span>
+				</div>
+				<div class="serch">
+					<label class="control-label">设备型号</label>
+					<span name="Q_DEVICE_MODEL" id="Q_DEVICE_MODEL" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				</span>
+				</div>
+				<div class="serch">
+					<label class="control-label">申请起始时间</label>
+					<input id="Q_WORK_APPTIME_BEGIN" name="Q_WORK_APPTIME_BEGIN" size="16" type="text" placeholder="请点击选择时间" class="text"/>
+				</div>
+				<div class="serch">
+					<label class="control-label">申请截止时间</label>
+					<input id="Q_WORK_APPTIME_END" name="Q_WORK_APPTIME_END" size="16" type="text" placeholder="请点击选择时间" class="text"/>
+					 
+				</div>	
+				<div class="serch">
+					<label class="control-label">申请部门</label>
+					<span name="Q_PROPOSER_AREA" id="Q_PROPOSER_AREA" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				</span>
+				</div>
+				<div class="serch">
+					<label class="control-label">申请人</label> 
+					<input type="text" name="Q_PROPOSER_NAME" id="Q_PROPOSER_NAME" class="text">
+			    </div>
+			    <div class="serch">
+					<label class="control-label">接单人</label> 
+                  <input type="text" name="Q_RECVPERSON" id="Q_RECVPERSON" class="text">
+			    </div>
+			    <div class="serch">
+				<label class="control-label">审批部门</label>
+				<span name="Q_WORK_ASSIGN_DEPARTMENT" id="Q_WORK_ASSIGN_DEPARTMENT" class="select btn-group"> 
+				<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+				<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+				<ul class="dropdown-menu options"/></ul>
+       			</span>
+			</div>
+			<div class="serch">
+				<label class="control-label">审批人</label> 
+				<input type="text" name="Q_ASSIGN_NAME" id="Q_ASSIGN_NAME" class="text">
+			</div>
+			<div style="width: 99%;text-align: center;">
+				<button type="button"  name="org_search" id="org_search" class="btn btn-primary">查询</button>
+			</div>
+			</div>
+ </form>
+
+
+		<div class="context_box" style=" width: 99%;margin-left: 0.5%;padding-bottom: 10px;">
+		   	<div class="content-box" style="margin-bottom:0px;">
+		   	<div class="line-row" style="border-bottom: 1px solid #ccc;">
+                <div style="background-color: #00B83F;width: 5px;height: 12px;"></div>
+                <span style="margin-left: 10px">工单历史信息</span>
+            </div>
+   <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="orgInfo">
+	<thead>
+		<tr>
+			<th>工单号</th>
+			<th>工单类型</th>
+			<th>工单紧急度</th>
+			<th>工单状态</th>
+			<th>设备编号</th>
+			<th>设备名称</th>
+			<th>设备型号</th>
+			<th>设备类型</th>
+			<th>客户名称</th>
+			<th>提出申请时间</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody  align="center" id="temptable">
+		<tr>
+			<td colspan="7" class="dataTables_empty">........</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		
+	</tfoot>
+</table>
+ 
+
+
+
+
+
+
+</div>
+</div>
+
+<div class="context_box" style=" width: 99%;margin-left: 0.5%;padding-bottom: 10px;">
+		   	<div class="content-box" style="margin-bottom:0px;">
+		   	<div class="line-row" style="border-bottom: 1px solid #ccc;">
+                <div style="background-color: #00B83F;width: 5px;height: 12px;"></div>
+                <span style="margin-left: 10px">工单历史记录</span>
+            </div>
+			<!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+				<table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="queryHistoryResult">
+					<thead>
+						<tr>
+							<th>操作时间</th>
+							<th>操作人</th>
+							<th>操作类型</th>
+							<th>工单状态</th>
+							<th>意见/状态说明</th>
+							<th>接单人</th>
+							<th>处理详情</th>
+						</tr>
+					</thead>
+					<tbody align="center">
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table>
+
+			<!-- 构建表格结束 -->
+			</div>
+		</div>
+</div>
+
+
+
+</div>
+
+<!-- 弹出增加用户窗口 -->
+<div id="addOrgModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">增加区域</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="addOrgForm"  action="">
+  <div class="line-row ">
+
+  <div class="">
+    <label class="control-label" >区域名称</label>
+    <input type="text" name="ADDRESS_NAME" id="ADDRESS_NAME" class="text" maxlength="10" />
+  </div>
+  <div>
+  <label class="control-label" >上级区域名称</label>
+      <input type="text" readonly="readonly" name="ADDRESS_UPNAME" id="ADDRESS_UPNAME" class="text" maxlength="30" placeholder="请点击选择上级区域"> 
+  </div>
+  <div class="">
+    <label class="control-label"></label>
+    <input type="hidden" name="ADDRESS_hidden" id="ADDRESS_hidden" class="text" maxlength="20">
+  </div>
+  
+  <div id="menuContent" style="display:none" >
+     <ul id="treeDemo"  class="ztree"></ul>
+      <input type="hidden" name="BRACH_TREE" id="BRACH_TREE" class="text"/>
+  </div>
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="add_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+
+
+
+<!-- 弹出编辑用户窗口-->
+<div id="editOrgModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">编辑区域</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="editOrgForm"  action="">
+  <div class="line-row ">
+  
+  <div class="" sytle="align:right">
+       <label class="control-label">区域编号</label>
+    <input type="text" name="ADDRESS_ID" id="ADDRESS_ID" class="text" readonly="readonly" maxlength="10" />
+  </div>
+
+  <div class="">
+    <label class="control-label">区域名称</label>
+    <input type="text" name="ADDRESS_NAME" id="ADDRESS_NAME" class="text" maxlength="20">
+  </div>
+  
+  <div>
+  <label class="control-label" >上级区域名称</label>
+      <input type="text" readonly="readonly" name="ADDRESS_UPNAME" id="ADDRESS_UPNAME_EDIT" class="text" maxlength="30" > 
+  </div>
+  
+  <div class="">
+    <label class="control-label"></label>
+    <input type="hidden" name="ADDRESS_hidden" id="ADDRESS_hidden" class="text" maxlength="20">
+  </div>
+  
+  <div id="menuContent_edit" style="display:none" >
+     <ul id="treeDemo_EDIT"  class="ztree"></ul>
+      <input type="hidden" name="BRACH_TREE_EDIT" id="BRACH_TREE_EDIT" class="text"/>
+  </div>
+  
+
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="edit_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+</div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+              
+            </ul>
+          </div>
+          <div class=" pull-right">
+            <ul class="nav">
+          
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+   <script type="text/javascript" src="<%=basePath%>/oa/verify/verifyinfo.js"></script>
+   <script type="text/javascript" src="<%=basePath%>/oa/common/workHistory.js"></script>

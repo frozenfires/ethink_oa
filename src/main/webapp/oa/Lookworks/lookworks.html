@@ -1,0 +1,195 @@
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #e1e1e8;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+</style>
+<!--工单审批-->
+<div class="context_self show" style="width: 99%;">
+	<div class="title_self">工单详细情况</div>
+	<div class=" line-row context_self" style="width:99%;margin-left:0.5%;">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">基础信息</span>
+	    </div>
+		<div class="">
+			<label class="control-label">工单号</label> 
+			<input type="text" id="WORK_ID" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">工单类型</label>
+			<input type="text" id="WORK_TYPE_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">工单紧急度</label>
+			<input type="text" id="WORK_URGENT_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">工单状态</label>
+			<input type="text" id="WORK_STATUS_DESC" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">申请人</label>
+			<input type="text"  id="PROPOSER_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">申请人所属部门</label>
+			<input type="text"  id="PROPOSER_AREA" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">申请时间</label>
+			<input type="text"  id="WORK_APPTIME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">接单人</label>
+			<input type="text"  id="WORK_LASTDEAL_NAME" class="text"/>
+		</div>
+		<br/>
+        <div class="" style="width: 98%">
+            <label class="control-label">申请备注</label>
+            <textarea id="WORK_APPMARK" style="width: 80%;height: 30px;resize: none;" ></textarea>
+        </div>
+	</div>
+	<div class="line-row context_self" style="width:99%;margin-left:0.5%;display:none" id="deviceInfo">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">设备信息</span>
+	    </div>
+		<div class="">
+			<label class="control-label">设备编号</label> 
+			<input type="text"  id="DEVICE_NO" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">设备名称</label> 
+			<input type="text"  id="DEVICE_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">设备型号</label> 
+			<input type="text"  id="DEVICE_MODEL_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">设备类型</label> 
+			<input type="text"  id="DEVICE_TYPE_NAME" class="text"/>
+		</div>
+	</div>
+	<div class=" line-row context_self" style="width:99%;margin-left:0.5%;">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">客户信息</span>
+	    </div>
+		<div class="">
+			<label class="control-label">客户代号</label> 
+			<input type="text"  id="CUS_ORG_ID" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">客户名称</label> 
+			<input type="text"  id="CUS_ORG_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">联系人</label> 
+			<input type="text"  id="CUS_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">联系电话</label> 
+			<input type="text"  id="CUS_ORG_PHONE" class="text"/>
+		</div>
+		<br/>
+        <div class="" style="width: 98%">
+            <label class="control-label">客户地址</label>
+            <textarea id="CUS_ORG_ADDRESS" style="width: 80%;height: 30px;resize: none;" ></textarea>
+        </div>
+	</div>
+	<div class=" line-row context_self" style="width:99%;margin-left:0.5%;display:none" id="businessInfo">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">业务信息</span>
+	    </div>
+		<div style="display:none">
+			<label class="control-label">验收日期</label> 
+			<input type="text"  id="WORK_ACCEPT_TIME" class="text"/>
+		</div>
+		<div style="display:none">
+			<label class="control-label">验收类型</label> 
+			<input type="text"  id="WORK_ACCEPT_TYPE_DESC" class="text"/>
+		</div>
+		<div style="display:none">
+			<label class="control-label">培训日期</label> 
+			<input type="text"  id="WORK_TRAIN_TIME" class="text"/>
+		</div>
+		<div style="display:none">
+			<label class="control-label">故障发生时间</label> 
+			<input type="text"  id="WORK_REPAIR_TIME" class="text"/>
+		</div>
+		<div style="display:none">
+			<label class="control-label">故障类别</label> 
+			<input type="text"  id="FAULT_TYPE_DESC" class="text"/>
+		</div>
+		<div style="display:none">
+			<label class="control-label">设备型号</label> 
+			<input type="text"  id="INSTALL_DEVICE_MODEL_NAME" class="text"/>
+		</div>
+		<div style="display:none">
+			<label class="control-label">设备类型</label> 
+			<input type="text"  id="INSTALL_DEVICE_TYPE_NAME" class="text"/>
+		</div>
+		<br/>
+        <div class="" style="width:98%;display:none">
+            <label class="control-label">培训内容</label>
+            <textarea id="WORK_TRAIN_INFO" style="width: 80%;height: 30px;resize: none;" ></textarea>
+        </div>
+        <br/>
+        <div class="" style="width:98%;display:none">
+            <label class="control-label">巡检说明</label>
+            <textarea id="WORK_PARTOL_TYPE" style="width: 80%;height: 30px;resize: none;" ></textarea>
+        </div>
+        <br/>
+        <div class="" style="width:98%;display:none">
+            <label class="control-label">故障描述</label>
+            <textarea id="WORK_REPAIR_DESCRIBE" style="width: 80%;height: 30px;resize: none;" ></textarea>
+        </div>
+	</div>
+	<div class=" line-row context_self enclosure" style="width:99%;margin-left:0.5%;display:none">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">附件图片</span>
+	    </div>
+	    <div id="imageInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+            <div id="ImgShow" class="line-row" style="width: 97%">
+                <div id="_showimg" class="line-row" style="height:auto;width: 97%"/>
+            </div>
+        </div>
+	</div>
+	<div class=" line-row context_self enclosure" style="width:99%;margin-left:0.5%;display:none">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">附件文档</span>
+	    </div>
+	    <div id="fileInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+            <div id="fileShow" class="line-row" style="width: 97%">
+                <div id="_showfile" class="line-row" style="height:auto;width: 97%"/>
+            </div>
+        </div>
+	</div>
+	<div style="margin-top:30px;text-align:center">
+		<button class="btn btn-primary" id="RET">返回</button>
+	</div>
+</div>
+<script type="text/javascript" src="<%=basePath%>/oa/Lookworks/lookworks.js"></script>
+
+
+

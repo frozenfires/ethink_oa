@@ -1,0 +1,304 @@
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #e1e1e8;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+    #imgshowInfo{
+        border:none;
+        background-color: transparent;
+
+    }
+
+</style>
+<div class="context_self" style="width: 99%">
+    <div class="">
+        <div class="title_self">工单详细信息</div>
+        <form class="" id="lookworks" action="" method="post">
+            <div class="line-row show context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">基本信息</span>
+                </div>
+                <br/>
+
+                <div class="">
+                    <label class="control-label">工单编号</label>
+                    <input type="text" name="WORK_ID" id="WORK_ID" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+
+                <div class="">
+                    <label class="control-label">工单类型</label>
+                    <input type="text" name="WORK_TYPE_SHOW" id="WORK_TYPE_SHOW" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="">
+                    <label class="control-label">紧急程度</label>
+                    <input type="text" name="WORK_URGENT_SHOW" id="WORK_URGENT_SHOW" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+
+                <div class="">
+                    <label class="control-label">工单状态</label>
+                    <input type="text" name="WORK_STATUS" id="WORK_STATUS" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+
+
+                <div class="">
+                    <label class="control-label">所属部门</label>
+                    <input type="text" name="WORK_DEPARTMENT" id="WORK_DEPARTMENT" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+                <div class="">
+                    <label class="control-label">申请人</label>
+                    <input type="text" name="WORK_CREATER_ID" id="WORK_CREATER_ID" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+                <div class="">
+                    <label class="control-label">申请时间</label>
+                    <input type="text" name="WORK_APPTIME" id="WORK_APPTIME" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+                <br/>
+                <div class="" style="width: 98%">
+                    <label class="control-label">申请备注</label>
+                    <textarea type="text" name="WORK_APPMARK" id="WORK_APPMARK" style="width: 80%;height: 20px;resize: none;" readonly="readonly" ></textarea>
+                </div>
+
+
+            </div>
+            <div class="line-row show DevInfo context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">设备信息</span>
+                </div>
+                <br/>
+
+                <div class="DevInfo">
+                    <label class="control-label">设备编号</label>
+                    <input type="text" name="DEVICE_ID_P" id="DEVICE_ID_P" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+
+                <div class="DevInfo">
+                    <label class="control-label">设备名称</label>
+                    <input type="text" name="DEVICE_NAME" id="DEVICE_NAME" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+                <div class="DevInfo">
+                    <label class="control-label">设备型号</label>
+                    <input type="text" name="DEVICE_MODEL_SHOW" id="DEVICE_MODEL_SHOW" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+
+                <div class="DevInfo">
+                    <label class="control-label">设备类型</label>
+                    <input type="text" name="DEVICE_TYPE_SHOW" id="DEVICE_TYPE_SHOW" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="line-row show CustomerInfo context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">客户信息</span>
+                </div>
+                <br/>
+
+                <div class="CustomerInfo">
+                    <label class="control-label">网点编号</label>
+                    <input type="text" name="ORG_ID_P" id="ORG_ID_P" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="CustomerInfo">
+                    <label class="control-label">客户名称</label>
+                    <input type="text" name="ORG_NAME" id="ORG_NAME" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+
+
+
+                <div class="CustomerInfo">
+                    <label class="control-label">客户地址</label>
+                    <input type="text" name="ORG_ADDRESS" id="ORG_ADDRESS" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+
+                <div class="CustomerInfo">
+                    <label class="control-label">联系人</label>
+                    <input type="text" name="LINKMAN" id="LINKMAN" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+
+                <div class="CustomerInfo">
+                    <label class="control-label">联系电话</label>
+                    <input type="text" name="ORG_PHONE" id="ORG_PHONE" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="line-row show InstallInfo context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加业务信息：安装</span>
+                </div>
+                <br/>
+                <div class="InstallInfo">
+                    <label class="control-label">设备类型</label>
+                    <input type="text" name="WORK_INSTALL_TYPE_SHOW" id="WORK_INSTALL_TYPE_SHOW" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="InstallInfo">
+                    <label class="control-label">设备型号</label>
+                    <input type="text" name="WORK_INSTALL_MODEL_SHOW" id="WORK_INSTALL_MODEL_SHOW" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+
+            </div>
+            <div class="line-row RepairInfo show context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加业务信息：维修</span>
+                </div>
+                <br/>
+                <div class="RepairInfo">
+                    <label class="control-label">故障发生时间</label>
+                    <input id="WORK_REPAIR_TIME" size="16" type="text" name="WORK_REPAIR_TIME" readonly="readonly" class="text">
+
+                </div>
+                <div class="RepairInfo">
+                    <label class="control-label">故障类别</label>
+                    <input type="text" name="WORK_REPAIR_TYPE" id="WORK_REPAIR_TYPE" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="RepairInfo">
+                    <label class="control-label">故障描述</label>
+                    <input type="text" name="WORK_REPAIR_DESCRIBE" id="WORK_REPAIR_DESCRIBE" class="text" maxlength="11" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="line-row show PatrolInfo context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加业务信息：巡检</span>
+                </div>
+                <br/>
+                <div class="PatrolInfo">
+                    <label class="control-label">巡检说明</label>
+                    <textarea type="text" name="WORK_PARTOL_TYPE" id="WORK_PARTOL_TYPE" style="width: 80%;height: 60px;resize: none;" ></textarea>
+                </div>
+            </div>
+            <div class="line-row show MoveDevInfo context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加业务信息：移机</span>
+                </div>
+                <br/>
+                <div class="MoveDevInfo">
+                    <label class="control-label">客户代号</label>
+                    <input type="text" name="WORK_MOVEDEV_No" id="WORK_MOVEDEV_No" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="MoveDevInfo">
+                    <label class="control-label">客户名称</label>
+                    <input type="text" name="WORK_MOVEDEV_NAME" id="WORK_MOVEDEV_NAME" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="MoveDevInfo">
+                    <label class="control-label">客户地址</label>
+                    <input type="text" name="WORK_MOVEDEV_ADDRESS" id="WORK_MOVEDEV_ADDRESS" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="MoveDevInfo">
+                    <label class="control-label">联系人</label>
+                    <input type="text" name="WORK_MOVEDEV_CONTACTS" id="WORK_MOVEDEV_CONTACTS" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+                <div class="MoveDevInfo">
+                    <label class="control-label">联系电话</label>
+                    <input type="text" name="WORK_MOVEDEV_PHONE" id="WORK_MOVEDEV_PHONE" class="text" maxlength="11" readonly="readonly"/>
+
+                </div>
+            </div>
+            <div class="line-row show AcceptInfo context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加业务信息：验收</span>
+                </div>
+                <br/>
+                <div class="AcceptInfo">
+                    <label class="control-label">验收时间</label>
+                    <input id="WORK_ACCEPT_TIME" size="16" type="text" name="WORK_ACCEPT_TIME" readonly="readonly" class="text">
+                </div>
+                <div class="AcceptInfo">
+
+                    <label class="control-label">验收类型</label>
+                    <input id="WORK_ACCEPT_TYPE_SHOW" size="16" type="text" name="WORK_ACCEPT_TYPE_SHOW" readonly="readonly" class="text">
+
+                </div>
+            </div>
+            <div class="line-row show TrainInfo context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加业务信息：培训</span>
+                </div>
+                <br/>
+                <div class="TrainInfo">
+                    <label class="control-label">培训时间</label>
+                    <input id="WORK_TRAIN_TIME" size="16" type="text" name="WORK_TRAIN_TIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+
+                </div>
+                <div class="TrainInfo">
+                    <label class="control-label">培训内容</label>
+                    <textarea type="text" name="WORK_TRAIN_INFO" id="WORK_TRAIN_INFO" style="width: 80%;height: 60px;resize: none;" ></textarea>
+                </div>
+
+            </div>
+
+            <div id="imageInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加图片信息</span>
+                </div>
+                <br/>
+
+                <div id="ImgShow" class="line-row" style="width: 97%">
+                    <div id="_showimg" class="line-row" style="height:auto;width: 97%">
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="fileInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加文件信息</span>
+                </div>
+                <br/>
+
+                <div id="fileShow" class="line-row" style="width: 97%">
+                    <div id="_showfile" class="line-row" style="height:auto;width: 97%">
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <div id="imgshowInfo"class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <image id="bigimgshow" style="width: auto;height: auto;max-width: 80%;max-height: 80%;" src=""/>
+                <image id="closeimgshow" style="width: 42px;height: 42px;margin-top: -300px;" src="../oa/appwork/upfile/close.png"/>
+        </div>
+        <div style="text-align: center;padding-top: 20px;">
+            <a class="btn btn-primary" id="back">返回</a>
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript" src="<%=basePath%>/oa/Lookworks/lookworks.js"></script>
+</div>

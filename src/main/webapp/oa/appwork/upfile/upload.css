@@ -1,0 +1,27 @@
+.addImages{
+    display: inline-block;
+    width: 120px;
+    height: 100px;
+    position: relative;
+
+}
+
+#a01{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 100px;
+    opacity: 0;
+
+}
+
+#img{
+    margin-left:0px;
+    margin-top:5px;
+}
+/**
+.show_img{
+    width: 200px;
+    height: 200px;
+}*/

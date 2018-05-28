@@ -1,0 +1,166 @@
+
+html{overflow-x: hidden;}
+body{height:auto!important; height:500px; min-height:500px;  padding-top: 30px; padding-bottom: 100px;font-family: 宋体;}
+
+.xtest{border: 1px solid red}
+
+.header .header-right,.header span.orgName{display: none;}
+.header .userInfo{padding-top: 0px; padding-bottom: 0px;}
+.header span.tophtml{display: inline-block;}
+/**交易标题*/
+.header span.tophtml, span.tranName,
+.header .tranName,.header .orgName{font-family: 宋体; font-size: 19px; font-weight: 800; }
+.header .tranName{padding:1px 0px 1px 15px; margin:0px 0px 0px -30px; }
+.header .userInfo span{line-height: 23px; height: 23px; }
+
+/**主交易区域*/
+#mainContent{padding: 0px; padding-bottom: 200px;}
+
+/**hub菜单*/
+.hub{width:auto!important;  text-align: -webkit-center; padding-top: 17px;}
+.hub .hmenu4{text-align: left; margin-top:10px; width:768px; }
+.hub .hmenu4 .title{ width:80px; height:50px;line-height:50px;font-size:18px;font-family:宋体; }
+.hub .hmenu4 .title{vertical-align: top; display:inline-block; _zoom:1; *display:inline;}
+.hub .hmenu4 .title span{float:right;}
+.hub .hmenu4 .hgroup{padding-left: 3px; text-align: left; display:inline-block; _zoom:1;*display:inline;}
+.hub .hmenu4 .hgroup .hitem{width:680px; }
+.hub .hmenu4 .hgroup .hitem a{background-color: #009216;margin-right:0px;float:left;width:130px;height:40px;display:block;
+		line-height:40px;text-align:center;font-size:15px;font-family:宋体;color:#ffffff;text-decoration:none;
+		border:3px solid transparent; margin:0px 5px 5px 0px;}
+.hub .hmenu4 .hgroup .hitem a:hover{text-decoration:none;border:solid 3px #165B60;}
+.hub .hmenu4 .hgroup .hitem a.s{width:192px;}
+
+/**默认字体样式*/
+.font0{font-family: 宋体;font-size: 14px; font-weight: 200;}
+h4{font-family: 宋体;font-size: 14px; font-weight: 200;}
+h3{font-family: 宋体;font-size: 19px;}
+
+/**输入框整体样式*/
+input.text, input.date{width:160px; height:18px; line-height: 18px; border: solid 1px; border-color: #7F9DB9; 
+	color: #444444; font-size: 12px; font-family: 宋体; padding: 0;}
+
+/**单选框、复选框样式*/
+input.radio, input.checkbox{width:18px;}
+
+label{font-size: 12px; line-height: 18px;}
+
+/**下拉列表控件样式*/
+.dropdown-menu li a{line-height: 13px; font-size: 12px;}
+.select{padding: 0px; display:inline;}
+.select button.item, .btn-group button.item{height:20px; line-height: 20px; width:143px; background-color: #fff; color: #444444; 
+	border-top: solid 1px #7F9DB9; border-bottom: solid 1px #7F9DB9; ; border-left: solid 1px #7F9DB9;
+	font-family: 宋体; font-size: 11px; text-align: left; 
+	display:inline-block; _zoom:1;*display:inline;}
+.select .dropdown-toggle{height: 20px; width:20px; margin-top: 0px; margin-right: 1px; background:url(./images/caret.PNG);
+	border-top: solid 1px #7F9DB9; border-bottom: solid 1px #7F9DB9; ; border-right: solid 1px #7F9DB9;}
+.select .caret{margin-top:9px; background-color: #B7D3FC;}
+
+/** 行模式查询条件排列 */
+div.line-row{width:100%; padding-top: 9px;}
+div.line-row label{display:inline-block; _zoom:1;*display:inline;}
+/*div.line-row div{display:inline-block; _zoom:1;*display:inline; margin-left: 30px; margin-top:9px; width:290px;}*/
+div.line-row div{display:inline-block; _zoom:1;*display:inline; margin-left: 5px; width:250px;}
+div.line-row div label.control-label{width:90px; text-align: right;margin-right: 3px;}
+div.line-row div input,div.line-row div select{display:inline-block; _zoom:1;*display:inline; width:140px; padding: 0px; margin: 0px;}
+div.line-row input.smalltext{width:50px;}
+div.line-row .select,div.line-row .btn-group{margin-left: 0px; height:17px; border: 0px;}
+div.line-row .select .dropdown-toggle{margin-right: 1px; }
+div.line-row .select button.item{ width:122px; height: 20px; line-height:20px; margin: 2px 0px 2px 0px;}
+
+/**只作展示用的 值对行的展示 */
+div.onlyShow div.control-group{margin-bottom: 0px; height:30px; padding: 0px;}
+div.onlyShow div.control-group div.controls{padding-top: 5px; padding-left: 6px; font-size: 12px;}
+div.onlyShow div.control-group label{margin-top:2px;}
+
+/**control-group容器排列定义*/
+div.control-group, .form-horizontal .control-group{margin-bottom: 10px;}
+div.control-group div.controls{display: inline-block; _zoom:1; *display:inline;}
+div.control-group label.control-label, .form-horizontal label.control-label{width:120px; display: inline-block; _zoom:1; *display:inline;}
+
+
+/**警告框样式定义*/
+.alert {background-color: #D44A26;border-color: #D44A26;color: #FFF;}
+
+/**底部工具条定义*/
+.footer .footer-container,.footer .navbar-inner{background-color:#30134B; height:52px; vertical-align: top;}
+.footer-container{padding-top: 0px; padding-left:80px; padding-right:80px;}
+.footer li{width: 80px; text-align: center;}
+/**工具条按钮定义*/
+.footer .icontext{line-height: 30px; font-size: 18px; font-family: 宋体; color: #ffffff; width: 100%; cursor:pointer;}
+.footer a.icon{display:none; }
+/**图标分割线*/
+li.split{height: 26px; width:2px; margin: 2px 15px 0px 15px; background-color: #ffffff; }
+
+/**手风琴样式*/
+.loading {display: none;}
+.accordion h5{line-height: 20px; padding:3px; padding-left:6px; width: 100%; }
+.accordion {border: 1px solid #ccc; width:  100%;}
+.accordion li h5 a {background: #fff;border-bottom:1px solid #333;border-top:1px solid #ccc;color:#000;display:block;
+                    font-style: normal;margin: 0;padding:5px 10px; width:100%;}
+.accordion li.active h5 a {background:#fff;border-bottom:1px solid #036;border-top: 1px solid #9cf;text-shadow:0 -1px 2px #036, #9cf 0 1px 2px; width:100%;}
+.accordion li.locked h5 a {background: #fff;border-bottom:1px solid #630;border-top: 1px solid #fc9;text-shadow: 0 -1px 2px #630, #fc9 0 1px 2px; width:100%;}
+.accordion li h5 {margin: 0;padding:0;}
+.accordion .panel div{padding:10px; background: #fff;}
+
+/**弹出窗口样式定义*/
+/*.modal.fade.in{top:20%;}*/
+.modal-backdrop {_filter: alpha(opacity=60);}
+div.popwindow{left: 45%; width: 640px; top:-270px;}
+.modal-footer { padding: 14px 15px 15px; margin-bottom: 0; border-top: 1px solid #ddd; background-color: #fff;
+		text-align: right; box-shadow: inset 0 1px 0 #ffffff; *zoom: 1;}
+.modal-footer .btn{width:120px; font-family: 宋体; font-size: 18px; height:45px; margin-left: 10px;}
+.modal-header {padding: 9px 15px; border-bottom: 1px solid #eee; }
+.modal-header h3{font-size: 28;font-weight: 400}
+.modal-body { overflow-y: auto; max-height: 400px; width:auto;}
+.modal-body h3{font-weight: 400;}
+
+/**充满全屏的模态窗口*/
+.largeModal-backdrop{z-index: 1030;}
+.largeModal{position: absolute; left:0; top:0; width:100%; height:100%; margin-left: 0px; z-index: 1035; }
+
+/**内容边框*/
+.content-box{background:#fff;	border:1px solid #ccc;	margin-bottom:20px; padding-left: -20px;overflow:hidden; margin-top:5px;}
+
+/**标签页控件样式*/
+.tabStyle { text-align: center; font-size: 24px; width: 100%; background-color: #9F9AE7;
+    padding-top: 10px; padding-left: 20px; margin-bottom: 0px;
+}
+.tabStyle li{background-color: #9F9AE7; font-size: 19px; font-family: 宋体; color:#fff;}
+.tabStyle li.active{background-color:#000; color:#30134B;}
+.nav-tabs li a {color:#fff; *border: 1px solid #9F9AE7; *background-color: #9F9AE7; *filter: chroma(color=#30134B);}
+.tabStyle li.active a{color:#30134B;}
+.tab-pane{padding-top: 5px;}
+.nav-tabs li a:hover { color: #444444}
+
+/**按钮颜色定义*/
+.btn.btn-primary{background-color: #30134b;}
+
+/**去掉表格th的上边框background-color: #30134b; color:#fff;*/
+table th,.table th{background-color: #e3e4ff; color: #30134b; border-top-width: 0px; font-family: 宋体; font-size: 12px;}
+table td,.table td{font-family: 宋体; font-size: 12px; padding-top: 3px; padding-bottom: 2px; vertical-align: middle;}
+.table th,.table td{line-height: 16px; padding-bottom: 2px;}
+.table td input{font-size: 12px; margin-top: -3px; margin-bottom: -2px;}
+td input {width:100%; }
+
+/**余额查询样式*/
+.C003Table{max-width: 100%; background-color: #fff;border-collapse: collapse; border-spacing: 0;
+    border:0px solid #999;}
+.C003Table th{background-color: #9E9AE7; border:1px solid #fff; color: #fff;}
+.C003Table td{background-color: #E3E4FF; padding-top:3px; padding-bottom: 3px; border-color: #fff;}
+
+/**查询表单样式*/ 
+.queryForm{border-bottom: 0px solid #444444; padding-bottom: 15px; background-color: #E5DEFF;}
+
+/**居中*/
+.center{text-align:center}
+
+/*div居中*/
+.divauto {width:auto;margin:0 30px 0 30px;}
+
+/**错误提示信息样式*/
+label.error{color:#FF4400; width:237px; text-align: right;}
+
+ul.ztree {margin-top: 3px;margin-left: 30px;border: 1px solid #617775;background: #f0f6e4;width:220px;height:240px;overflow-y:scroll;overflow-x:auto;}
+
+/**交易确认交易截图宽度*/
+.sourceTran{width:768px;}

@@ -1,0 +1,4 @@
+1.使用时请更改etoa.war、activity.war数据库连接
+2.请在tomcat中部署并运行activity.war,并在activity项目中部署工作流文件（work-form-v7.zip）
+3.请在数据库中运行etoa_create.sql、etoa_insert.sql的解压后数据库脚本
+4.待工作流文件、数据库脚本部署完毕后，请启新tomcat容器，部署运行etoa.war，注意项目端口冲突。

@@ -1,0 +1,444 @@
+<!-- 工单申请-->
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #e1e1e8;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    #imgshowInfo{
+        border:none;
+        background-color: transparent;
+
+    }
+
+
+</style>
+
+<div class="context_self" style="width: 99%;">
+    <div class="title_self" style="">新建工单</div>
+
+
+    <form class="addworksForm" id="addworksForm" action="" method="post" enctype="multipart/form-data">
+        <div class="line-row context_self" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">基本信息</span>
+            </div>
+            <br/>
+            <div class="">
+                <label class="control-label">工单编号</label>
+                <input type="text" name="WORK_ID" id="WORK_ID" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+
+            <div class="">
+                <label class="control-label"><span style="color:red;">*</span>工单类型</label>
+                <span name="WORK_TYPE" id="WORK_TYPE" class="select btn-group">
+                            <button class="btn btn-mini item" id="" data-toggle="dropdown" value="">请选择</button>
+                            <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                            <ul class="dropdown-menu options"></ul>
+                        </span>
+            </div>
+            <div class="">
+                <label class="control-label"><span style="color:red;">*</span>紧急程度</label>
+                <span name="WORK_URGENT" id="WORK_URGENT" class="select btn-group">
+                          <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+                          <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                          <ul class="dropdown-menu options">
+                          </ul>
+                        </span>
+            </div>
+
+            <div class="">
+                <label class="control-label">工单状态</label>
+                <input type="text" name="WORK_STATUS" id="WORK_STATUS" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+
+
+            <div class="">
+                <label class="control-label">所属部门</label>
+                <input type="text" name="WORK_DEPARTMENT" id="WORK_DEPARTMENT" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+            <div class="">
+                <label class="control-label">申请人</label>
+                <input type="text" name="WORK_STAFF" id="WORK_STAFF" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+            <div class="">
+                <label class="control-label">申请时间</label>
+                <input type="text" name="WORK_APPTIME" id="WORK_APPTIME" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+            <br/>
+            <div class="" style="width: 98%">
+                <label class="control-label">申请备注</label>
+                <!--<input type="text" name="WORK_APPMARK" id="WORK_APPMARK" class="text"/>-->
+                <textarea type="text" name="WORK_APPMARK" id="WORK_APPMARK" style="width: 80%;height: 30px;resize: none;" ></textarea>
+            </div>
+        </div>
+        <div class="line-row context_self DevInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">设备信息</span></div>
+            <br/>
+            <div class="DevInfo">
+                <label class="control-label"><span style="color:red;">*</span>设备编号</label>
+                <input type="text" name="WORK_DEV_NO" id="WORK_DEV_NO" class="text" maxlength="11"/>
+
+            </div>
+            <a name="DevQuery" class="DevInfo btn btn-primary" id="DevQuery" style="width: auto;">查询</a>
+            <br/>
+            <div class="DevInfo">
+                <label class="control-label">设备名称</label>
+                <input type="text" name="WORK_DEV_NAME" id="WORK_DEV_NAME" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+            <div class="DevInfo">
+                <label class="control-label">设备型号</label>
+                <input type="text" name="WORK_DEV_MODEL" id="WORK_DEV_MODEL" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+
+            <div class="DevInfo">
+                <label class="control-label">设备类型</label>
+                <input type="text" name="WORK_DEV_TYPE" id="WORK_DEV_TYPE" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+
+            <div style="display: none">
+                <label class="control-label">工单所属区域</label>
+                <input type="text" name="ADDRESS_ID_P" id="ADDRESS_ID_P" class="text"/>
+            </div>
+        </div>
+        <div class="line-row context_self CustomerInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">客户信息</span></div>
+            <br/>
+            <div class="CustomerInfo">
+                <label class="control-label"><span style="color:red;">*</span>网点编号</label>
+                <input type="text" name="WORK_CUS_NO" id="WORK_CUS_NO" class="text" maxlength="11"/>
+
+            </div>
+            <div class="CustomerInfo">
+                <label class="control-label"><span style="color:red;">*</span>客户名称</label>
+                <input type="text" name="WORK_CUS_NAME" id="WORK_CUS_NAME" class="text" maxlength="11"/>
+
+            </div>
+            <a name="CUSQuery" class="btn btn-primary" id="CUSQuery" style="width: auto;">选择客户信息</a>
+
+            <br/>
+
+            <div class="CustomerInfo">
+                <label class="control-label">客户地址</label>
+                <input type="text" name="WORK_CUS_ADDRESS" id="WORK_CUS_ADDRESS" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+
+            <div class="CustomerInfo">
+                <label class="control-label">联系人</label>
+                <input type="text" name="WORK_CUS_CONTACTS" id="WORK_CUS_CONTACTS" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+
+            <div class="CustomerInfo">
+                <label class="control-label">联系电话</label>
+                <input type="text" name="WORK_CUS_PHONE" id="WORK_CUS_PHONE" class="text" maxlength="11" readonly="readonly"/>
+            </div>
+        </div>
+        <div class="line-row context_self InstallInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加业务信息：安装</span></div>
+            <br/>
+            <div class="InstallInfo">
+                <label class="control-label"><span style="color:red;">*</span>设备类型</label>
+                <span name="WORK_INSTALL_TYPE" id="WORK_INSTALL_TYPE" class="select btn-group">
+                      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+                      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                      <ul class="dropdown-menu options"/>
+                </span>
+            </div>
+            <div class="InstallInfo">
+                <label class="control-label"><span style="color:red;">*</span>设备型号</label>
+                <span name="WORK_INSTALL_MODEL" id="WORK_INSTALL_MODEL" class="select btn-group">
+                      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+                      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                      <ul class="dropdown-menu options">
+
+                      </ul>
+                    </span>
+            </div>
+        </div>
+        <div class="line-row context_self TrainInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加业务信息：培训</span></div>
+            <br/>
+            <div class="TrainInfo">
+                <label class="control-label"><span style="color:red;">*</span>培训时间</label>
+                <input id="WORK_TRAIN_TIME" size="16" type="text" name="WORK_TRAIN_TIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+
+            </div>
+            <div class="TrainInfo" style="width: 98%">
+                <label class="control-label"><span style="color:red;">*</span>培训内容</label>
+                <textarea type="text" name="WORK_TRAIN_INFO" id="WORK_TRAIN_INFO" style="width: 80%;height: 60px;resize: none;" ></textarea>
+            </div>
+
+        </div>
+        <div class="line-row context_self RepairInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加业务信息：维修</span></div>
+            <br/>
+            <div class="RepairInfo">
+                <label class="control-label"><span style="color:red;">*</span>故障发生时间</label>
+                <input id="WORK_REPAIR_TIME" size="16" type="text" name="WORK_REPAIR_TIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+
+            </div>
+            <div class="RepairInfo">
+                <label class="control-label"><span style="color:red;">*</span>故障类别</label>
+                <span name="WORK_REPAIR_TYPE" id="WORK_REPAIR_TYPE" class="select btn-group">
+                      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+                      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                      <ul class="dropdown-menu options"/>
+                </span>
+            </div>
+            <div class="RepairInfo">
+                <label class="control-label"><span style="color:red;">*</span>故障描述</label>     
+                <input type="text" name="WORK_REPAIR_DESCRIBE" id="WORK_REPAIR_DESCRIBE" class="text" maxlength="11"/>
+            </div>
+        </div>
+        <div class="line-row context_self PatrolInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加业务信息：巡检</span></div>
+            <br/>
+
+            <div class="PatrolInfo" style="width: 98%;">
+                <label class="control-label"><span style="color:red;">*</span>巡检说明</label>
+                <textarea type="text" name="WORK_PARTOL_TYPE" id="WORK_PARTOL_TYPE" style="width: 80%;height: 60px;resize: none;" ></textarea>
+
+            </div>
+        </div>
+        <div class="line-row context_self MoveDevInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加业务信息：移机</span></div>
+            <br/>
+
+            <div class="MoveDevInfo">
+                <label class="control-label"><span style="color:red;">*</span>客户代号</label>
+                <input type="text" name="WORK_MOVEDEV_No" id="WORK_MOVEDEV_No" class="text" maxlength="11"/>
+
+            </div>
+            <div class="MoveDevInfo">
+                <label class="control-label"><span style="color:red;">*</span>客户名称</label>
+                <input type="text" name="WORK_MOVEDEV_NAME" id="WORK_MOVEDEV_NAME" class="text" maxlength="11"/>
+            </div>
+            <a class="MoveDevInfo btn btn-primary" id="Move_CUSQuery" style="width: auto;">选择客户信息</a>
+            <br/>
+            <div class="MoveDevInfo">
+                <label class="control-label"><span style="color:red;">*</span>客户地址</label>
+                <input type="text" name="WORK_MOVEDEV_ADDRESS" id="WORK_MOVEDEV_ADDRESS" class="text" maxlength="11" readonly="readonly"/>
+
+            </div>
+            <div class="MoveDevInfo">
+                <label class="control-label"><span style="color:red;">*</span>联系人</label>
+                <input type="text" name="WORK_MOVEDEV_CONTACTS" id="WORK_MOVEDEV_CONTACTS" class="text" maxlength="11" readonly="readonly"/>
+
+            </div>
+            <div class="MoveDevInfo">
+                <label class="control-label"><span style="color:red;">*</span>联系电话</label>
+                <input type="text" name="WORK_MOVEDEV_PHONE" id="WORK_MOVEDEV_PHONE" class="text" maxlength="11" readonly="readonly"/>
+
+            </div>
+        </div>
+        <div class="line-row context_self AcceptInfo" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加业务信息：验收</span></div>
+            <br/>
+
+            <div class="AcceptInfo">
+                <label class="control-label"><span style="color:red;">*</span>验收时间</label>
+                <input id="WORK_ACCEPT_TIME" size="16" type="text" name="WORK_ACCEPT_TIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+            </div>
+            <div class="AcceptInfo">
+                <label class="control-label"><span style="color:red;">*</span>验收类型</label>
+                <span name="WORK_ACCEPT_TYPE" id="WORK_ACCEPT_TYPE" class="select btn-group">
+                          <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+                          <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                          <ul class="dropdown-menu options"></ul>
+                        </span>
+            </div>
+
+
+        </div>
+        <input id="filecount" value="" style="display: none">
+
+        <div class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加图片信息</span></div>
+            <br/>
+
+            <div id="ImgShow" class="line-row" style="width: 97%">
+                <div id="_showimg" class="line-row" style="height:auto;width: 97%">
+
+
+                    <div class="image_div" style=" position:relative;width: 130px;height: 130px;margin-left:20px;">
+                        <div style="position:absolute;width:100px;height:100px;left: 0px;top:0px;margin: 0 0;">
+                            <img style="position:absolute;width: 100px;height: 100px;left: 0px;top:0px;margin: 0 0;" src="../oa/appwork/upfile/upload-bj.png">
+                            <input style="position:absolute;width: 100px;height: 100px;left: 0px;top:0px;margin: 0 0;opacity: 0;" type="file" id="a01" class="filebtn" name="file"/>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+            <div>
+                <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                <span style="margin-left: 10px">附加文件信息</span>
+            </div>
+            <br/>
+
+            <div id="fileShow" class="line-row" style="width: 97%">
+                <div id="_showfile" class="line-row" style="height:auto;width: 97%">
+
+                    <!--<div  class="" style=" position:relative;width: 300px;height: 130px;margin-left:20px;background-color: #e9322d">-->
+                        <!--<div class="" style="position:absolute;width:100px;height:100px;left: 0px;top:0px;margin: 0 0;background-color: #0a246a">-->
+                            <!--<img style="width: 100px;height: 100px;" src=" ">-->
+                        <!--</div>-->
+                        <!--<div style="position:absolute;width:200px;height:130px;left: 100px;margin: 0 0;background-color: #1a9b00;">-->
+                            <!--<div >-->
+                                <!--文件名称:<span id=""></span>-->
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--上传时间:<span id="">20180507</span>-->
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--文件大小:<span id=""></span>-->
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--<a id="" style="color: #e9322d"></a>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                    <div class="file_div" style=" position:relative;width: 130px;height: 130px;margin-left:20px;">
+                        <div style="position:absolute;width:100px;height:100px;left: 0px;top:0px;margin: 0 0;">
+                            <img style="position:absolute;width: 100px;height: 100px;left: 0px;top:0px;margin: 0 0;" src="../oa/appwork/upfile/upload-bj.png">
+                            <input style="position:absolute;width: 100px;height: 100px;left: 0px;top:0px;margin: 0 0;opacity: 0;" type="file" id="a02" class="filebtn" name="file"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+    <div style="text-align: center">
+        <a class="btn btn-primary" id="build_cancel">取消</a>
+        <a class="btn btn-primary" id="submit">确认</a>
+    </div>
+
+
+    <div id="CustomInfo" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <h3 id="myModalLabel">选择客户信息  <a class="alert_closewindow"  id="window_close"></a></h3>
+
+        </div>
+        <div class="modal-body">
+            <div>
+                工单信息
+            </div>
+            <div class="content-box">
+                <!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+                <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="queryCustomerResult">
+                    <thead>
+                    <tr>
+
+                        <th>客户代号</th>
+                        <th>客户名称</th>
+                        <th>客户地址</th>
+                        <th>联系人</th>
+                        <th>联系电话</th>
+                    </tr>
+                    </thead>
+                    <tbody align="center" id="temptable">
+                    <tr>
+                        <td colspan="6" class="dataTables_empty">........</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+
+            </div>
+            <a id="window_confirm" class="btn btn-primary">确认</a>
+        </div>
+    </div>
+
+    <div id="Movedev_CusInfo" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <h3>选择客户信息 <a class="alert_closewindow" id="Movedev_window_close"></a></h3>
+
+        </div>
+        <div class="modal-body">
+            <div>
+                工单信息
+            </div>
+            <div class="content-box">
+                <!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+                <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="Movedev_queryResult">
+                    <thead>
+                    <tr>
+
+                        <th>客户代号</th>
+                        <th>客户名称</th>
+                        <th>客户地址</th>
+                        <th>联系人</th>
+                        <th>联系电话</th>
+                    </tr>
+                    </thead>
+                    <tbody align="center" id="Movedev_temptable">
+                    <tr>
+                        <td colspan="6" class="dataTables_empty">........</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+
+            </div>
+            <a id="Movedev_window_confirm" class="btn btn-primary">确认</a>
+        </div>
+
+
+    </div>
+
+    <div id="imgshowInfo"class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <image id="bigimgshow" style="width: auto;height: auto;max-width: 80%;max-height: 80%;" src=""/>
+        <image id="closeimgshow" style="width: 42px;height: 42px;margin-top: -300px;" src="../oa/appwork/upfile/close.png"/>
+    </div>
+    <script type="text/javascript" src="<%=basePath%>/oa/appwork/appwork.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/oa/appwork/upload.js"></script>
+
+
+</div>
+</div>

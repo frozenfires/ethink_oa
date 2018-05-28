@@ -1,0 +1,38 @@
+<div class="container ">
+    <div class="">
+
+        <div class="content-box">
+            <!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+            <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="queryResult">
+                <thead>
+                <tr>
+                    <th>工单号</th>
+                    <th>工单类型</th>
+                    <th>工单紧急度</th>
+                    <th>工单状态</th>
+                    <th>设备编号</th>
+                    <th>设备名称</th>
+                    <th>设备型号</th>
+                    <th>设备类型</th>
+                    <th>客户名称</th>
+                    <th>提出申请时间</th>
+                    <th>详细信息</th>
+                </tr>
+                </thead>
+                <tbody align="center" id="temptable">
+                <tr>
+                    <td colspan="8" class="dataTables_empty">........</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+
+
+
+
+
+        <script type="text/javascript" src="<%=basePath%>/oa/myworks/myworks.js"></script>
+    </div>
+</div>

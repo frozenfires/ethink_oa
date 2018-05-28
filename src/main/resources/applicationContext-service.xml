@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
+       default-lazy-init="true">
+
+    <description>Spring dao 配置</description>
+
+    <!--    <bean id="tcrcBaseFunctionDao" class="com.ebring.platform.config.IdFactoryBean">
+            <property name="clazz" value="com.ebring.tcrc.trans.base.dao.ITcrcBaseFunctionDao"></property>
+       </bean>
+       <bean id="tcrcBaseManageDao" class="com.ebring.platform.config.IdFactoryBean">
+            <property name="clazz" value="com.ebring.tcrc.trans.base.dao.ITcrcBaseManageDao"></property>
+       </bean> -->
+
+    <!-- 用户登录服务 -->
+    <bean id="loginService" class="com.ebring.tcrc.trans.login.LoginService"></bean>
+    <!-- 用户退出登录服务 -->
+    <bean id="logoutService" class="com.ebring.tcrc.trans.login.LogoutService"></bean>
+
+    <!-- SSO处理服务 -->
+    <bean id="SSOService" class="com.ebring.tcrc.trans.common.service.SSOService"></bean>
+
+    <!-- 公共查询分页服务 -->
+    <bean id="CommonQueryService" class="com.ebring.tcrc.trans.common.service.CommonQueryService">
+        <property name="queryService">
+            <map>
+                <entry key="TCRC_BASE_FUNCTION_DAO">
+                    <ref bean="ITcrcBaseFunctionDao"/>
+                </entry>
+                <entry key="TCRC_BASE_MANAGE_DAO">
+                    <ref bean="ITcrcBaseManageDao"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+
+    <!-- 公共处理(insert,update,delete)服务 -->
+    <bean id="CommonExecuteService" class="com.ebring.tcrc.trans.common.service.CommonExecuteService">
+        <property name="ExecuteService">
+            <map>
+                <entry key="TCRC_BASE_FUNCTION_DAO">
+                    <ref bean="ITcrcBaseFunctionDao"/>
+                </entry>
+                <entry key="TCRC_BASE_MANAGE_DAO">
+                    <ref bean="ITcrcBaseManageDao"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 公共金融提交服务 -->
+    <bean id="CommonFinanceService" class="com.ebring.tcrc.trans.common.service.CommonFinanceService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+        <property name="insertCashNoService" ref="InsertCashNoService"></property>
+    </bean>
+
+
+    <!-- 创建流水号服务 -->
+    <bean id="CreateSeqNoService" class="com.ebring.tcrc.trans.common.service.CreateSeqNoService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 公共写冠字号服务 -->
+    <bean id="InsertCashNoService" class="com.ebring.tcrc.trans.common.service.InsertCashNoService">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- 插入流水服务 -->
+    <bean id="InsertTranLogService" class="com.ebring.tcrc.trans.common.service.InsertTranLogService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+        <property name="insertCashNoService" ref="InsertCashNoService"></property>
+    </bean>
+
+    <!-- 修改流水服务 -->
+    <bean id="UpdateTranLogService" class="com.ebring.tcrc.trans.common.service.UpdateTranLogService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+
+    <!-- 插入异常流水服务 -->
+    <bean id="InsertTranExceptionService" class="com.ebring.tcrc.trans.common.service.InsertTranExceptionService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+
+    <!-- 查询异常流水服务 -->
+    <bean id="SelectTranExceptionService" class="com.ebring.tcrc.trans.common.service.SelectTranExceptionService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+
+    <!-- 写交易暂存信息服务 -->
+    <bean id="InsertTempTranInfoService" class="com.ebring.tcrc.trans.common.service.InsertTempTranInfoService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+
+    <!-- 修改交易暂存信息服务 -->
+    <bean id="UpdateTempTranInfoService" class="com.ebring.tcrc.trans.common.service.UpdateTempTranInfoService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+
+    <!-- 暂存交易处理 -->
+    <bean id="C008Service" class="com.ebring.tcrc.trans.c008.C008Service">
+        <property name="insertTranLogService" ref="InsertTranLogService"></property>
+        <property name="updateTempTranInfoService" ref="UpdateTempTranInfoService"></property>
+        <property name="commonFinanceService" ref="CommonFinanceService"></property>
+    </bean>
+
+    <!-- 故障清除服务 -->
+    <bean id="C002Service" class="com.ebring.tcrc.trans.c002.C002Service">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+
+    <!-- 故障发生时保存相关数据 -->
+    <bean id="DeviceErrorService" class="com.ebring.tcrc.trans.common.service.DeviceErrorService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+        <property name="insertTranExceptionService" ref="InsertTranExceptionService"></property>
+    </bean>
+
+    <!-- 插入设备信息服务 -->
+    <bean id="InsertDeviceInfoService" class="com.ebring.tcrc.trans.f006.service.InsertDeviceInfoService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="getDeviceInfoService" ref="GetDeviceInfoService"></property>
+    </bean>
+    <!-- 修改设备信息服务 -->
+    <bean id="UpdateDeviceInfoService" class="com.ebring.tcrc.trans.f006.service.UpdateDeviceInfoService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="getDeviceInfoService" ref="GetDeviceInfoService"></property>
+    </bean>
+    <!-- 删除设备信息服务 -->
+    <bean id="DeleteDeviceInfoService" class="com.ebring.tcrc.trans.f006.service.DeleteDeviceInfoService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 插入数据文件解析结果服务  -->
+    <bean id="insertDataByFileParseService" class="com.ebring.tcrc.trans.common.service.InsertDataByFileParseService">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- 增加角色服务 -->
+    <bean id="AddRoleService" class="com.ebring.tcrc.trans.f004.service.AddRoleService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+    <!-- 查询角色对应的资源服务 -->
+    <bean id="SelectRoleResourceService" class="com.ebring.tcrc.trans.f004.service.SelectRoleResourceService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 更新角色服务 -->
+    <bean id="UpdateRoleService" class="com.ebring.tcrc.trans.f004.service.UpdateRoleService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+    <!-- 删除角色服务 -->
+    <bean id="DeleteRoleService" class="com.ebring.tcrc.trans.f004.service.DeleteRoleService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 查询菜单服务 -->
+    <bean id="SelectMenuService" class="com.ebring.tcrc.trans.login.SelectMenuService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 插入长短款服务 -->
+    <bean id="InsertBadaccountService" class="com.ebring.tcrc.trans.common.service.InsertBadaccountService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+
+    <!-- TCP服务 
+   <bean id="TCPServer" class="com.ebring.tcrc.trans.communication.TCPServer" init-method="init" lazy-init="false">
+   	    <property name="getDeviceInfoService" ref="GetDeviceInfoService"></property>
+   	    <property name="port" value="8089"></property>
+   </bean>-->
+
+    <!-- TCP服务 -->
+    <bean id="SSOTCPServer" class="com.ebring.tcrc.trans.login.SSOTCPServer" lazy-init="false">
+        <property name="ip" value="200.100.49.62"></property>
+        <property name="port" value="14888"></property>
+    </bean>
+
+    <!-- 根据IP获取是否有权限服务 -->
+    <bean id="GetDeviceInfoService" class="com.ebring.tcrc.trans.communication.GetDeviceInfoService" init-method="init" lazy-init="false">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 单点 -->
+    <!--    <bean id="TCPServer" class="com.ebring.tcrc.trans.communication.TCPServer" init-method="init" lazy-init="false">
+               <property name="getDeviceInfoService" ref="GetDeviceInfoService"></property>
+               <property name="port" value="8089"></property>
+       </bean> -->
+
+    <bean id="SelectOrgTreeService" class="com.ebring.tcrc.trans.common.service.SelectOrgTreeService" lazy-init="false">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 服务器端推送服务 -->
+    <bean id="ServerPushService" class="com.ebring.tcrc.trans.pad.ServerPushService"/>
+
+    <bean id="PasswordManagerService" class="com.ebring.tcrc.trans.common.service.PasswordManagerService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 导出数据到Excel -->
+    <bean id="ExportToExcelService" class="com.ebring.tcrc.trans.common.service.ExportToExcelService">
+        <property name="CommonQueryService" ref="CommonQueryService"></property>
+    </bean>
+
+    <!-- 双柜员设备busy时判断上一次操作的终端IP是否是本终端 -->
+    <bean id="DeviceBusyService" class="com.ebring.tcrc.trans.common.service.DeviceBusyService"/>
+
+    <!-- 客户端日志处理服务 -->
+    <bean id="LogWriteService" class="com.ebring.tcrc.trans.common.service.LogWriteService">
+    </bean>
+
+    <!-- 设置锁屏状态服务 -->
+    <bean id="SetLockService" class="com.ebring.tcrc.userLock.SetLockService">
+    </bean>
+
+    <!-- 屏幕解锁身份验证 -->
+    <bean id="ValidateUserService" class="com.ebring.tcrc.userLock.ValidateUserService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 校验各个模块是否需要做时间判断服务 -->
+    <bean id="SystemUseTimeService" class="com.ebring.tcrc.trans.common.service.SystemUseTimeService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 系统使用时间模块增加数据并且判断是否重复增加服务 -->
+    <bean id="SystemUseTimeInsertService" class="com.ebring.tcrc.trans.f014.service.SystemUseTimeInsertService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 系统使用时间模块修改数据并且判断修改后数据是否重复提交服务 -->
+    <bean id="SystemUseTimeUpdateService" class="com.ebring.tcrc.trans.f014.service.SystemUseTimeUpdateService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 用户交接服务 -->
+    <bean id="UserHandoverService" class="com.ebring.tcrc.trans.f015.UserHandoverService">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 前屏接受服务  -->
+    <bean id="FrontScreenReceiver" class="com.ebring.selfmng.trans.FrontScreenReceiver">
+        <property name="tcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+    </bean>
+
+    <!-- 凭证类型服务  -->
+    <bean id="saveVouchTypeService" class="com.ebring.selfmng.trans.vouchtype.VouchTypeService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+    </bean>
+    <!-- 凭证类型分配服务 -->
+    <bean id="VoucherTypeAllocService" class="com.ebring.selfmng.trans.vouchtype.VoucherTypeAllocService">
+        <property name="tcrcBaseFunctionDao" ref="ITcrcBaseFunctionDao"></property>
+   </bean>
+   
+   
+
+    <bean id="CurrentTaskService" class="com.ebring.oa.trans.CurrentTaskService">
+         <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+    
+    <bean id="HistoryCommentService" class="com.ebring.oa.trans.HistoryCommentService">
+         <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+    <!-- 工单查询 -->
+    <bean id="WorkOrderService" class="com.ebring.oa.trans.WorkOrderService">
+        <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+    <!--  -->
+     <bean id="MailUtil" class="com.ebring.oa.mail.MailUtil">
+    </bean>
+    
+    
+  
+  <bean id="TimeOutEventDeal" class="com.ebring.oa.schedule.TimeOutEventDeal">
+       <property name="outTimeMailSend" ref="OutTimeMailSend"></property>
+        <property name="overinSuranceMailSend" ref="OverinSuranceMailSend"></property>
+    </bean> 
+  
+    <bean id="OACustomerInfoServicre" class="com.ebring.tcrc.trans.common.service.OACustomerInfoServicre">
+        <property name="ExecuteService">
+            <map>
+                <entry key="TCRC_BASE_FUNCTION_DAO">
+                    <ref bean="ITcrcBaseFunctionDao"/>
+                </entry>
+                <entry key="TCRC_BASE_MANAGE_DAO">
+                    <ref bean="ITcrcBaseManageDao"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!--工单处理-->
+    <bean id="AppWorkService" class="com.ebring.oa.trans.AppWorkService">
+        <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+
+	<!--工单审批-->
+    <bean id="WorkAssignmentService" class="com.ebring.oa.trans.WorkAssignmentService">
+        <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+
+
+    <!--工单处理-->
+    <bean id="WorkDealService" class="com.ebring.oa.trans.WorkDealService">
+        <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+
+    <!--工单审验-->
+    <bean id="WorkverifyService" class="com.ebring.oa.trans.WorkverifyService">
+        <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+
+
+    <!--工单修改更新-->
+    <bean id="ModifyWorksService" class="com.ebring.oa.trans.ModifyWorksService">
+        <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+        <property name="iWorkFlowService" ref="workflowservice"></property>
+    </bean>
+   
+   
+   <bean id=" MailSendListenerImpl" class="com.ebring.oa.mail.MailSendListenerImpl">
+<!--         <property name="mailUtil" ref="MailUtil"></property> -->
+<!--         <property name="contentDeal" ref="ContentDeal"></property> -->
+<!--         <property name="iWorkFlowService" ref="workflowservice"></property> -->
+   </bean>
+   <bean id="OutTimeMailSend" class="com.ebring.oa.schedule.OutTimeMailSend">  
+           <property name="mailUtil" ref="MailUtil"></property>
+    </bean>   
+<!--    <bean id="MailSendQueen" class="com.ebring.oa.mail.MailSendQueen">  -->
+<!--        <property name="contentDeal" ref="ContentDeal"></property>   -->
+<!--     </bean> -->
+	
+    <bean id="DeleteFileService" class="com.ebring.oa.trans.DeleteFileService">           	
+    </bean>
+    
+    <bean id="ContentDeal" class="com.ebring.oa.mail.ContentDeal"> 
+<!--        <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>   -->
+     <!--    <property name="iWorkFlowService" ref="workflowservice"></property>-->  
+<!--         <property name="mailUtil" ref="MailUtil"></property>        	 -->
+    </bean>
+ <bean id="OverinSuranceMailSend" class="com.ebring.oa.schedule.OverinSuranceMailSend">         
+          <property name="iTcrcBaseManageDao" ref="ITcrcBaseManageDao"></property>
+           <property name="mailUtil" ref="MailUtil"></property>
+          
+    </bean> 
+
+
+
+
+
+
+
+</beans>

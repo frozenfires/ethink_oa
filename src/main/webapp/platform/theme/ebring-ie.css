@@ -1,0 +1,32 @@
+
+/**
+ * 针对ie6定制的样式
+ */
+
+/**模态窗口默认位置*/
+.modal {top: -190px;}
+
+div.header{ border-bottom:1px solid #DBDBDB;width: 100%;
+	background-color: #fff;z-index: 935; 
+	_position:absolute; 
+	_top:expression(eval(document.documentElement.scrollTop + 0));
+	overflow:hidden;
+}
+.header-right ul li{margin-top: -10px;}
+.header-right,.header .header-right a{line-height: 20px; height:20px;}
+.header .userInfo,.tranName{display:inline-block; _zoom:1;*display:inline;}
+.header .orgName{display: block;}
+.header .nav{display:inline-block; _zoom:1;*display:inline;}
+
+onlyShow div.control-group {margin-bottom: 0px;height: 30px;padding: 0px;}
+/**control-group容器排列定义*/
+div.control-group div.controls{display: inline-block; _zoom:1; *display:inline;}
+div.control-group label{display: inline-block; _zoom:1; *display:inline;}
+/**下拉列表控件样式*/
+.select{border: solid 1px; border-color: #7F9DB9;display:inline;}
+.select .item{height:27px; line-height: 27px; width:182px;}
+.select .dropdown-toggle{height: 29px; width:27px; }
+
+/** 行模式查询条件排列 */
+div.line-row .select .item{height:23px; line-height: 23px; width:114px; max-width: 114px;}
+div.line-row .select .dropdown-toggle{height: 28px; width:27px; margin-top: -3px; }

@@ -1,0 +1,182 @@
+
+/*-------- 综合管理端主页样式 Home -------*/
+/* 初始化样式 */
+html,body {margin:0;padding:0;}
+
+body{overflow:hidden;}
+/* 最外层div样式 */
+.frame {margin:0 auto; width:100%;}
+/* 头部样式 */
+.topContent { height:60px;background-color: #396ba6;
+			background-image: url(images/tou1.jpg);
+			background-repeat: no-repeat;}
+.bodyContent {width: 100%;margin-top:61px;}
+.left { float:left; width:200px;height:100%;background:rgb(230, 235, 238);}
+.right { margin-left:202px; height:100%;}
+
+/* 左右浮动 */
+.fl{ float: left;}
+.fr{ float: right;}
+/* 外边框 */
+.bor{ border: 1px solid blue;}
+/* 横线 */
+.hr{ bottom:100px;}
+/* 菜单 */
+.menuC{
+	width:100%;
+	display: block;
+	background:#396ba6;
+}
+
+.bodyContent .accordion-heading a {
+  font-family: 微软雅黑;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.bodyContent .accordion-inner {
+  padding: 0px;
+}
+.bodyContent .nav-list {
+  padding: 0px;
+}
+.menu-hr {
+  width: 100%;
+  height: 2px;
+}
+.bodyContent .nav-list li {
+  padding: 0px 15px 0px 15px;
+  background-color: #58A2D1;
+  line-height: 36px;
+}
+.bodyContent .nav-list a {
+  padding-left: 30px;
+  font-family: 微软雅黑;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: none;
+}
+.menuC .nav > li > a:hover{
+	color:#000;
+}
+.bodyContent a {
+  text-decoration: none;
+}
+a:hover{color:#000;}
+/**系统logo*/
+.head-logo{
+	/* width:1024px; height: 60px;
+	background-image: url(images/tou1.jpg);
+	background-repeat: no-repeat; */
+}
+.info{
+	background-image: url(images/yhm.png);
+}
+.image{
+	width:36px;
+	height:36px;
+}
+#webTop{
+	background-color: #396ba6;
+	background-image: url(images/tou1.jpg);
+	background-repeat: no-repeat;
+}
+.li1{
+	margin-top: 1%;
+	width: 167px;
+	font-size: 16px;
+	font-family: 微软雅黑;
+	font-weight: 500;
+	margin-right: 15px;
+}
+.li2{
+	margin-top: -2%;
+	margin-right: 15px;
+}
+.li3{
+	margin-top: -2%;
+}
+.sxClass{
+	width: 1px;
+}
+.accordion-group {
+	margin-bottom: 2px;
+	border: 0px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.menuC .nav-list li.hubopen a {
+	color: #000;
+}
+/**子系统容器*/
+#subsystem{height: 100%}
+
+/*-- 锁屏页面样式 Home --*/
+.lockscreenPage{
+	width: 100%;
+	height: 100%;
+	background-image: url(images/dl1_02.jpg);
+	background-repeat: repeat-x;
+}
+.luakloginClass {
+	width: 706px;
+	height: 272px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -136px 0 0 -353px;
+	background: url(images/dl1_03.png) no-repeat;
+}
+.formClass{
+	float: right;
+	position: relative;
+	margin-left: 54%;
+	height: 100%;
+	width: 46%;
+}
+.leftClass {
+	width: 85%;
+	height: 50%;
+	margin-top: 10%;
+	margin-left: 7%;
+}
+.rightClass {
+	width: 85px;
+	height: 50px;
+	margin-left: 65%;
+	margin-top: 5%;
+}
+#llogin{
+	width: 85px;
+	height: 50px;
+}
+.backg{
+	height:700px;
+	background: url(images/dl1_01.jpg) no-repeat;
+}
+#lusername{
+	background-color: transparent;
+}
+input.loginField{
+	margin-top: 5px;margin-bottom: 5px;	height: 50px;
+	line-height: 26px;	width: 260px;	font-size: 23px;
+}
+
+/*-- 锁屏页面样式 End --*/
+
+/*顶部工具栏*/
+.nav-pills > li > a.navshuxian{width: 1px; height: 42px; background: url(images/shuxian.png);margin:0px;padding: 0px;}
+
+/*退出按钮*/
+.nav-pills > li > a#logout{height:30px; background: url(images/tc_an01.png) no-repeat; background-position: 5px 10px;}
+.nav-pills > li > a#logout:hover{background: url(images/tc_an02.png) no-repeat; background-position: 5px 10px; color: #fff;}
+span.lockscreentext,span.logouttext{margin-left: 36px; line-height: 34px;}
+
+/*锁定按钮*/
+.nav-pills > li > a#lockscreen{height:36px; background: url(images/sd_an01.png) no-repeat; background-position: 5px 10px;}
+.nav-pills > li > a#lockscreen:hover{background: url(images/sd_an02.png) no-repeat; background-position: 5px 10px; color: #fff;}
+
+/*-------- 综合管理端主页样式 End -------*/

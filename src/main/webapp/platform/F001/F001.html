@@ -1,0 +1,419 @@
+<!-- 用户管理 -->
+<div class="container">
+	<div>
+		<!-- 查询开始 -->
+		<form class="queryForm" id="userQueryForm" action="" method="post">
+			<div class="line-row ">
+				<div class="">
+					<label class="control-label" for="cashno">登录名</label> 
+					<input type="text" name="USER_ID_P" id="USER_ID_P" class="text"/>
+				</div>
+				<div class="">
+					<label class="control-label">姓名</label>
+					<input type="text" name="USER_NAME_P" id="USER_NAME_P" class="text"/>
+				</div>
+			    <div class="">
+			    	<label class="control-label">所属区域</label>
+					<span name="ADDRESS_ID"  id="ADDRESS_ID" class="select btn-group">
+				      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+				      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+				      <ul class="dropdown-menu options"/>
+				     </span>
+			    </div>
+				<button type="button" name="user_search" id="user_search" class="btn btn-primary">查询</button>
+			</div>
+		</form>
+		<!-- 查询结束 -->
+
+		<div class="">
+			<!-- 按钮部分开始 -->
+			<div>
+				<button name="ADD" class="btn btn-primary" id="ADD">增加</button>
+				<button name="EDIT" class="btn btn-primary" id="EDIT">修改</button>
+				<button name="DELETE" class="btn btn-primary" id="DELETE">删除</button>
+			</div>
+			<!-- 按钮部分结束 -->
+		   	
+		   	<!-- 构建表格开始 -->
+			<div class="content-box">
+			<!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+				<table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="userInfo">
+					<thead>
+						<tr>
+							<th>登录名</th>
+							<th>姓名</th>
+							<th>办公电话</th>
+							<th>手机</th>
+							<th>所属区域</th>
+							<th>Email</th>
+							<th>用户状态</th>
+						</tr>
+					</thead>
+					<tbody align="center">
+						<tr>
+							<td colspan="8" class="dataTables_empty">........</td>
+						</tr>
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table>
+			</div>
+			<!-- 构建表格结束 -->
+		</div>
+	</div>
+
+	<!-- 弹出新增用户窗口-->
+	<div id="addUserModal" class="modal hide fade popwindow" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		
+		<div class="modal-header">
+			<h3 id="myModalLabel">增加用户</h3>
+		</div>
+
+		<div class="modal-body" style="height:350px;">
+			<form id="addUserForm" action="">
+				<div class="line-row ">
+					<div class="">
+						<label class="control-label" for="cashno">登录名</label> 
+						<input type="text" name="USER_ID_P" id="USER_ID_P" class="text"/>
+					</div>
+					<div class="">
+						<label class="control-label">姓名</label> 
+						<input type="text" name="USER_NAME_P" id="USER_NAME_P" class="text" maxlength="10"/>
+					</div>
+					<div class="">
+						<label class="control-label">身份证号码</label> 
+						<input type="text" name="IDNUMBER" id="IDNUMBER" class="text" maxlength="20"/>
+					</div>
+					<div class="">
+						<label class="control-label">民族</label>
+						<span name="NATION" id="NATION" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">性别</label> 
+						  <span name="SEX" id="SEX" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				      </span>
+					</div>
+					<div class="">
+						<label class="control-label">出生日期</label> 
+						<input id="BIRTHDAY" size="16" type="text" name="BIRTHDAY" readonly="readonly" placeholder="请点击选择时间" class="text"/>
+					</div>
+					<div class="">
+						<label class="control-label">婚姻状况</label> 
+						<span name="MARRIAGED" id="MARRIAGED" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options"/>
+						 </span>
+					</div>
+					<div class="">
+						<label class="control-label">政治面貌</label>
+						<span name="POLITICS" id="POLITICS" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">学历</label>
+						<span name="EDUCATION" id="EDUCATION" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">驾驶证类型</label>
+						<span name="DRIVER" id="DRIVER" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">手机</label> 
+						<input type="text" name="MOBILEPHONE_P" id="MOBILEPHONE_P" class="text" maxlength="11"/>
+					</div>
+					<div class="">
+						<label class="control-label">办公电话</label> 
+						<input type="text" name="OFFICEPHONE" id="OFFICEPHONE" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">家庭电话</label> 
+						<input type="text" name="HOMEPHONE" id="HOMEPHONE" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">家庭住址</label> 
+						<input type="text" name="ADDRESS" id="ADDRESS" class="text" maxlength="30">
+					</div>
+					<div class="">
+						<label class="control-label">应急电话</label> 
+						<input type="text" name="URGENTPHONE" id="URGENTPHONE" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">毕业院校</label> 
+						<input type="text" name="SCHOOL" id="SCHOOL" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">专业</label> 
+						<input type="text" name="MAJOR" id="MAJOR" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">参加工作时间</label> 
+						<input id="WORKTIME" size="16" type="text" name="WORKTIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+					</div>
+					<div class="">
+						<label class="control-label">加入公司时间</label> 
+						<input id="JOINTIME" size="16" type="text" name="JOINTIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+					</div>
+					<div class="">
+						<label class="control-label">劳动合同编号</label> 
+						<input type="text" name="CONTRACTNUM" id="CONTRACTNUM" class="text" maxlength="30">
+					</div>
+					<div class="">
+						<label class="control-label">资质</label>
+						<span name="APTITUDE" id="APTITUDE" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">Email</label> 
+						<input type="text" name="EMAIL" id="EMAIL" class="text" maxlength="30">
+					</div>
+					<div class="">
+						<label class="control-label">所属区域</label>
+						 <span name="ADDRESS_ID" id="ADDRESS_ID" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options"/>
+						 </span>
+					</div>
+					<div class="">
+						<label class="control-label">角色</label> 
+						<span name="ROLE_ID_P" id="ROLE_ID_P" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options"/>
+						 </span>
+					</div>
+					<div class="">
+						<label class="control-label">用户状态</label> 
+						<span name="FREEZE_USER" id="FREEZE_USER" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options">
+						      <li><a href="javascript:void(0);" value="Y">冻结</a></li>
+        					  <li><a href="javascript:void(0);" value="N">正常</a></li>
+        					  </ul>
+						 </span>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="modal-footer">
+			<button id="close" class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+			<button id="add_save" class="btn btn-primary">保存</button>
+		</div>
+	</div>
+	<!-- 弹出新增用户窗口结束-->
+
+	<!-- 弹出编辑用户窗口-->
+	<div id="editUserModal" class="modal hide fade popwindow" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		
+		<div class="modal-header">
+			<h3 id="myModalLabel">编辑用户</h3>
+		</div>
+		
+		<div class="modal-body" style="height:350px;">
+			<form id="editUserForm" action="">
+				<div class="line-row ">
+					<div class="">
+						<label class="control-label" for="cashno">登录名</label> 
+						<input type="text" name="USER_ID_P" id="USER_ID_P" class="text" readonly="readonly"/>
+					</div>
+					<div class="">
+						<label class="control-label">姓名</label> 
+						<input type="text" name="USER_NAME_P" id="USER_NAME_P" class="text" maxlength="10">
+					</div>
+					<div class="">
+						<label class="control-label">身份证号码</label> 
+						<input type="text" name="IDNUMBER" id="IDNUMBER" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">民族</label>
+						<span name="NATION" id="NATION" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">性别</label> 
+						  <span name="SEX" id="SEX" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				      </span>
+					</div>
+					<div class="">
+						<label class="control-label">出生日期</label> 
+						<input id="BIRTHDAY" size="16" type="text" name="BIRTHDAY" readonly="readonly" placeholder="请点击选择时间" class="text">
+					</div>
+					<div class="">
+						<label class="control-label">婚姻状况</label> 
+						<span name="MARRIAGED" id="MARRIAGED" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options"/>
+						 </span>
+					</div>
+					<div class="">
+						<label class="control-label">政治面貌</label>
+						<span name="POLITICS" id="POLITICS" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">学历</label>
+						<span name="EDUCATION" id="EDUCATION" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">驾驶证类型</label>
+						<span name="DRIVER" id="DRIVER" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">手机</label> 
+						<input type="text" name="MOBILEPHONE_P" id="MOBILEPHONE_P" class="text" maxlength="11">
+					</div>
+					<div class="">
+						<label class="control-label">办公电话</label> 
+						<input type="text" name="OFFICEPHONE" id="OFFICEPHONE" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">家庭电话</label> 
+						<input type="text" name="HOMEPHONE" id="HOMEPHONE" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">家庭住址</label> 
+						<input type="text" name="ADDRESS" id="ADDRESS" class="text" maxlength="30">
+					</div>
+					<div class="">
+						<label class="control-label">应急电话</label> 
+						<input type="text" name="URGENTPHONE" id="URGENTPHONE" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">毕业院校</label> 
+						<input type="text" name="SCHOOL" id="SCHOOL" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">专业</label> 
+						<input type="text" name="MAJOR" id="MAJOR" class="text" maxlength="20">
+					</div>
+					<div class="">
+						<label class="control-label">参加工作时间</label> 
+						<input id="WORKTIME" size="16" type="text" name="WORKTIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+					</div>
+					<div class="">
+						<label class="control-label">加入公司时间</label> 
+						<input id="JOINTIME" size="16" type="text" name="JOINTIME" readonly="readonly" placeholder="请点击选择时间" class="text">
+					</div>
+					<div class="">
+						<label class="control-label">劳动合同编号</label> 
+						<input type="text" name="CONTRACTNUM" id="CONTRACTNUM" class="text" maxlength="30">
+					</div>
+					<div class="">
+						<label class="control-label">资质</label>
+						<span name="APTITUDE" id="APTITUDE" class="select btn-group"> 
+						  <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+					      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+					      <ul class="dropdown-menu options"/>
+       				   </span>
+					</div>
+					<div class="">
+						<label class="control-label">Email</label> 
+						<input type="text" name="EMAIL" id="EMAIL" class="text" maxlength="30">
+					</div>
+					<div class="">
+						<label class="control-label">所属区域</label>
+						 <span name="ADDRESS_ID" id="ADDRESS_ID" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options"/>
+						 </span>
+					</div>
+					<div class="">
+						<label class="control-label">角色</label> 
+						<span name="ROLE_ID_P" id="ROLE_ID_P" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options"/>
+						 </span>
+					</div>
+					<div class="">
+						<label class="control-label">用户状态</label> 
+						<span name="FREEZE_USER" id="FREEZE_USER" class="select btn-group">
+						      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+						      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+						      <ul class="dropdown-menu options">
+						      <li><a href="javascript:void(0);" value="Y">冻结</a></li>
+        					  <li><a href="javascript:void(0);" value="N">正常</a></li>
+        					  </ul>
+						 </span>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+			<button id="edit_save" class="btn btn-primary">保存</button>
+		</div>
+	</div>
+	<!-- 弹出编辑用户窗口结束-->
+</div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+	<div class="navbar-inner">
+		<div class="footer-container">
+			<div class="">
+				<ul class="nav">
+					<li class="cancel ">
+						<a id="cancel" class="icon" href="javascript:void(0);"></a>
+						<div class="icontext">取消</div>
+					</li>
+					<li class="split"></li>
+				</ul>
+			</div>
+			<div class=" pull-right">
+				<ul class="nav"></ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="<%=basePath%>/platform/F001/F001.js"></script>
+
+
+

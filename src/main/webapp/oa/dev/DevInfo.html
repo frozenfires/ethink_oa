@@ -1,0 +1,549 @@
+﻿
+
+<!-- 设备管理 -->
+<div class="container ">
+<div class="">
+
+<form class="queryForm" id="devQueryForm"  action="" method="post">
+  <div class="line-row ">
+  <div class="">
+    <label class="control-label">设备编号</label>
+    <input type="text" name="DEVICED_ID" id="DEVICE_ID" class="text"/>
+  </div>
+  <div class="">
+    <label class="control-label" >安装人员</label>
+    <input type="text" name="SETUP_MAN" id="SETUP_MAN" class="text">
+  </div>
+  <div class="">
+    <label class="control-label" >安装网点</label>
+    <input type="text" name="SETUP_BRACH_Q" id="SETUP_BRACH_Q" class="text">
+  </div>
+  <div class="">
+    <label class="control-label" >管机员</label>
+    <input type="text" name="MANAGER_NAME" id="MANAGER_NAME" class="text" maxlength="10">
+  </div>  		
+    <button type="button" name="dev_search" id="dev_search" class="btn btn-primary">查询</button>
+  </div>
+ </form>
+
+<div class=" "><!-- 左侧开始 -->
+	<div>
+   		<button  name="ADD" class="btn btn-primary"  id="ADD">增加</button>
+     	<button  name="EDIT" class="btn btn-primary"  id="EDIT">修改</button>
+       	<button  name="DELETE" class="btn btn-primary"  id="DELETE">删除</button>
+       	<button  name="LOOK" class="btn btn-primary"  id="LOOK">查看</button>
+	</div>
+  <div class="content-box">
+   <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="devInfo">
+	<thead>
+		<tr>
+			<th>设备编号</th>	
+			<th>安装网点</th>			
+			<th>管机员</th>
+			<th>管机员电话</th>			
+			<th>安装人员</th>
+			<th>安装人员电话</th>
+			<th>启用日期</th>
+			<th>质保期</th>								
+		</tr>
+	</thead>
+	<tbody  align="center">
+		<tr>
+			<td colspan="7" class="dataTables_empty">........</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		
+	</tfoot>
+</table>
+ </div>
+
+</div>
+
+</div>
+
+<!-- 弹出增加设备信息窗口 -->
+<div id="addDevModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">增加设备</h3>
+  </div>
+  <div class="modal-body" style="height:350px;">
+
+<form id="addDevForm"  action="">
+  <div class="line-row ">
+  <div style="display:none">
+    <label class="control-label" >设备ID</label>
+    <input type="text" name="ID" id="ID" class="text" />
+  </div>		
+  <div class="dd" >
+    <label class="control-label" ><span style="color:red;">*</span>设备编号</label>
+    <input type="text" name="DEVICED_ID" id="DEVICE_ID" class="text" maxlength="10" />
+  </div>
+  <div class="dd" >
+    <label class="control-label"><span style="color:red;">*</span>设备类型</label>
+	<span name="DEVICE_TYPE"  id="DEVICE_TYPE" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+   <div class="dd" >
+    <label class="control-label" ><span style="color:red;">*</span>设备名称</label>
+    <input type="text" name="DEVICE_NAME" id="DEVICE_NAME" class="text" maxlength="10" />
+  </div>
+  <div class="dd" >
+    <label class="control-label"><span style="color:red;">*</span>设备型号</label>
+	<span name="DEVICE_MODEL"  id="DEVICE_MODEL" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+  <div class="dd" >
+    <label class="control-label" >主机序列号</label>
+    <input type="text" name="HOST_NUM" id="HOST_NUM" class="text" maxlength="30">
+  </div>
+  <div class="dd" >
+    <label class="control-label" >TCR序列号</label>
+    <input type="text" name="TCR_NUM" id="TCR_NUM" class="text" maxlength="30">
+  </div>
+  <div class="dd" >
+    <label class="control-label" >管机员</label>
+    <input type="text" name="MANAGER_NAME" id="MANAGER_NAME" class="text" maxlength="10">
+  </div>
+  <div class="dd" >
+    <label class="control-label" >管机员电话</label>
+    <input type="text" name="MANAGER_TEL" id="MANAGER_TEL" class="text" maxlength="20">
+  </div>
+  <div class="dd" >   
+       <label class="control-label" ><span style="color:red;">*</span>到货时间</label>
+        <input id="ARRIVE_TIME" size="16" type="text" name="ARRIVE_TIME"  placeholder="请点击选择时间" class="text" >
+     </div> 
+     
+  <div class="dd"> 
+       <label class="control-label"><span style="color:red;">*</span>安装时间</label>
+       <input id="SETUP_TIME" size="16" type="text" name="SETUP_TIME"  placeholder="请点击选择时间" class="text">
+     </div>
+   <div class="dd" > 
+     <label class="control-label"><span style="color:red;">*</span>安装类型</label>
+	<span name="SETUP_TYPE"  id="SETUP_TYPE" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>  
+    <div class="dd">
+       <label class="control-label" >验收时间</label>
+       <input id="ACCPET_TIME" size="16" type="text" name="ACCPET_TIME"  placeholder="请点击选择时间" class="text">
+     </div>
+    <div class="dd">  
+     <label class="control-label" >启用时间</label>
+     <input id="START_TIME" size="16" type="text" name="START_TIME"  placeholder="请点击选择时间" class="text">
+   </div> 
+  <div class="dd">   
+   <label class="control-label"><span style="color:red;">*</span>质保期</label>
+	<span name="EXP_TIME"  id="EXP_TIME" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+  <div class="dd">
+    <label class="control-label" >维保方</label>
+    <input type="text" name="SERVICER" id="SERVICER" class="text" maxlength="30">
+  </div>					 
+  <div class="dd">
+       <label class="control-label"><span style="color:red;">*</span>过保时间</label>
+       <input id="OUTOF_TIME" size="16" type="text" name="OUTOF_TIME"  placeholder="请点击选择时间" class="text">
+  </div>
+  <div class="dd">
+       <label class="control-label">LICENSE</label>
+       <input id="LICENSE_TIME" size="16" type="text" name="LICENSE_TIME"  placeholder="请点击选择时间" class="text">  
+  </div>
+  <div class="dd">
+    <label class="control-label" >安装人员</label>
+    <input type="text" name="SETUP_MAN" id="SETUP_MAN" class="text" maxlength="10">
+  </div>
+  <div class="dd">
+    <label class="control-label" >安装人员电话</label>
+    <input type="text" name="SETUP_MAN_TEL" id="SETUP_MAN_TEL" class="text" maxlength="15">
+  </div>
+
+  <div class="dd">
+    <label class="control-label" >保修状态</label>
+     <span name="REPAIR_STATUS" id="REPAIR_STATUS" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">保内</a></li>
+        <li><a href="javascript:void(0);" value="2">保外</a></li>
+      </ul>
+    </span>
+  </div>
+   <div class="dd">
+    <label class="control-label" >过保续签</label>
+     <span name="OUT_OF_SIGN" id="OUT_OF_SIGN" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">是</a></li>
+        <li><a href="javascript:void(0);" value="2">否</a></li>
+      </ul>
+    </span>
+  </div>
+  <div class="dd" style="width:600px;">
+ 	  <label class="control-label" ><span style="color:red;">*</span>安装网点</label>
+      <input type="text" readonly="readonly" name="SETUP_BRANCH_NAME" id="SETUP_BRANCH_NAME" class="text"  placeholder="请点击选择网点"  style="width:460px;"> 
+  </div>
+  <div id="menuContent" style="display:none" >
+     <ul id="treeDemo"  class="ztree"></ul>
+      <input type="hidden" name="BRACH_TREE" id="BRACH_TREE" class="text"/>
+  </div>
+  <div style="display:none;"> 
+       <label class="control-label" for="SETUP_BRANCH_ID_NAME"></label>
+       <input id="SETUP_BRANCH_ID_PRESENT" size="16" type="text" name="SETUP_BRANCH_ID_PRESENT" class="text">
+  </div>
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="add_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+
+<!-- 弹出查看设备信息窗口-->
+<div id="lookDevModal"  class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">查看设备信息</h3>
+  </div>
+  <div class="modal-body" style="height:350px;">
+
+<form id="lookDevForm"  action="">
+  <div class="line-row ">
+	<div style="display:none">
+    <label class="control-label" >设备ID</label>
+    <input type="text" name="ID" id="ID" class="text" />
+  </div>	
+<div class="dd">
+    <label class="control-label" ><span style="color:red;">*</span>设备编号</label>
+    <input type="text" name="DEVICED_ID" id="DEVICED_ID" class="text" maxlength="10" readonly="readonly"/>
+  </div>	
+  <div class="dd" >
+    <label class="control-label"><span style="color:red;">*</span>设备类型</label>
+	<span name="DEVICE_TYPE"  id="DEVICE_TYPE" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="" disabled="disabled">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown" disabled="disabled"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+  <div class="dd" >
+    <label class="control-label" ><span style="color:red;">*</span>设备名称</label>
+    <input type="text" name="DEVICE_NAME" id="DEVICE_NAME" class="text" maxlength="10" readonly="readonly"/>
+  </div>
+  <div class="dd" >
+    <label class="control-label"><span style="color:red;">*</span>设备型号</label>
+	<span name="DEVICE_MODEL"  id="DEVICE_MODEL" class="select btn-group" >
+	<button class="btn btn-mini item" data-toggle="dropdown" value="" disabled="disabled">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown" disabled="disabled"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+ <div class="dd">
+    <label class="control-label" >主机序列号</label>
+    <input type="text" name="HOST_NUM" id="HOST_NUM" class="text" maxlength="30" readonly="readonly">
+  </div>	
+  
+ <div class="dd">
+    <label class="control-label" >TCR序列号</label>
+    <input type="text" name="TCR_NUM" id="TCR_NUM" class="text" maxlength="30" readonly="readonly">
+  </div> 
+ 
+  <div class="dd">
+    <label class="control-label" >管机员</label>
+    <input type="text" name="MANAGER_NAME" id="MANAGER_NAME" class="text" maxlength="10" readonly="readonly">
+  </div>
+  <div class="dd">
+    <label class="control-label" >管机员电话</label>
+    <input type="text" name="MANAGER_TEL" id="MANAGER_TEL" class="text" maxlength="20" readonly="readonly">
+  </div>
+  <div class="dd" >   
+       <label class="control-label"><span style="color:red;">*</span>到货时间</label>
+        <input id="ARRIVE_TIME"  size="16" type="text" name="ARRIVE_TIME" readonly="readonly" placeholder="请点击选择时间" class="text" disabled="disabled">
+     </div> 
+     
+  <div class="dd"> 
+       <label class="control-label" ><span style="color:red;">*</span>安装时间</label>
+       <input id="SETUP_TIME" size="16" type="text" name="SETUP_TIME" readonly="readonly" placeholder="请点击选择时间" class="text" disabled="disabled">
+     </div>
+  
+  <div id="menuContent_look" style="display:none"  >
+      <ul id="treeDemo_look"  class="ztree"></ul>
+      <input type="hidden" name="BRACH_TREE_LOOK" id="BRACH_TREE_LOOK" class="text"/>
+  </div>
+ <div class="dd" > 
+     <label class="control-label"><span style="color:red;">*</span>安装类型</label>
+	<span name="SETUP_TYPE"  id="SETUP_TYPE" class="select btn-group" >
+	<button class="btn btn-mini item" data-toggle="dropdown" value="" disabled="disabled">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown" disabled="disabled"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>  
+  <div class="dd">
+       <label class="control-label" >验收时间</label>
+       <input id="ACCPET_TIME" size="16" type="text" name="ACCPET_TIME" readonly="readonly" placeholder="请点击选择时间" class="text" disabled="disabled">
+     </div>
+    <div class="dd">  
+     <label class="control-label" >启用时间</label>
+     <input id="START_TIME" size="16" type="text" name="START_TIME" readonly="readonly" placeholder="请点击选择时间" class="text" disabled="disabled">
+   </div>
+  <div class="dd">   
+   <label class="control-label">质保期</label>
+	<span name="EXP_TIME"  id="EXP_TIME" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="" disabled="disabled">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown" disabled="disabled"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+  <div class="dd">
+    <label class="control-label" >维保方</label>
+    <input type="text" name="SERVICER" id="SERVICER" class="text" maxlength="30" readonly="readonly">
+  </div>
+ <div class="dd">
+       <label class="control-label" ><span style="color:red;">*</span>过保时间</label>
+       <input id="OUTOF_TIME" size="16" type="text" name="OUTOF_TIME" readonly="readonly" placeholder="请点击选择时间" class="text" disabled="disabled">
+  </div>
+  <div class="dd">
+       <label class="control-label" >LICENSE</label>
+       <input id="LICENSE_TIME" size="16" type="text" name="LICENSE_TIME" readonly="readonly" placeholder="请点击选择时间" class="text" disabled="disabled">  
+  </div>
+   <div class="dd">
+    <label class="control-label" >安装人员</label>
+    <input type="text" name="SETUP_MAN" id="SETUP_MAN" class="text" maxlength="10" readonly="readonly">
+  </div>
+  <div class="dd">
+    <label class="control-label" >安装人员电话</label>
+    <input type="text" name="SETUP_MAN_TEL" id="SETUP_MAN_TEL" class="text" maxlength="15" readonly="readonly">
+  </div>
+   <div class="dd">
+    <label class="control-label" >保修状态</label>
+     <span name="REPAIR_STATUS" id="REPAIR_STATUS" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value=""  disabled="disabled">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown" disabled="disabled"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">保内</a></li>
+        <li><a href="javascript:void(0);" value="2">保外</a></li>
+      </ul>
+    </span>
+  </div>
+   <div class="dd">
+    <label class="control-label" >过保续签</label>
+     <span name="OUT_OF_SIGN" id="OUT_OF_SIGN" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="" disabled="disabled">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown" disabled="disabled"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">是</a></li>
+        <li><a href="javascript:void(0);" value="2">否</a></li>
+      </ul>
+    </span>
+  </div>
+  <div style="width:600px;">
+ 	 <label class="control-label" ><span style="color:red;">*</span>安装网点</label>
+     <input type="text" readonly="readonly" name="SETUP_BRANCH_ID_NAME" id="SETUP_BRANCH_ID_NAME" class="text" style="width:460px;"> 
+  </div>
+  </div>  
+</form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="ensure" class="btn btn-primary">确定</button>
+  </div>
+</div>
+
+</div>
+
+
+<!-- 弹出编辑设备信息窗口-->
+<div id="editDevModal"  class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">编辑设备信息</h3>
+  </div>
+  <div class="modal-body" style="height:350px;">
+
+<form id="editDevForm"  action="">
+  <div class="line-row ">
+	<div style="display:none">
+    <label class="control-label" >设备ID</label>
+    <input type="text" name="ID" id="ID" class="text" />
+  </div>	
+<div class="dd">
+    <label class="control-label" ><span style="color:red;">*</span>设备编号</label>
+    <input type="text" name="DEVICED_ID" id="DEVICED_ID" class="text" maxlength="10" />
+  </div>	
+ <div class="dd" >
+    <label class="control-label"><span style="color:red;">*</span>设备型号</label>
+	<span name="DEVICE_TYPE"  id="DEVICE_TYPE" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+  <div class="dd" >
+    <label class="control-label" ><span style="color:red;">*</span>设备名称</label>
+    <input type="text" name="DEVICE_NAME" id="DEVICE_NAME" class="text" maxlength="10" />
+  </div>
+  <div class="dd" >
+    <label class="control-label"><span style="color:red;">*</span>设备型号</label>
+	<span name="DEVICE_MODEL"  id="DEVICE_MODEL" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+ <div class="dd">
+    <label class="control-label" >主机序列号</label>
+    <input type="text" name="HOST_NUM" id="HOST_NUM" class="text" maxlength="30">
+  </div>	
+  
+ <div class="dd">
+    <label class="control-label" >TCR序列号</label>
+    <input type="text" name="TCR_NUM" id="TCR_NUM" class="text" maxlength="30">
+  </div> 
+ 
+  <div class="dd">
+    <label class="control-label" >管机员</label>
+    <input type="text" name="MANAGER_NAME" id="MANAGER_NAME" class="text" maxlength="10">
+  </div>
+  <div class="dd">
+    <label class="control-label" >管机员电话</label>
+    <input type="text" name="MANAGER_TEL" id="MANAGER_TEL" class="text" maxlength="20">
+  </div>
+  <div class="dd" >   
+       <label class="control-label" ><span style="color:red;">*</span>到货时间</label>
+        <input id="ARRIVE_TIME"  size="16" type="text" name="ARRIVE_TIME" placeholder="请点击选择时间" class="text">
+     </div> 
+     
+  <div class="dd"> 
+       <label class="control-label"><span style="color:red;">*</span>安装时间</label>
+       <input id="SETUP_TIME" size="16" type="text" name="SETUP_TIME"  placeholder="请点击选择时间" class="text">
+     </div>
+ 
+  <div class="dd" > 
+     <label class="control-label"><span style="color:red;">*</span>安装类型</label>
+	<span name="SETUP_TYPE"  id="SETUP_TYPE" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>  
+ 
+  <div class="dd">
+       <label class="control-label" >验收时间</label>
+       <input id="ACCPET_TIME" size="16" type="text" name="ACCPET_TIME"  placeholder="请点击选择时间" class="text">
+     </div>
+    <div class="dd">  
+     <label class="control-label" >启用时间</label>
+     <input id="START_TIME" size="16" type="text" name="START_TIME"  placeholder="请点击选择时间" class="text">
+   </div>
+   <div class="dd">   
+   <label class="control-label">质保期</label>
+	<span name="EXP_TIME"  id="EXP_TIME" class="select btn-group">
+	<button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+	<button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/></button>
+	<ul class="dropdown-menu options"/></ul>
+	</span>
+  </div>
+  <div class="dd">
+    <label class="control-label" >维保方</label>
+    <input type="text" name="SERVICER" id="SERVICER" class="text" maxlength="30">
+  </div>
+ <div class="dd">
+       <label class="control-label" ><span style="color:red;">*</span>过保时间</label>
+       <input id="OUTOF_TIME" size="16" type="text" name="OUTOF_TIME"  placeholder="请点击选择时间" class="text">
+  </div>
+  <div class="dd">
+       <label class="control-label" >LICENSE</label>
+       <input id="LICENSE_TIME" size="16" type="text" name="LICENSE_TIME" placeholder="请点击选择时间" class="text">  
+  </div>
+   <div class="dd">
+    <label class="control-label" >安装人员</label>
+    <input type="text" name="SETUP_MAN" id="SETUP_MAN" class="text" maxlength="10">
+  </div>
+  <div class="dd">
+    <label class="control-label" >安装人员电话</label>
+    <input type="text" name="SETUP_MAN_TEL" id="SETUP_MAN_TEL" class="text" maxlength="15">
+  </div>
+   <div class="dd">
+    <label class="control-label" >保修状态</label>
+     <span name="REPAIR_STATUS" id="REPAIR_STATUS" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">保内</a></li>
+        <li><a href="javascript:void(0);" value="2">保外</a></li>
+      </ul>
+    </span>
+  </div>
+   <div class="dd">
+    <label class="control-label" >过保续签</label>
+     <span name="OUT_OF_SIGN" id="OUT_OF_SIGN" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">是</a></li>
+        <li><a href="javascript:void(0);" value="2">否</a></li>
+      </ul>
+    </span>
+  </div>
+  <div class="dd" style="width:600px;">
+ 	<label class="control-label" ><span style="color:red;">*</span>安装网点</label>
+    <input type="text" readonly="readonly" name="SETUP_BRANCH_ID" id="SETUP_BRANCH_ID" class="text"  style="width:460px;">
+  </div> 
+  <div id="menuContent_edit" style="display:none" >
+      <ul id="treeDemo_edit"  class="ztree"></ul>
+      <input type="hidden" name="BRACH_TREE_EDIT" id="BRACH_TREE_EDIT" class="text"/>
+  </div>
+  <div id="" style="display:none" >    
+      <input type="hidden" name="BRACH_TREE_EDIT_ID" id="BRACH_TREE_EDIT_ID" class="text"/>
+  </div>
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="edit_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+</div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+              
+            </ul>
+          </div>
+          <div class=" pull-right">
+            <ul class="nav">
+          
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+   <script type="text/javascript" src="./dev/DevInfo.js"></script>
+   <script type="text/javascript" src="./common/commonInit.js"></script>

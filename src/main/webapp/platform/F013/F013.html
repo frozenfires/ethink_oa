@@ -1,0 +1,52 @@
+<!-- 重置密码 -->
+<div class="container ">
+  <div class="tranContent">
+  <div class="tabbable tranContent" style="text-align: center;">
+		<form id="pwdForm" action="" method="post" style="display:inline-block; margin-left:-120px;">
+			<div class="line-row ">
+				<div class="" style="margin-top: 40%">
+					<label class="control-label">柜员号</label> <input
+						type="text" class="text" name="USER_ID_P" id="USER_ID_P" />
+				</div>
+				<br />
+				
+				<br />
+				<div class="" style="margin-left:25%;">
+			        <a class="btn btn-primary" style="margin-top: 70px"id="build_cancel">取消</a>
+			        <a class="btn btn-primary" style="margin-top: 70px;margin-left:30%;" id="submit">确认</a>
+                </div>
+			</div>
+		</form>
+	</div>
+  </div>
+ </div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+            </ul>
+          </div>
+          <div class="pull-right">
+            <ul class="nav">
+              <li class="submit">
+                <a id="submit" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">确定</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+<script type="text/javascript" src="<%=basePath%>/platform/F013/F013.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+
+
+<!-- 客户信息管理F014-->
+<div class="container " style="height:1000px;">
+<div class="">
+
+<form class="queryForm" id="orgQueryForm"  action="" method="post">
+  <div class="line-row ">
+  <div class="">
+    <label class="control-label">客户类别</label>
+    <input type="radio" name="CUSTOMER_TYPE" id="CUSTOMER_TYPE" />代理商
+     <input type="radio" name="CUSTOMER_TYPE" id="CUSTOMER_TYPE" />直签
+  </div>
+  <div class="">
+    <label class="control-label" >网点名称</label>
+    <input type="text" name="ORGG_NAME" id="ORGG_NAME" class="text">
+  </div>
+    <div class="">
+    <label class="control-label" >网点地址</label>
+    <input type="text" name="BRANCH_ADDRESS" id="BRANCH_ADDRESS" class="text">
+  </div>
+      <div class="">
+    <label class="control-label" >联系人</label>
+    <input type="text" name="LINKMAN" id="LINKMAN" class="text">
+  </div>
+  		<!-- <button id="org_search" name="org_search" class="btn btn-primary">查询</button>-->
+    	<button type="button" name="org_search" id="org_search" class="btn btn-primary">查询</button>
+  </div>
+ </form>
+
+<div class=" "><!-- 左侧开始 -->
+	<div>
+   		<button  name="ADD" class="btn btn-primary"  id="ADD">增加</button>
+     	<button  name="EDIT" class="btn btn-primary"  id="EDIT">修改</button>
+       	<button  name="DELETE" class="btn btn-primary"  id="DELETE">删除</button>
+	</div>
+<!--   <input type="button" name="ADD" value="增加" id="ADD" class="btn" role="button"/>
+  <input type="button" name="EDIT" value="修改" id="EDIT" class=""/>
+   <input type="button" name="DELETE" value="删除" id="DELETE" class=""/>
+   -->
+ 
+  <div class="content-box">
+   <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="orgInfo">
+	<thead>
+		<tr>
+			<th>客户类别</th>
+			<th>机构级别</th>
+			<th>上级机构</th>
+			<th>网点地址</th>
+			<th>网点名称</th>
+			<th>区域</th>
+			<th>联系人</th>
+			<th>联系电话</th>
+			<th>邮箱</th>
+			<th>备注一</th>
+			<th>备注二</th>
+		</tr>
+	</thead>
+	<tbody  align="center">
+		<tr>
+			<td colspan="11" class="dataTables_empty">........</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		
+	</tfoot>
+</table>
+ </div>
+
+</div>
+
+</div>
+
+<!-- 弹出增加用户窗口 -->
+<div id="addOrgModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">增加客户</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="addOrgForm"  action="">
+  <div class="line-row ">
+
+  <div class="">
+    <label class="control-label" >网点地址</label>
+    <input type="text" name="BRANCH_ADDRESS" id="BRANCH_ADDRESS" class="text" maxlength="10" />
+  </div>
+  <div class="">
+    <label class="control-label" >网点名称</label>
+    <input type="text" name="BRANCH_NAME" id="BRANCH_NAME" class="text" maxlength="20">
+  </div>
+  
+  <div class="">
+    <label class="control-label" >区域</label>
+     <span name="ORG_TYPE" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">网点</a></li>
+        <li><a href="javascript:void(0);" value="2">支行</a></li>
+        <li><a href="javascript:void(0);" value="3">分行</a></li>
+        <li><a href="javascript:void(0);" value="4">总行</a></li>
+      </ul>
+    </span>
+  </div>
+  <div class="">
+    <label class="control-label" >客户类别</label>
+     <span name="ORG_TYPE" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">代理商</a></li>
+        <li><a href="javascript:void(0);" value="2">直签</a></li>
+
+      </ul>
+    </span>
+  </div>
+  
+ 
+
+
+ <div class="">
+    <label class="control-label" >电话</label>
+    <input type="text" name="ORG_PHONE" id="ORG_PHONE" class="text" maxlength="15">
+  </div>
+  <div class="">
+    <label class="control-label" >联系人</label>
+    <input type="text" name="ORG_CONTACTS" id="ORG_CONTACTS" class="text" maxlength="20">
+  </div>
+    <div class="">
+    <label class="control-label" >邮箱</label>
+    <input type="text" name="EMAIL" id="EMAIL" class="text" maxlength="20">
+  </div>
+  <br>
+  <div class="" style="width:590px;">
+    <label class="control-label" >地址</label>
+    <input type="text" name="ORG_ADDRESS" id="ORG_ADDRESS" class="text" maxlength="30" style="width:400px;">
+  </div>
+ <div class="" style="width:300px">
+ <label class="control-label" >网点机构</label>
+      <input type="text"readonly="readonly" name="ORG_NAME" id="ORG_NAME" class="text" maxlength="20">
+ <a id="showORGTree" href="#" >选择</a>
+  </div>
+  <div id="menuContent" style="display:none"  >
+     <ul id="treeDemo"  class="ztree"></ul>
+      <input type="hidden" name="ORG_TREE" id="ORG_TREE" class="text"/>
+  </div>
+
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="add_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+
+
+
+
+<!-- 弹出编辑用户窗口-->
+<div id="editOrgModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">编辑机构</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="editOrgForm"  action="">
+  <div class="line-row ">
+
+  <div class="" sytle="align:right">
+       <label class="control-label">机构代号</label>
+    <input type="text" name="ORGG_ID" id="ORG_ID" class="text" readonly="readonly" maxlength="10" />
+  </div>
+  <div class="">
+    <label class="control-label">机构名称</label>
+    <input type="text" name="ORGG_NAME" id="ORG_NAME" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label">机构级别</label>
+     <span name="ORG_TYPE" id="ORG_TYPE" class="select btn-group">
+      <button class="btn btn-mini item" data-toggle="dropdown" value="" >请选择</button>
+      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+      <ul class="dropdown-menu options">
+      	<li><a href="javascript:void(0);" value="1">网点</a></li>
+        <li><a href="javascript:void(0);" value="2">支行</a></li>
+        <li><a href="javascript:void(0);" value="3">分行</a></li>
+        <li><a href="javascript:void(0);" value="4">总行</a></li>
+      </ul>
+    </span>
+  </div>
+  <div class="">
+    <label class="control-label" >上级机构</label>
+    <input type="text" name="PARENT_ORG_ID" id="PARENT_ORG_ID" class="text" maxlength="20">
+  </div>
+
+
+
+ <div class="">
+    <label class="control-label" >电话</label>
+    <input type="text" name="ORG_PHONE" id="ORG_PHONE" class="text" maxlength="15">
+  </div>
+  <div class="">
+    <label class="control-label" >联系人</label>
+    <input type="text" name="ORG_CONTACTS" id="ORG_CONTACTS" class="text" maxlength="20">
+  </div>
+    <div class="">
+    <label class="control-label" >邮箱</label>
+    <input type="text" name="EMAIL" id="EMAIL" class="text" maxlength="20">
+  </div>
+  <br>
+  <div class="" style="width:590px;">
+    <label class="control-label" >地址</label>
+    <input type="text" name="ORG_ADDRESS" id="ORG_ADDRESS" class="text" maxlength="30" style="width:400px;">
+  </div>
+  
+
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="edit_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+</div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+              
+            </ul>
+          </div>
+          <div class=" pull-right">
+            <ul class="nav">
+          
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+<TABLE border=0 height=600px align=left id="orgidshow">
+	<TR>
+		<TD width=260px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
+			<ul id="tree" class="ztree" style="width:260px; overflow:auto;"></ul>
+		</TD>
+		<TD width=770px align=left valign=top><IFRAME ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO width=100%  height=600px SRC="core/standardData.html"></IFRAME></TD>
+	</TR>
+</TABLE>
+
+   <script type="text/javascript" src="<%=basePath%>/platform/F0111/F0111.js"></script>
+    

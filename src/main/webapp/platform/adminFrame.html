@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" />
+		<meta name="author" content="@ebring"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!-- frame页面 脚本引用 -->
+		<script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="common/global.js"></script>
+		<script type="text/javascript" src="common/config.js"></script>
+		<script type="text/javascript" src="common/loadMaincss.js"></script>
+		<script type="text/javascript">
+			window.onload = frameSize;
+			window.onresize = frameSize;
+			function frameSize() { 
+				var cHeight = document.documentElement.clientHeight;
+				var tHeight = document.getElementById("topContent").offsetHeight;
+				document.getElementById("bodyContent").style.height = (cHeight - tHeight+1)+'px';
+			};
+
+			window.systemReadylist = [];
+			window.systemReady = function(func){
+				if(func){
+					window.systemReadylist.push(func);
+				}else{
+					for(var i=0; i<systemReadylist.length; i++){
+						try{
+							systemReadylist[i]();
+						}catch(e){}
+					}
+				}
+			}
+			window.mainOnload = function(){
+				window.systemReady();
+			}
+			window.name="ethinkManageWindow";
+		</script>
+	</head>
+	<body style="min-width: 1024px; min-height: 600px;">
+		<!-- web page Home -->
+		<div id="frame" class="frame">
+			<!-- top信息 -->
+			<div id="topContent" class="topContent header navbar-static-top">
+			    <div class="header-right">
+					<ul class="nav nav-pills control ">
+						<li class="li1 ">
+							<a class="info">Hi ! <span id="head-userName" class="userName"></span></a>
+						</li>
+						<li class="sxClass">
+							<a class="icon navshuxian"></a>
+						</li>
+						<li class="li2 ">
+							<a id="logout" class="luck" href="#">
+								<span class="logouttext" >退出</span>
+							</a>
+						</li>
+						<li class="sxClass">
+							<a class="icon navshuxian"></a>
+						</li>
+						<li class="li3 ">
+							<a id="lockscreen" class="luck" href="#">
+							<span class="lockscreentext">锁定</span></a>
+						</li>
+						<!--  <li class=" ">
+							<a id="changePwd" class="control " href="#">密码修改</a>
+						</li> -->
+					</ul>
+			    </div>
+			</div>
+			<div id="bodyContent" class="bodyContent">
+				<!-- 左侧菜单 -->
+	    		<div id="left" class="left overflow-y">
+		    		<div id="menu" class="menuC accordion"></div>
+				</div>
+				<!-- 右侧交易区域 -->
+	    		<div id="right" class="right">
+					<!-- <iframe id="mainsystem" name="mainsystem" class="" onload="mainOnload()" src="" 
+					 frameborder="no" scrolling="auto" hidefocus="" height="100%" width="100%"></iframe> -->
+					<div id="subsystem"></div>
+				</div>
+		  	</div>
+		</div>
+		<!-- 锁屏页面 -->
+		<div id="lockscreenPage" class="lockscreenPage">
+	    	<div class="backg"></div>
+			<div class="luakloginClass">
+			 	<div class="formClass">
+			 		<div class="leftClass" >
+			          <input id="lusername" name="lusername" type="text" class="loginField" readonly="readonly" placeholder="用户名">
+			          <input id="lpassword" name="lpassword" type="password" class="loginField" placeholder="请输入密码进行解锁">
+			        </div>
+			        <div class="rightClass" >
+			          <button id="llogin" class="btn-primary btn">确定</button>
+			        </div>
+			 	</div>
+			</div>
+	    </div>
+<!-- web page End -->
+	</body>
+	
+	<!-- 不要修改下面代码。 此代码放到文件底部，引入公共js文件，及初始化方法。 -->
+	<script type="text/javascript" src="lib/jquery.md5.js"></script>
+	<script type="text/javascript" src="lib/bootstrap.js"></script>
+	<script type="text/javascript" src="lib/json2.js"></script>
+	<script type="text/javascript" src="common/jqueryExtend.js"></script>
+	<script type="text/javascript" src="common/util.js"></script>
+	<script type="text/javascript" src="common/alert.js"></script>
+   	<script type="text/javascript" src="common/_view.js"></script>
+	<script type="text/javascript" src="common/systemmng.js"></script>
+	<script type="text/javascript" src="common/frame.js"></script>
+</html>

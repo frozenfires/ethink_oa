@@ -1,0 +1,207 @@
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #efefef;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+    #pull_down {
+        background-image: url('../oa/appwork/upfile/pulldown.PNG');
+        margin-top: -15px;
+        margin-left: 98%;
+        width: 17px;
+        height: 17px;
+    }
+
+</style>
+
+<div class="context_self" style="width: 99%;">
+
+    <div class="title_self">
+       工单高级查询
+        <div id="pull_down"></div>
+    </div>
+<div>
+<form id="orgQueryForm"  action="" method="post">
+  <div class="line-row " >
+          <div class="queryhide">
+    <label class="control-label" >客户名称</label>
+    <input type="text" name="MYORG_NAME" id="MYORG_NAME" class="text">
+  </div>
+     <div class="">
+ <label class="control-label" >工单号</label>
+      <input type="text" name="WORK_ID" id="WORK_ID" class="text" maxlength="20">
+ 
+
+  </div>
+   <div class="">
+  <label class="control-label" >申请开始时间</label>
+      <input type="text" name="appStart_time" id="appStart_time" placeholder="请点击选择时间" class="text" maxlength="20">
+  </div>
+   <div class="">
+  <label class="control-label" >申请结束时间</label>
+      <input type="text" name="append_time"  id="append_time" placeholder="请点击选择时间" class="text" maxlength="20">
+ 
+
+  </div>
+    <div class="">
+                    <label class="control-label">工单类型</label>
+                    <span name="WORK_TYPE" id="WORK_TYPE" class="select btn-group">
+                            <button class="btn btn-mini item" id="" data-toggle="dropdown" value="">请选择</button>
+                            <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                            <ul class="dropdown-menu options">
+                               
+                            </ul>
+                        </span>
+                </div>
+      <div class="">
+                    <label class="control-label">工单状态</label>
+                    <span name="WORK_STATUS" id="WORK_STATUS" class="select btn-group">
+                            <button class="btn btn-mini item" id="" data-toggle="dropdown" value="">请选择</button>
+                            <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"></button>
+                            <ul class="dropdown-menu options" id="staus1">
+                 
+                               
+                            </ul>
+                        </span>
+                </div>
+            
+ <div class="queryhide">
+			    	<label class="control-label">设备类型</label>
+					<span name="WORK_INSTALL_DEVTYPE"  id="WORK_INSTALL_DEVTYPE" class="select btn-group">
+				      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+				      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+				      <ul class="dropdown-menu options"/>
+				     </span>
+			    </div>
+			      <div class="queryhide">
+			    	<label class="control-label">设备型号</label>
+					<span name="DEVICE_MODEL"  id="DEVICE_MODEL" class="select btn-group">
+				      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+				      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+				      <ul class="dropdown-menu options"/>
+				     </span>
+			    </div>
+			      <div class="queryhide">
+    <label class="control-label" >审批部门</label>
+    <span name="WORK_DEPARTMENT"  id="WORK_DEPARTMENT" class="select btn-group">
+				      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+				      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+				      <ul class="dropdown-menu options"/>
+				     </span>
+  </div>
+		 <div class="queryhide">
+    <label class="control-label" >申请部门</label>
+   <span name="APPLy_DEPARTMENT"  id="APPLy_DEPARTMENT" class="select btn-group">
+				      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+				      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+				      <ul class="dropdown-menu options"/>
+				     </span>
+  </div>	
+		 <div class="queryhide">
+    <label class="control-label" >审验部门</label>
+ <span name="WORK_DEPARTMENT"  id="WORK_DEPARTMENT" class="select btn-group">
+				      <button class="btn btn-mini item" data-toggle="dropdown" value="">请选择</button>
+				      <button class="btn btn-mini dropdown-toggle " data-toggle="dropdown"/>
+				      <ul class="dropdown-menu options"/>
+				     </span>
+  </div>	
+			     <div class="queryhide">
+			    	<label class="control-label">设备编号</label>
+					<input type="text" name="DEVICE_NO" id="DEVICE_NO" class="text">
+			    </div>
+    
+      
+ 
+    <div class="queryhide">
+    <label class="control-label" >审验人</label>
+    <input type="text" name="APPROVER_NAME" id="APPROVER_NAME" class="text">
+  </div>
+   
+  
+  <div class="queryhide">
+    <label class="control-label" >审批人</label>
+    <input type="text" name="WORK_CHECKPERSON_NAME" id="WORK_CHECKPERSON_NAME" class="text">
+  </div>
+
+  
+  </div> 
+  		<!-- <button id="org_search" name="org_search" class="btn btn-primary">查询</button>-->
+    	 <button type="button" name="work_search" id="Search" class="btn btn-primary" style="margin-left: 650px;margin-top: 20px;">查询</button>
+  </div>
+ 
+ </form>
+        <div class="content-box">
+            <!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+            <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="queryResult">
+                <thead>
+                <tr>
+                    <th>工单号</th>
+                    <th>工单类型</th>
+                    <th>工单紧急度</th>
+                    <th>工单状态</th>
+                    <th>设备编号</th>
+                    <th>设备名称</th>
+                    <th>设备型号</th>
+                    <th>设备类型</th>
+                    <th>客户名称</th>
+                    <th>提出申请时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody align="center" id="temptable">
+                <tr>
+                    <td colspan="8" class="dataTables_empty">........</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+
+ <div class="context_box" style=" width: 99%;margin-left: 0.5%;padding-bottom: 10px;">
+
+        <!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+        <div class="content-box" style="margin-bottom:0px;">
+            <div class="line-row" style="border-bottom: 1px solid #ccc;">
+                <div style="background-color: #00B83F;width: 5px;height: 12px;"></div>
+                <span style="margin-left: 10px">工单历史信息</span>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="queryHistoryResult">
+                <thead>
+                <tr>
+                    <th>操作时间</th>
+                    <th>操作人</th>
+                    <th>操作类型</th>
+                    <th>工单状态</th>
+                    <th>意见/状态说明</th>
+                    <th>接单人</th>
+                    <th>处理详情</th>
+
+                </tr>
+                </thead>
+                <tbody align="center" id="Historytemptable">
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+</div>
+</div>
+
+<script type="text/javascript" src="<%=basePath%>/oa/common/workHistory.js"></script>
+        <script type="text/javascript" src="<%=basePath%>/oa/queryAllWork/queryAllworks.js"></script>
+    </div>

@@ -1,0 +1,2 @@
+tcrcBaseFunctionMapper.xml  TCRC基础交易配置
+tcrcBaseManageMapper.xml    TCRC基础自有功能配置

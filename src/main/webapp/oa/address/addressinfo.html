@@ -1,0 +1,179 @@
+﻿
+
+<!-- 区域管理-->
+<div class="container ">
+<div class="">
+
+<form class="queryForm" id="orgQueryForm"  action="" method="post">
+  <div class="line-row ">
+  <div class="">
+    <label class="control-label">区域编号</label>
+    <input type="text" name="ADDRESS_ID" id="ADDRESS_ID" class="text"/>
+  </div>
+  <div class="">
+    <label class="control-label" >区域名称</label>
+    <input type="text" name="ADDRESS_NAME" id="ADDRESS_NAME" class="text">
+  </div>
+  		<!-- <button id="org_search" name="org_search" class="btn btn-primary">查询</button>-->
+    	<button type="button" name="org_search" id="org_search" class="btn btn-primary">查询</button>
+  </div>
+ </form>
+
+<div class=" "><!-- 左侧开始 -->
+	<div>
+   		<button  name="ADD" class="btn btn-primary"  id="ADD">增加</button>
+     	<button  name="EDIT" class="btn btn-primary"  id="EDIT">修改</button>
+       	<button  name="DELETE" class="btn btn-primary"  id="DELETE">删除</button>
+	</div>
+<!--   <input type="button" name="ADD" value="增加" id="ADD" class="btn" role="button"/>
+  <input type="button" name="EDIT" value="修改" id="EDIT" class=""/>
+   <input type="button" name="DELETE" value="删除" id="DELETE" class=""/>
+   -->
+ 
+  <div class="content-box">
+   <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="orgInfo">
+	<thead>
+		<tr>
+			<th>区域编号</th>
+			<th>区域名称</th>
+			<th>上级区域名称</th>
+			<th>上级区域编号</th>
+		</tr>
+	</thead>
+	<tbody  align="center">
+		<tr>
+			<td colspan="7" class="dataTables_empty">........</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		
+	</tfoot>
+</table>
+ </div>
+
+</div>
+
+</div>
+
+<!-- 弹出增加用户窗口 -->
+<div id="addOrgModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">增加区域</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="addOrgForm"  action="">
+  <div class="line-row ">
+
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>区域名称</label>
+    <input type="text" name="ADDRESS_NAME" id="ADDRESS_NAME" class="text" maxlength="10" />
+  </div>
+  <div>
+  <label class="control-label" ><span style="color:red;">*</span>上级区域名称</label>
+      <input type="text" readonly="readonly" name="ADDRESS_UPNAME" id="ADDRESS_UPNAME" class="text" maxlength="30" placeholder="请点击选择上级区域"> 
+  </div>
+  <div class="">
+    <label class="control-label"></label>
+    <input type="hidden" name="ADDRESS_hidden" id="ADDRESS_hidden" class="text" maxlength="20">
+  </div>
+  
+  <div id="menuContent" style="display:none" >
+     <ul id="treeDemo"  class="ztree"></ul>
+      <input type="hidden" name="BRACH_TREE" id="BRACH_TREE" class="text"/>
+  </div>
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="add_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+
+
+
+<!-- 弹出编辑用户窗口-->
+<div id="editOrgModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">编辑区域</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="editOrgForm"  action="">
+  <div class="line-row ">
+  
+  <div class="" sytle="align:right">
+       <label class="control-label">区域编号</label>
+    <input type="text" name="ADDRESS_ID" id="ADDRESS_ID" class="text" readonly="readonly" maxlength="10" />
+  </div>
+
+  <div class="">
+    <label class="control-label"><span style="color:red;">*</span>区域名称</label>
+    <input type="text" name="ADDRESS_NAME" id="ADDRESS_NAME" class="text" maxlength="20">
+  </div>
+  
+  <div>
+  <label class="control-label" ><span style="color:red;">*</span>上级区域名称</label>
+      <input type="text" readonly="readonly" name="ADDRESS_UPNAME" id="ADDRESS_UPNAME_EDIT" class="text" maxlength="30" > 
+  </div>
+  
+  <div class="">
+    <label class="control-label"></label>
+    <input type="text" name="ADDRESS_UPID" id="ADDRESS_UPID" class="text" readonly="readonly" maxlength="20" style="display:none">
+  </div>
+  
+  <div class="">
+    <label class="control-label"></label>
+    <input type="hidden" name="ADDRESS_hidden" id="ADDRESS_hidden" class="text" maxlength="20">
+  </div>
+  
+  <div id="menuContent_edit" style="display:none" >
+     <ul id="treeDemo_EDIT"  class="ztree"></ul>
+      <input type="hidden" name="BRACH_TREE_EDIT" id="BRACH_TREE_EDIT" class="text"/>
+  </div>
+  
+
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="edit_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+</div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+              
+            </ul>
+          </div>
+          <div class=" pull-right">
+            <ul class="nav">
+          
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+   <script type="text/javascript" src="<%=basePath%>/oa/address/addressinfo.js"></script>
+ 

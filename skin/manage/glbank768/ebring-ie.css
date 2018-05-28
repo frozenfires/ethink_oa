@@ -1,0 +1,17 @@
+
+/**
+ * 针对ie6定制的样式
+ */
+
+/**模态窗口默认位置*/
+.modal {top: -190px;}
+
+.hub .hmenu4 .hgroup .hitem a{margin: 0px 0px 0px 0px;}
+.hub{padding-top: 0px;}
+
+.select button.item, .btn-group button.item,
+div.line-row .select button.item{height:14px; line-height: 14px;}
+
+.footer .icontext{margin-top: -37px; padding-top: 3px;}
+/**图标分割线*/
+li.split{height: 31px; width:2px; margin: 3px 15px 0px 15px; background-color: #ffffff; }

@@ -1,0 +1,163 @@
+<style type="text/css">  
+         .cover{
+             position: absolute;
+             z-index: 1;
+             top: 0;
+             left: 0;
+             width: 120px;
+             height: 95px;
+             background-color: rgba(0,0,0,.3);
+             display: none;
+             line-height: 95px;
+             text-align: center;
+             cursor: pointer;
+         }
+         .cover>.delbtn{
+             color: red;
+             font-size: 20px;
+ 
+         }
+        
+         .addImages{
+             display: inline-block;
+             width: 120px;
+             height: 95px;                       
+             position: relative;
+             overflow: hidden;
+         }
+              
+         #a01{
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 125px;
+             height: 95px;
+             opacity: 0;
+         }
+
+
+</style> 
+<!-- 工单处理信息-->
+<div class="container" >
+<div class="">
+
+<form class="addDealForm" id="addDealForm"  action="" method="post" enctype="multipart/form-data">
+  <div class="modal-header">
+    <h3 id="myModalLabel">填写工单处理信息</h3>
+  </div>
+  <div class="line-row " id="d1">
+  <div class="" style="display:none;">
+    <label class="control-label">ID</label>
+    <input type="text" name="ID" id="ID" class="text"/>
+  </div>
+  <div class="" style="display:none;">
+    <label class="control-label">工单ID</label>
+    <input type="text" name="WORKAPP_ID" id="WORKAPP_ID" class="text"/>
+  </div>
+  <div class="">
+    <label class="control-label">处理状态</label>
+    <input type="text" name="DEAL_STATUS" id="DEAL_STATUS" class="text"/>
+  </div>
+  <div class="">
+    <label class="control-label">开始时间</label>
+    <input type="text" name="START_TIME" id="START_TIME" class="text"/>
+  </div>
+  <div class="">
+    <label class="control-label" >完成时间</label>
+    <input type="text" name="END_TIME" id="END_TIME" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >处理描述</label>
+    <input type="text" name="DEAL_DES" id="DEAL_DES" class="text" maxlength="20">
+  </div>
+  
+  <div class="">
+    <label class="control-label" >设备类型</label>
+    <input type="text" name="DEVICE_TYPE" id="DEVICE_TYPE" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >设备型号</label>
+    <input type="text" name="DEVICE_MODEL" id="DEVICE_MODEL" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >设备编号</label>
+    <input type="text" name="DEVICE_ID" id="DEVICE_ID" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >设备名称</label>
+    <input type="text" name="DEVICE_NAME" id="DEVICE_NAME" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >主机序列号</label>
+    <input type="text" name="HOST_NUM" id="HOST_NUM" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >TCR序列号</label>
+    <input type="text" name="TCR_NUM" id="TCR_NUM" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >设备IP</label>
+    <input type="text" name="DEVICE_IP" id="DEVICE_IP" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >子网掩码</label>
+    <input type="text" name="SUBNET_MASK" id="SUBNET_MASK" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >网关</label>
+    <input type="text" name="GATEWAY" id="GATEWAY" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" >MAC地址</label>
+    <input type="text" name="MAC" id="MAC" class="text" maxlength="20">
+  </div>
+   <div class="">
+    <label class="control-label" >安装点类型</label>
+    <input type="text" name="SETUP_TYPE" id="SETUP_TYPE" class="text" maxlength="20">
+  </div>
+   <div class="">
+    <label class="control-label" >验收类型</label>
+    <input type="text" name="MAC" id="MAC" class="text" maxlength="20">
+  </div>
+   <div class="">
+    <label class="control-label" >验收结果</label>
+    <input type="text" name="CHECK_RESULT" id="CHECK_RESULT" class="text" maxlength="20">
+  </div>
+   <div class="">
+    <label class="control-label" >培训内容</label>
+    <input type="text" name="TRANING_CONT" id="TRANING_CONT" class="text" maxlength="20">
+  </div>
+   <div class="">
+    <label class="control-label" >故障类别</label>
+    <input type="text" name="FAUILT_TYPE" id="FAUILT_TYPE" class="text" maxlength="20">
+  </div>
+   <div class="">
+    <label class="control-label" >故障原因</label>
+    <input type="text" name="FAUILT_REASON" id="FAUILT_REASON" class="text" maxlength="20">
+  </div>
+ <div >
+		  <div class="addImages">        
+	          <input type="file"  id="a01" class="filebtn" name="file"/>
+	          <div class="text-detail">
+	              <img src="../oa/appwork/image/upload-bj.png"/>
+	              <p>点击上传</p>
+	          </div>
+	     </div> 
+     </div>
+ <div class="" style="width:350px">
+    <label class="control-label">上传文件</label>
+	<a class="afile" href="javascript:void(0);">
+	<input type="file" id="a02" class="filebtn" name="file">
+	</a>
+  </div>
+</div>
+ </form>
+	
+</div>
+ <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="add_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+ <script type="text/javascript" src="./F017/F017.js"></script>

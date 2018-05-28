@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- TCRC基础交易配置区 -->
+<mapper namespace="com.ebring.tcrc.trans.base.dao.ITcrcBaseFunctionDao">
+
+  <!-- 不加缓存
+  <cache />
+   -->
+  
+   <!--冠字号查询  -->
+  <select id="selectCashNumber" parameterType="hashmap" resultType="hashmap">
+      select T.MAINLOG_ID TRANLOG_ID,T.ORG_ID ORG_ID_P,T.USER_ID USER_ID_P, C.SNO, C.AMTTYPE, T.CONSUMER_ACCOUNT, T.ACCOUNT_ID, R.MODULE_NAME, C.CCY, C.TRANCODE, C.CLIENTID, C.DEVICE_ID,
+      date_format(T.INSERT_TIME,'%Y-%m-%d %H:%i:%s') INSERT_TIME, C.TRANLOG_ID SUBLOG_ID
+      FROM FIN_CASHNO C, FIN_TRAN_LOG T, BASE_RESOURCE R 
+      WHERE C.TRANLOG_ID = T.TRANLOG_ID AND T.TRANCODE = R.MODULE_ID
+      <if test="SNO != null and SNO !='' ">  
+        and SNO like   CONCAT('%',#{SNO},'%')
+      </if> 
+      <if test="ORG_ID_P != null and ORG_ID_P !='' ">  
+        and T.ORG_ID = #{ORG_ID_P}
+      </if> 
+      <if test="USER_ID_P != null and USER_ID_P !='' ">  
+        and T.USER_ID = #{USER_ID_P}
+      </if>
+      <if test="TRANLOG_ID != null and TRANLOG_ID !='' ">  
+        and T.MAINLOG_ID like  CONCAT('%',#{TRANLOG_ID},'%')
+      </if> 
+      <if test="CONSUMER_ACCOUNT != null and CONSUMER_ACCOUNT !='' ">  
+        and T.CONSUMER_ACCOUNT like  CONCAT('%',#{CONSUMER_ACCOUNT},'%')
+      </if> 
+      <if test="AMTTYPE != null and AMTTYPE !='' ">  
+        and C.AMTTYPE = '${AMTTYPE}'
+      </if> 
+      <if test="MODULE_ID != null and MODULE_ID !='' ">  
+        and R.MODULE_ID = '${MODULE_ID}'
+      </if> 
+       <if test="startTime != null and startTime !='' ">  
+          <![CDATA[ AND str_to_date(T.INSERT_TIME, '%Y-%m-%d %H:%i:%s') >= '${startTime}' ]]>  
+      </if>  
+      <if test="endTime != null and endTime !='' ">  
+          <![CDATA[ AND str_to_date(T.INSERT_TIME, '%Y-%m-%d %H:%i:%s') <= '${endTime}' ]]>  
+      </if>
+      ORDER BY T.UPDATE_TIME DESC     
+  </select>
+  
+   <!--流水查询  -->
+  <select id="selectTransLog" parameterType="hashmap" resultType="hashmap">
+      select MAINLOG_ID, MODULE_NAME,ORG_ID ORG_ID_P,USER_ID USER_ID_P,date_format(INSERT_TIME,'%Y-%m-%d %H:%i:%s') AS INSERT_TIME,
+       CCY, FORMAT((TCRAMT +BOXAMT), 2) AS SUMAMT, FORMAT(TCRAMT, 2) AS TCRAMT, FORMAT(BOXAMT, 2) AS BOXAMT, FORMAT(TCR_REAL_AMT, 2) AS TCR_REAL_AMT, 
+	TRAN_STATUS, REASON, TCR_AMT_BEFOR, ONLINE_NO, TRANLOG_ID, CASH_FLAG 
+	FROM FIN_TRAN_LOG, BASE_RESOURCE 
+      WHERE TRANCODE = MODULE_ID
+      <if test="SNO != null and SNO !='' ">  
+        and SNO like  CONCAT('%',#{SNO},'%')
+      </if> 
+       <if test="MAINLOG_ID != null and MAINLOG_ID !='' ">  
+        and MAINLOG_ID like   CONCAT('%',#{MAINLOG_ID},'%')
+      </if> 
+       <if test="MODULE_ID != null and MODULE_ID !='' ">  
+        and MODULE_ID like   CONCAT('%',#{MODULE_ID},'%')
+      </if> 
+       <if test="TRAN_STATUS != null and TRAN_STATUS !='' ">  
+        and TRAN_STATUS = '${TRAN_STATUS}'
+      </if> 
+      <if test="startTime != null and startTime !='' ">  
+          <![CDATA[ AND str_to_date(INSERT_TIME, '%Y-%m-%d %H:%i:%s') >= '${startTime}' ]]>  
+      </if>  
+      <if test="endTime != null and endTime !='' ">  
+          <![CDATA[ AND str_to_date(INSERT_TIME, '%Y-%m-%d %H:%i:%s') <= '${endTime}' ]]>  
+      </if> 
+      <if test="amtmin != null and amtmin != ''">
+      	  <![CDATA[	and (TCRAMT+BOXAMT) >= '${amtmin}' ]]>
+      </if>     
+      <if test="amtmax != null and amtmax != ''">
+      	  <![CDATA[ and (TCRAMT+BOXAMT) <= '${amtmax}' ]]>
+      </if>     
+      <if test="SEQNO_THIRD != null and SEQNO_THIRD !='' ">  
+        and SEQNO_THIRD like   CONCAT('%',#{SEQNO_THIRD},'%')
+      </if>
+      <if test="ONLINE_NO != null and ONLINE_NO !='' ">  
+        and ONLINE_NO like CONCAT('%',#{ONLINE_NO},'%')
+      </if>
+      <if test="ORG_ID_P != null and ORG_ID_P !='' ">  
+        and ORG_ID = #{ORG_ID_P}
+      </if>
+      <if test="USER_ID_P != null and USER_ID_P !='' ">  
+        and USER_ID = #{USER_ID_P}
+      </if>
+      ORDER BY UPDATE_TIME DESC 
+  </select>
+  
+
+  <!--流水查询  -->
+  <select id="selectTransLogNoPage" parameterType="hashmap" resultType="hashmap">
+      select MAINLOG_ID, MODULE_NAME,ORG_ID ORG_ID_P,USER_ID USER_ID_P,date_format(INSERT_TIME,'%Y-%m-%d %H:%i:%s') AS INSERT_TIME,
+       CCY, FORMAT((TCRAMT +BOXAMT), 2) AS SUMAMT, FORMAT(TCRAMT, 2) AS TCRAMT, FORMAT(BOXAMT, 2) AS BOXAMT, FORMAT(TCR_REAL_AMT, 2) AS TCR_REAL_AMT, 
+  TRAN_STATUS, REASON, TCR_AMT_BEFOR, ONLINE_NO, TRANLOG_ID, CASH_FLAG 
+  FROM FIN_TRAN_LOG, BASE_RESOURCE 
+      WHERE TRANCODE = MODULE_ID
+      <if test="startTime != null and startTime !='' ">  
+          <![CDATA[ AND str_to_date(INSERT_TIME, '%Y-%m-%d %H:%i:%s') >= '${startTime}' ]]>  
+      </if>  
+      <if test="endTime != null and endTime !='' ">  
+          <![CDATA[ AND str_to_date(INSERT_TIME, '%Y-%m-%d %H:%i:%s') <= '${endTime}' ]]>  
+      </if> 
+      ORDER BY UPDATE_TIME DESC 
+  </select>
+  
+  <!--账户余额查询  -->
+  <select id="queryAccount" parameterType="hashmap" resultType="hashmap">
+  	select DEVICE_BALANCE AMT_TCRAMT, BOX_BALANCE AMT_BOXAMT from BASE_CASH_ACCOUNT WHERE TERMINAL_IP=#{USER_IP}
+  </select>
+  
+  <!--查询账户详情（现金账户余额查询）  -->
+  <select id="selectAmt" parameterType="hashmap" resultType="hashmap">
+  	SELECT A.ACCOUNT_ID, U.ORG_ID, U.USER_ID, U.USER_NAME, D.DEVICE_ID,A.TELLER_BOX, 
+  	(A.DEVICE_BALANCE+ A.BOX_BALANCE) AS SUMAMT, 
+  	A.DEVICE_BALANCE, A.BOX_BALANCE 
+  	FROM BASE_CASH_ACCOUNT A, BASE_DEVICE_INFO D, BASE_USER U 
+ WHERE A.DEVICE_ID = D.DEVICE_ID AND A.USER_ID = U.USER_ID
+  	<if test="USER_ID_ != null and USER_ID_ !='' ">  
+       and A.USER_ID = #{USER_ID_}
+    </if> 
+    <if test="ORG_ID_ != null and ORG_ID_ !='' ">  
+       and U.ORG_ID = #{ORG_ID_}
+    </if> 
+  </select>
+  
+  <!-- 插入日志 -->
+  <insert id="insertTransLog" parameterType="hashmap" >
+ INSERT INTO FIN_TRAN_LOG(TRANLOG_ID,MAINLOG_ID,USER_ID,ORG_ID,DEVICE_ID,ACCOUNT_ID,TRANCODE,INSERT_TIME,FINISH_TIME,TRAN_STATUS,TCRAMT,BOXAMT,
+ONLINE_NO,RETCODE_ONLINE,TCR_REAL_AMT,REAL_V1,REAL_V5,REAL_V10,REAL_V20,REAL_V50,REAL_V100,TCR_AMT_BEFOR,ATM_NO,CONSUMER_ACCOUNT,SELEBRANCH,
+IS_REVERSED,TRANFEES,TRANCODE_THIRD,SEQNO_THIRD,ADD_MONEY_CYCLE,REASON,MEMO,UPDATE_TIME,CCY,PATTERN,CASH_FLAG) 
+VALUES(#{TRANLOG_ID},#{MAINLOG_ID,jdbcType=VARCHAR},#{USER_ID},#{ORG_ID},#{DEVICE_ID},#{ACCOUNT_ID},
+#{TRANCODE},str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s'),#{FINISH_TIME,jdbcType=DATE},#{TRAN_STATUS,jdbcType=VARCHAR},#{TCRAMT,jdbcType=VARCHAR},#{BOXAMT,jdbcType=VARCHAR},
+#{ONLINE_NO,jdbcType=VARCHAR},#{RETCODE_ONLINE,jdbcType=VARCHAR},#{TCR_REAL_AMT,jdbcType=VARCHAR},#{REAL_V1,jdbcType=VARCHAR},#{REAL_V5,jdbcType=VARCHAR},
+#{REAL_V10,jdbcType=VARCHAR},#{REAL_V20,jdbcType=VARCHAR},#{REAL_V50,jdbcType=VARCHAR},#{REAL_V100,jdbcType=VARCHAR},#{TCR_AMT_BEFOR,jdbcType=VARCHAR},
+#{ATM_NO,jdbcType=VARCHAR},#{CONSUMER_ACCOUNT,jdbcType=VARCHAR},#{SELEBRANCH,jdbcType=VARCHAR},#{IS_REVERSED,jdbcType=VARCHAR},#{TRANFEES,jdbcType=VARCHAR},
+#{TRANCODE_THIRD,jdbcType=VARCHAR},#{SEQNO_THIRD,jdbcType=VARCHAR},#{ADD_MONEY_CYCLE,jdbcType=VARCHAR},#{REASON,jdbcType=VARCHAR},#{MEMO,jdbcType=VARCHAR},str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s'),#{CCY,jdbcType=VARCHAR},
+#{PATTERN,jdbcType=VARCHAR},#{CASH_FLAG,jdbcType=VARCHAR})
+  </insert>  
+  
+  <!-- 修改日志 -->
+  <update id="updateTransLog" parameterType="hashmap" >
+UPDATE FIN_TRAN_LOG 
+SET UPDATE_TIME=str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s') 
+ <if test="FINISH_TIME != null and FINISH_TIME !='' ">  
+             , FINISH_TIME= str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s')
+ </if>
+ <if test="TRAN_STATUS != null and TRAN_STATUS !='' ">  
+             , TRAN_STATUS= #{TRAN_STATUS}
+ </if> 
+ <if test="TCRAMT != null and TCRAMT !='' ">  
+             , TCRAMT= #{TCRAMT}
+  </if> 
+  <if test="BOXAMT != null and BOXAMT !='' ">  
+             , BOXAMT= #{BOXAMT}
+  </if> 
+  <if test="ONLINE_NO != null and ONLINE_NO !='' ">  
+             , ONLINE_NO= #{ONLINE_NO}
+  </if> 
+  <if test="RETCODE_ONLINE != null and RETCODE_ONLINE !='' ">  
+             , RETCODE_ONLINE= #{RETCODE_ONLINE}
+  </if> 
+   <if test="TCR_REAL_AMT != null and TCR_REAL_AMT !='' ">  
+             , TCR_REAL_AMT= #{TCR_REAL_AMT}
+  </if>
+   <if test="REAL_V1 != null and REAL_V1 !='' ">  
+             , REAL_V1= #{REAL_V1}
+  </if>
+  <if test="REAL_V5 != null and REAL_V5 !='' ">  
+             , REAL_V5= #{REAL_V5}
+  </if>
+   <if test="REAL_V10 != null and REAL_V10 !='' ">  
+             , REAL_V10= #{REAL_V10}
+  </if>
+    <if test="REAL_V20 != null and REAL_V20 !='' ">  
+             , REAL_V20= #{REAL_V20}
+  </if>
+    <if test="REAL_V50 != null and REAL_V50 !='' ">  
+             , REAL_V50= #{REAL_V50}
+  </if>
+    <if test="REAL_V100 != null and REAL_V100 !='' ">  
+             , REAL_V100= #{REAL_V100}
+  </if>
+  <if test="TCR_AMT_BEFOR != null and TCR_AMT_BEFOR !='' ">  
+             , TCR_AMT_BEFOR= #{TCR_AMT_BEFOR}
+  </if>
+   <if test="ATM_NO != null and ATM_NO !='' ">  
+             , ATM_NO= #{ATM_NO}
+  </if>
+ <if test="CONSUMER_ACCOUNT != null and CONSUMER_ACCOUNT !='' ">  
+             , CONSUMER_ACCOUNT= #{CONSUMER_ACCOUNT}
+  </if>
+   <if test="SELEBRANCH != null and SELEBRANCH !='' ">  
+             , SELEBRANCH= #{SELEBRANCH}
+  </if>
+ <if test="IS_REVERSED != null and IS_REVERSED !='' ">  
+             , IS_REVERSED= #{IS_REVERSED}
+  </if>
+   <if test="TRANFEES != null and TRANFEES !='' ">  
+             , TRANFEES= #{TRANFEES}
+  </if>
+    <if test="TRANCODE_THIRD != null and TRANCODE_THIRD !='' ">  
+             , TRANCODE_THIRD= #{TRANCODE_THIRD}
+  </if>
+   <if test="SEQNO_THIRD != null and SEQNO_THIRD !='' ">  
+             , SEQNO_THIRD= #{SEQNO_THIRD}
+  </if>
+   <if test="ADD_MONEY_CYCLE != null and ADD_MONEY_CYCLE !='' ">  
+             , ADD_MONEY_CYCLE= #{ADD_MONEY_CYCLE}
+  </if>
+   <if test="REASON != null and REASON !='' ">  
+             , REASON= #{REASON}
+  </if>
+    <if test="MEMO != null and MEMO !='' ">  
+             , MEMO= #{MEMO}
+  </if>
+   <if test="CCY!= null and CCY !='' ">  
+             , CCY= #{CCY}
+  </if>
+      WHERE TRANLOG_ID=#{TRANLOG_ID}
+  </update>    
+
+
+ <!-- 根据TRanLog_id查询一条日志信息 -->
+  <select id="selectTranLogForID" parameterType="hashmap" resultType="hashmap">
+  	SELECT b.MODULE_name TRANNAME,a.* FROM  FIN_TRAN_LOG a,BASE_RESOURCE b WHERE TRANLOG_ID=#{TRANLOG_ID} and a.trancode = b.MODULE_ID
+  </select>    
+
+
+ <!-- 更新账户余额 -->
+  <select id="selectAccountCashBalance" parameterType="hashmap" resultType="hashmap">
+           SELECT DEVICE_BALANCE ,BOX_BALANCE FROM BASE_CASH_ACCOUNT  WHERE TERMINAL_IP=#{USER_IP}
+  </select>    
+  
+  <!-- 查询终端IP2 -->
+  <select id="selectTerminalByDeviceId" parameterType="hashmap" resultType="hashmap">
+  	SELECT TERMINAL_IP2 FROM BASE_DEVICE_INFO WHERE DEVICE_ID=#{DEVICE_ID}
+  </select>
+
+  <!-- 更新账户余额 -->
+  <update id="updateAccountCashBalance" parameterType="hashmap" >
+           update BASE_CASH_ACCOUNT set device_balance=#{DEVICE_BALANCE},
+           BOX_BALANCE=#{BOX_BALANCE} WHERE TERMINAL_IP=#{USER_IP}
+  </update>    
+   
+    <!-- 插入账户登记簿 -->
+  <insert id="insertAccountBook" parameterType="hashmap" >
+          INSERT INTO FIN_ACCOUNT_BOOK(TRANLOG_ID,USER_ID,TRANCODE,LOGTIME,DEVICE_ID,ACCOUNT_ID,
+          TCRAMT,BOXAMT,ACC_DEVICE_BALANCE,BOX_BALANCE) VALUES(#{TRANLOG_ID},#{USER_ID},#{TRANCODE},str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s'),#{DEVICE_ID},#{ACCOUNT_ID},
+          #{TCRAMT},if(#{BOXAMT}='',0,#{BOXAMT}),#{ACC_DEVICE_BALANCE},#{BOX_BALANCE})
+  </insert>  
+
+   <!-- 插入冠字号 -->
+  <insert  id="insertCashNo" parameterType="hashmap">
+          INSERT INTO  FIN_CASHNO(TRANLOG_ID,SNO,AMTTYPE,CCY,TRANCODE,CLIENTID,DEVICE_ID,INSERT_TIME,MAINLOG_ID) 
+          VALUES(#{TRANLOG_ID},#{SNO},#{AMTTYPE},#{CCY},#{TRANCODE},#{CLIENTID},#{DEVICE_ID},str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s'),#{MAINLOG_ID})
+  </insert >  
+
+ 
+   <!-- 插入设备现金出入信息 -->
+  <insert  id="insertDeviceCashInfo" parameterType="hashmap">
+          INSERT INTO  FIN_DEVICE_COUNTER_BOOK(TRANLOG_ID,LOGTIME,TRANFLAG,BLANCE_100,BLANCE_50,BLANCE_20,BLANCE_10,BLANCE_5,BLANCE_1,COLLECT_100
+          ,COLLECT_50,COLLECT_20,COLLECT_10,COLLECT_5,COLLECT_1,ECYCLE_100,ECYCLE_50,ECYCLE_20,ECYCLE_10,ECYCLE_5,ECYCLE_1,BOX7013TYPE,BOX7013COUNT,
+          BOX7013STATUS,BOX7013CCY,BOX7014TYPE,BOX7014COUNT,BOX7014STATUS,BOX7014CCY,BOX7015TYPE,BOX7015COUNT,BOX7015STATUS,BOX7015CCY,
+          BOX7016TYPE,BOX7016COUNT,BOX7016STATUS,BOX7016CCY,BOX7018TYPE,BOX7018COUNT,BOX7018STATUS,BOX7018CCY,BOX_DETAIL) values 
+          (#{TRANLOG_ID},str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s'),#{TRANFLAG},#{BLANCE_100},#{BLANCE_50},#{BLANCE_20},#{BLANCE_10},#{BLANCE_5},#{BLANCE_1},#{COLLECT_100},
+          #{COLLECT_50},#{COLLECT_20},#{COLLECT_10},#{COLLECT_5},#{COLLECT_1},#{ECYCLE_100},#{ECYCLE_50},#{ECYCLE_20},#{ECYCLE_10},#{ECYCLE_5},#{ECYCLE_1},#{BOX7013TYPE},#{BOX7013COUNT},
+          #{BOX7013STATUS},#{BOX7013CCY},#{BOX7014TYPE},#{BOX7014COUNT},#{BOX7014STATUS},#{BOX7014CCY},#{BOX7015TYPE},#{BOX7015COUNT},#{BOX7015STATUS},#{BOX7015CCY},
+          #{BOX7016TYPE},#{BOX7016COUNT},#{BOX7016STATUS},#{BOX7016CCY},#{BOX7018TYPE},#{BOX7018COUNT},#{BOX7018STATUS},#{BOX7018CCY},#{BOX_DETAIL})
+         
+  </insert > 
+  <!-- 查询现金counter -->
+  <select id="selectCounter" parameterType="hashmap"  resultType="hashmap">
+  	select * from FIN_DEVICE_COUNTER_BOOK where tranlog_id = #{TRANLOG_ID} order by logtime
+  </select>
+
+    <!-- 查询设备计数器 -->
+  <select id="selectCounterNoPage" parameterType="hashmap" resultType="hashmap">
+    SELECT TRANLOG_ID, date_format(LOGTIME,'%Y-%m-%d %H:%i:%s') AS LOGTIME, TRANFLAG, BLANCE_100, BLANCE_50, BLANCE_20, BLANCE_10, BLANCE_5, 
+    BLANCE_1, COLLECT_100, COLLECT_50, COLLECT_20, COLLECT_10, COLLECT_5, COLLECT_1, ECYCLE_100, 
+    ECYCLE_50, ECYCLE_20, ECYCLE_10, ECYCLE_5, ECYCLE_1, BOX7013TYPE, BOX7013COUNT, BOX7013STATUS,
+    BOX7013CCY, BOX7014TYPE, BOX7014COUNT, BOX7014STATUS, BOX7014CCY, BOX7015TYPE, BOX7015COUNT, 
+    BOX7015STATUS, BOX7015CCY, BOX7016TYPE, BOX7016COUNT, BOX7016STATUS, BOX7016CCY, BOX7018TYPE, 
+    BOX7018COUNT, BOX7018STATUS, BOX7018CCY, BOX_DETAIL, DEVICE_ID 
+    FROM FIN_DEVICE_COUNTER_BOOK
+    WHERE 1=1
+    <if test="startTime != null and startTime !='' ">  
+        <![CDATA[ AND date_format(LOGTIME, '%Y-%m-%d %H:%i:%s') >= '${startTime}' ]]>  
+    </if>  
+    <if test="endTime != null and endTime !='' ">  
+        <![CDATA[ AND date_format(LOGTIME, '%Y-%m-%d %H:%i:%s') <= '${endTime}' ]]>  
+    </if> 
+    ORDER BY LOGTIME
+  </select>
+  
+   <!-- 插入异常日志 -->
+  <insert  id="insertTranException" parameterType="hashmap">
+          INSERT INTO  FIN_TRAN_EXCEPTION(TRANLOG_ID,SCREEN,DATA) 
+          VALUES(#{TRANLOG_ID},#{SCREEN,jdbcType=BLOB},#{DATA})
+  </insert >  
+  
+   <!-- 查询异常日志 -->
+  <select  id="selectTranException" parameterType="hashmap"  resultType="hashmap">
+          SELECT TRANLOG_ID,SCREEN,DATA FROM FIN_TRAN_EXCEPTION WHERE TRANLOG_ID =#{TRANLOG_ID}
+  </select >
+  
+  <!-- 获取最后更新的一条交易流水 -->
+  <select id="selectLastTranlog" parameterType="hashmap"  resultType="hashmap">
+  	select * from FIN_TRAN_LOG where
+  		user_id=#{USER_ID} and org_id=#{ORG_ID} and device_id=#{DEVICE_ID} order by update_time desc LIMIT 1
+  </select>
+  
+   <!-- 插入暂存交易日志 -->
+  <insert  id="insertTempTranInfo" parameterType="hashmap">
+          INSERT INTO  FIN_TEMP_TRANINFO(ID,USER_ID,USER_NAME,SOLUTIONID,TRANLINKID,TRANTYPE,LOGTIME,REASON,CCY,TCRAMT,BOXAMT,PATTERN,ACTUALAMT,FLAG,MARK,ACTUALAMT_DETAIL,TRANAMT_DETAIL) 
+          VALUES(#{ID,jdbcType=VARCHAR},#{USER_ID,jdbcType=VARCHAR},#{USER_NAME,jdbcType=VARCHAR},#{SOLUTIONID,jdbcType=VARCHAR},#{TRANLINKID,jdbcType=VARCHAR},#{TRANTYPE,jdbcType=VARCHAR},str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s'),#{REASON,jdbcType=VARCHAR},#{
+          CCY,jdbcType=VARCHAR},#{TCRAMT,jdbcType=VARCHAR},#{BOXAMT,jdbcType=VARCHAR},#{PATTERN,jdbcType=VARCHAR},#{ACTUALAMT,jdbcType=VARCHAR},#{FLAG,jdbcType=VARCHAR},#{MARK,jdbcType=VARCHAR},#{ACTUALAMT_DETAIL,jdbcType=VARCHAR},#{TRANAMT_DETAIL,jdbcType=VARCHAR})
+  </insert >  
+  
+    <!-- 更新暂存交易日志 -->
+  <update  id="updateTempTranInfo" parameterType="hashmap">
+          UPDATE FIN_TEMP_TRANINFO 
+          SET LOGTIME=str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s')
+           <if test="SOLUTIONID!= null and SOLUTIONID !='' ">  
+             , SOLUTIONID= #{SOLUTIONID}
+           </if>
+            <if test="TRANLINKID != null and TRANLINKID !='' ">  
+             , TRANLINKID= #{TRANLINKID}
+           </if>
+            <if test="TRANTYPE != null and TRANTYPE !='' ">  
+             , TRANTYPE= #{TRANTYPE}
+           </if>
+             <if test="REASON != null and REASON !='' ">  
+             , REASON= #{REASON}
+           </if>
+            <if test="CCY != null and CCY !='' ">  
+             , CCY= #{CCY}
+           </if>
+             <if test="TCRAMT != null and TCRAMT !='' ">  
+             , TCRAMT= #{TCRAMT}
+           </if>
+             <if test="BOXAMT != null and BOXAMT !='' ">  
+             , BOXAMT= #{BOXAMT}
+           </if>
+            <if test="PATTERN != null and PATTERN !='' ">  
+             , PATTERN= #{PATTERN}
+           </if>
+            <if test="ACTUALAMT != null and ACTUALAMT !='' ">  
+             , ACTUALAMT= #{ACTUALAMT}
+           </if>
+            <if test="FLAG != null and FLAG !='' ">  
+             , FLAG= #{FLAG}
+           </if>
+             <if test="ACTUALAMT_DETAIL != null and ACTUALAMT_DETAIL !='' ">  
+             , ACTUALAMT_DETAIL= #{ACTUALAMT_DETAIL}
+           </if>
+             <if test="TRANAMT_DETAIL != null and TRANAMT_DETAIL !='' ">  
+             , TRANAMT_DETAIL= #{TRANAMT_DETAIL}
+           </if>
+           WHERE ID=#{ID}
+      
+  </update >  
+  
+  <!-- 根据ID查询暂存交易信息及日志信息 -->
+  <select id="selectTempTranInfo" parameterType="hashmap" resultType="hashmap">
+           SELECT b.MODULE_NAME TRANTYPE,a.id ID, a.USER_NAME USER_NAME, a.SOLUTIONID SOLUTIONID, a.TRANLINKID TRANLINKID,
+           		a.TRANTYPE TRANCODE, date_format(a.LOGTIME,'%Y-%m-%d %H:%i:%s') LOGTIME, a.REASON REASON,
+           		a.CCY CCY, a.TCRAMT TCRAMT, a.BOXAMT BOXAMT, a.PATTERN PATTERN, a.ACTUALAMT ACTUALAMT,
+           		a.FLAG FLAG, a.MARK MARK, a.ACTUALAMT_DETAIL ACTUALAMT_DETAIL, a.TRANAMT_DETAIL TRANAMT_DETAIL 
+           	FROM FIN_TEMP_TRANINFO a, BASE_RESOURCE b  WHERE a.trantype = b.MODULE_ID
+           	 and a.user_id= #{USER_ID}
+      <if test="ID != null and ID !='' ">
+       	and a.ID=#{ID}
+      </if>
+      <if test="FLAG != null and FLAG !='' ">  
+       	and a.FLAG=#{FLAG}
+      </if>
+      <if test="SOLUTIONID != null and SOLUTIONID !='' ">  
+       	and a.SOLUTIONID=#{SOLUTIONID}
+      </if>
+       order by LOGTIME desc
+  </select>
+  
+   <!-- 插入长短款 -->
+ <insert id="insertBadaccount" parameterType="hashmap">
+ 	INSERT INTO BASE_BADACCOUNT_BOOK(TRANLOG_ID, TYPE, DEVICE_ID, FINISH_TIME, ORG_ID, ERROR_USER_ID,
+ 	DISPOSE_USER_ID, CCY, AMT, BADACCOUNT_DESC, ACCOUNT_ID) 
+ 	VALUES(#{TRANLOG_ID},#{TYPE},#{DEVICE_ID},str_to_date(#{LOGTIME},'%Y-%m-%d %H:%i:%s'),
+ 	#{ORG_ID}, #{ERROR_USER_ID}, #{USER_ID}, #{CCY}, #{AMT}, #{BADACCOUNT_DESC, jdbcType=VARCHAR}, #{ACCOUNT_ID})
+ </insert>
+  
+  <!-- 根据TRanLog_id查询一条日志信息 -->
+  <select id="selectTranLogFromTranID" parameterType="hashmap" resultType="hashmap">
+  	SELECT TRANLOG_ID FROM  FIN_TRAN_LOG WHERE TRANLOG_ID=#{TRANLOG_ID}
+  </select>
+  
+   <delete id="deleteCashNo" parameterType="hashmap">
+     delete from FIN_CASHNO where  <![CDATA[ insert_time < str_to_date(#{DELETE_DATE},'%Y-%m-%d') ]]>
+  </delete>
+  <delete id="deleteTranLog" parameterType="hashmap">
+     delete from FIN_TRAN_LOG where  <![CDATA[ insert_time < str_to_date(#{DELETE_DATE},'%Y-%m-%d') ]]>
+  </delete>
+
+
+  <!-- 流水查询 打印需要不分页 -->
+  <select id="selectTransLogNotPage" parameterType="hashmap" resultType="hashmap">
+      select MAINLOG_ID, MODULE_NAME,ORG_ID ORG_ID_P,DEVICE_ID,USER_ID USER_ID_P, TO_CHAR(INSERT_TIME,'YYYY-MM-DD 
+HH24:MI:SS') AS INSERT_TIME, CCY, TO_CHAR(TO_NUMBER(NVL(TCRAMT, 0.00)) + TO_NUMBER(NVL(BOXAMT, 
+0.00)), 999999990.99) AS SUMAMT, TO_CHAR(NVL(TCRAMT, 0.00), 999999990.99) AS TCRAMT, TO_CHAR(NVL(BOXAMT, 
+0.00), 999999990.99) AS BOXAMT, TO_CHAR(ABS(NVL(TCR_REAL_AMT, '')), 999999990.99) AS TCR_REAL_AMT, 
+TRAN_STATUS, REASON, TCR_AMT_BEFOR, ONLINE_NO, TRANLOG_ID, CASH_FLAG 
+  FROM FIN_TRAN_LOG, BASE_RESOURCE 
+      WHERE TRANCODE = MODULE_ID
+      <if test="SNO != null and SNO !='' ">  
+        and SNO like '%'||#{SNO}||'%'
+      </if> 
+       <if test="MAINLOG_ID != null and MAINLOG_ID !='' ">  
+        and MAINLOG_ID like '%'||#{MAINLOG_ID}||'%'
+      </if> 
+       <if test="MODULE_ID != null and MODULE_ID !='' ">  
+        and MODULE_ID like '%'||#{MODULE_ID}||'%'
+      </if> 
+       <if test="TRAN_STATUS != null and TRAN_STATUS !='' ">  
+        and TRAN_STATUS = '${TRAN_STATUS}'
+      </if> 
+      <if test="startTime != null and startTime !='' ">  
+          <![CDATA[ AND TO_CHAR(INSERT_TIME, 'yyyy-mm-dd hh24:mi:ss') >= '${startTime}' ]]>  
+      </if>  
+      <if test="endTime != null and endTime !='' ">  
+          <![CDATA[ AND TO_CHAR(INSERT_TIME, 'yyyy-mm-dd hh24:mi:ss') <= '${endTime}' ]]>  
+      </if> 
+      <if test="amtmin != null and amtmin != ''">
+          <![CDATA[ and (TO_NUMBER(NVL(TCRAMT, 0)) + TO_NUMBER(NVL(BOXAMT, 0))) >= '${amtmin}' ]]>
+      </if>     
+      <if test="amtmax != null and amtmax != ''">
+          <![CDATA[ and (TO_NUMBER(NVL(TCRAMT, 0)) + TO_NUMBER(NVL(BOXAMT, 0))) <= '${amtmax}' ]]>
+      </if>     
+      <if test="SEQNO_THIRD != null and SEQNO_THIRD !='' ">  
+        and SEQNO_THIRD like '%'||#{SEQNO_THIRD}||'%'
+      </if>
+      <if test="ONLINE_NO != null and ONLINE_NO !='' ">  
+        and ONLINE_NO like '%'||#{ONLINE_NO}||'%'
+      </if>
+      <if test="ORG_ID_P != null and ORG_ID_P !='' ">  
+        and ORG_ID = #{ORG_ID_P}
+      </if>
+      <if test="USER_ID_P != null and USER_ID_P !='' ">  
+        and USER_ID = #{USER_ID_P}
+      </if>
+      ORDER BY UPDATE_TIME DESC 
+  </select>
+  
+</mapper>

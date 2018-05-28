@@ -1,0 +1,167 @@
+<!-- 角色管理-->
+<div class="container ">
+<div class="">
+
+<form class="queryForm" id="roleQueryForm"  action="" method="post">
+  <div class="line-row ">
+  <div class="">
+    <label class="control-label">角色ID</label>
+    <input type="text" name="ROLE_ID" id="ROLE_ID" class="text"/>
+  </div>
+  <div class="">
+    <label class="control-label" >角色名称</label>
+    <input type="text" name="ROLE_NAME" id="ROLE_NAME" class="text">
+  </div>
+  	 <!-- <button id="user_search" name="user_search" class="btn btn-primary">查询</button>-->
+     <button type="button" name="role_search" id="role_search" class="btn btn-primary">查询</button>
+  </div>
+ </form>
+
+<br>
+<div class=""><!-- 左侧开始 -->
+	<div>
+		<button  name="ADD" class="btn btn-primary"  id="ADD">增加</button>
+     	<button  name="EDIT" class="btn btn-primary"  id="EDIT">修改</button>
+        <button  name="DELETE" class="btn btn-primary"  id="DELETE">删除</button>
+	</div>
+<!--   <input type="button" name="ADD" value="增加" id="ADD" class="btn" role="button"/>
+  <input type="button" name="EDIT" value="修改" id="EDIT" class=""/>
+   <input type="button" name="DELETE" value="删除" id="DELETE" class=""/>
+   -->
+  <div class="content-box">
+   <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="roleInfo">
+	<thead>
+		<tr>
+			<th>角色ID</th>
+			<th>角色名称</th>
+			<th>角色描述</th>
+		</tr>
+	</thead>
+	<tbody align="center">
+		<tr>
+			<td colspan="8" class="dataTables_empty">........</td>
+		</tr>
+	</tbody>
+	<tfoot>
+	
+	</tfoot>
+</table>
+ </div>
+
+</div>
+
+</div>
+
+<!-- 弹出增加角色窗口-->
+<div id="addRoleModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">增加角色</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="addRoleForm"  action="">
+  <div class="line-row ">
+
+  <div class="">
+    <label class="control-label" >角色ID</label>
+    <input type="text" name="ROLE_ID" id="ROLE_ID" class="text" maxlength="10" />
+  </div>
+  <div class="">
+    <label class="control-label" >角色名称</label>
+    <input type="text" name="ROLE_NAME" id="ROLE_NAME" class="text" maxlength="20" >
+  </div>
+  <div class="">
+    <label class="control-label" >角色描述</label>
+    <input type="text" name="ROLE_DESC" id="ROLE_DESC" class="text" maxlength="50" >
+  </div>
+  </br>
+    <div class="">
+    <label class="control-label" >资源分配</label>
+     <ul id="treeDemo" class="ztree"></ul>
+      <input type="hidden" name="ROLE_TREE" id="ROLE_TREE" class="text"/>
+  </div>
+  
+  
+  
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="add_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+
+
+
+
+<!-- 弹出编辑角色窗口-->
+<div id="editRoleModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">编辑角色</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="editRoleForm"  action="">
+  <div class="line-row ">
+
+  <div class="" sytle="align:right">
+  <label class="control-label" >角色ID</label>
+    <input type="text" name="ROLE_ID" id="ROLE_ID" class="text" readonly="readonly" maxlength="10" />
+  </div>
+  <div class="">
+    <label class="control-label" >角色名称</label>
+    <input type="text" name="ROLE_NAME" id="ROLE_NAME" class="text" maxlength="20" >
+  </div>
+  <div class="">
+    <label class="control-label" >角色描述</label>
+    <input type="text" name="ROLE_DESC" id="ROLE_DESC" class="text" maxlength="50" >
+  </div>
+</br>
+    <div class="">
+    <label class="control-label" >资源分配</label>
+     <ul id="roleTreeUpdate" class="ztree"></ul>
+      <input type="hidden" name="ROLE_TREE_UPDATE" id="ROLE_TREE_UPDATE" class="text"/>
+  </div>
+
+
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="edit_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+</div>
+
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+                          
+            </ul>
+          </div>
+          <div class=" pull-right">
+            <ul class="nav">
+          
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+<script type="text/javascript" src="<%=basePath%>/platform/F004/F004.js"></script>

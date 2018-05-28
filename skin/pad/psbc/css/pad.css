@@ -1,0 +1,94 @@
+body {
+        padding-top: 40px;
+        /*padding-bottom: 40px;
+        background-color: #f5f5f5;*/
+        background: url(../img/bg.png) no-repeat;
+        background-size: 1346px 800px;
+	   	height:100%;
+	   	overflow:hidden
+}
+
+/**广告向上浮动40px */
+div.ad{margin-top: -40px}
+
+.xtest{border: 1px solid red}
+
+/**定义交易标题字体*/
+h1.title{font-size: 72px; line-height:79px; font-weight:bold;
+  text-shadow: 1px 0px 0px #fff,-1px 0px 0px #fff,0px 1px 0px #fff,0px -1px 0px #fff;}
+
+/**金额字体定义*/
+span.amt{color:#00922e}
+
+/**定义模态窗口背景色透明度*/
+.modal-backdrop, .modal-backdrop.fade.in {opacity: 0.2;filter: alpha(opacity=80);}
+
+
+/**定义按钮*/
+.btn-primary .caret,.btn-warning .caret,.btn-danger .caret,.btn-info .caret,
+.btn-success .caret,.btn-inverse .caret {
+   border: 0;
+}
+.btn-primary,.btn-primary:hover,.btn-warning,.btn-warning:hover,.btn-danger,.btn-danger:hover,
+.btn-success,.btn-success:hover,.btn-info,.btn-info:hover,.btn-inverse,.btn-inverse:hover {
+   text-shadow: none;
+}
+.btn-primary {  background-color: #1D7435;   border-color: #1D7435;
+   color: #FFF;   background-image: none;   background-repeat: no-repeat;   filter: none;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+  background-color: #397A4B;  border-color: #397A4B;  color: #CCC;
+}
+
+/**定义表格样式*/
+table.pad {margin-left:15px;margin-right:15px;width:100%;font-size:25px}
+table.pad td,table.pad th{width:130px;height:42px;font-weight: bold;font-align:center;
+	border-bottom:solid 1px #979797;border-right:solid 1px #979797;text-align:center;text-valign:center;}
+table.pad tr td {text-align:center;text-valign:center}
+.amt{text-align:right;font-align:right}
+table.pad td{vertical-align:middle;}
+table.pad tr#amt{height:80px}
+table.pad tr#amt td{text-align:right}
+
+.table-bordered {border: 1px solid #979797;}
+      /*
+table.pad tr{font-size:43px; height:60px; padding-top:7px}
+      */
+
+.btn[disabled] {opacity: 0.38;}
+
+.info {padding:20px;font-align:center;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  height: 180px;
+  margin: -150px 0 0 -280px;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+   left: 0;
+   margin: 0;
+   padding: 0 20%;
+   padding-left:90px;
+   width: 80%;
+   border: 0;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}

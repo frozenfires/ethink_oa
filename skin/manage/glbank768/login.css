@@ -1,0 +1,60 @@
+/**登录页面*/
+body {
+   color: #333;
+   background-color: transparent;
+   width:100%; 
+   overflow:hidden;
+   padding: 0px;   margin:0px;
+   height:608px;
+}
+html{background: url(./images/lanzhou_background.png) no-repeat left bottom ;
+	background-color: #fff;
+   height:100%;padding: 0px;   margin:0px;
+   overflow-x: hidden;
+}
+
+.login_head {width:100%; height: 130px; }
+.login_head .logo{height:100px;width: 310px; background:url(images/logo.gif) no-repeat;
+	background-size:contain;margin-top:94px;margin-left: 90px}
+
+/**底部位置*/
+.login_footer{position:absolute; width:100%; bottom:11px;left:30px; line-height: 31px; height:60px;
+	font-family:宋体;font-size:28px;color:#5D239C;}
+
+/**登陆界面中间内容区域*/
+.login_row{width:100%; top:200px; text-align: center; }
+.login_content{ text-align: left; 
+	display:inline-block; _zoom:1;*display:inline;}
+/**人物图标*/
+.login_user{height: 160px; width: 160px; margin-top: 20px; background:url(images/login_men.png) ; 
+		background-size: cover;
+		vertical-align: bottom;
+		display:inline-block; _zoom:1;*display:inline;}
+/**表单区域*/
+.login_content .loginForm#loginForm{padding-top:60px; padding-left:10px;
+		vertical-align: bottom; margin-bottom:10px; display:inline-block; _zoom:1;*display:inline;}
+.login_content .loginForm .left,
+.login_content .loginForm .right{display:inline-block; _zoom:1;*display:inline;}
+.login_content .loginForm .left{margin-left:6px; width:300px;}
+.login_content .loginForm .right{vertical-align: top; margin-top: 7px; margin-left:-15px; }
+
+/**登录按钮*/
+.login_btn{display:inline-block; _zoom:1;*display:inline;
+	border: solid 0px;
+	width:64px;height:64px;background:url(images/login_enter_n.gif) no-repeat;
+	padding-right:0px; margin-top: 7px;
+	cursor:pointer}
+
+/**登录页标题名称*/
+.topictext{font-family: 仿宋; color: #5D239C;margin-bottom: 8px;font-size: 35px; font-weight: 400;}
+
+input.loginField{margin-top: 5px; margin-bottom: 0px; height: 26px; line-height: 26px; width:260px; font-size: 23px;}
+
+
+	/*
+.login_btn:hover{
+	display:inline-block; _zoom:1;*display:inline;
+	float:right;width:64px;height:64px;background:url(images/login_enter_h.png) no-repeat 0px 0px;padding-right:0px;}
+.login_btn:active{float:right;display:block;width:64px;height:64px;background:url(images/login_enter_p.png) no-repeat 0px 0px;padding-right:0px;}
+*/
+

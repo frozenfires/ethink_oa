@@ -1,0 +1,180 @@
+<!--工单审批-->
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #e1e1e8;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="context_self show" style="width: 99%;">
+	<div class="title_self">工单详细情况</div>
+	<div class=" line-row context_self" style="width:99%;margin-left:0.5%;">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">基础信息</span>
+	    </div>
+		<div class="">
+			<label class="control-label">工单号</label> 
+			<input type="text" id="WORK_ID" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">工单类型</label>
+			<input type="text" id="WORK_TYPE_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">工单紧急度</label>
+			<input type="text" id="WORK_URGENT_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">工单状态</label>
+			<input type="text" id="WORK_STATUS_DESC" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">申请人</label>
+			<input type="text"  id="PROPOSER_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">申请人所属部门</label>
+			<input type="text"  id="PROPOSER_AREA" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">申请时间</label>
+			<input type="text"  id="WORK_APPTIME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">申请备注</label>
+			<input type="text"  id="WORK_APPMARK" class="text"/>
+		</div>
+	</div>
+	<div class=" line-row context_self" style="width:99%;margin-left:0.5%;">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">设备信息</span>
+	    </div>
+		<div class="">
+			<label class="control-label">设备编号</label> 
+			<input type="text"  id="DEVICE_NO" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">设备名称</label> 
+			<input type="text"  id="DEVICE_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">设备型号</label> 
+			<input type="text"  id="DEVICE_MODEL_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">设备类型</label> 
+			<input type="text"  id="DEVICE_TYPE_NAME" class="text"/>
+		</div>
+	</div>
+		<div class=" line-row context_self" style="width:99%;margin-left:0.5%;">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">客户信息</span>
+	    </div>
+		<div class="">
+			<label class="control-label">客户代号</label> 
+			<input type="text"  id="CUS_ORG_ID" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">客户名称</label> 
+			<input type="text"  id="CUS_ORG_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">客户地址</label> 
+			<input type="text"  id="CUS_ORG_ADDRESS" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">联系人</label> 
+			<input type="text"  id="CUS_NAME" class="text"/>
+		</div>
+		<div class="">
+			<label class="control-label">联系电话</label> 
+			<input type="text"  id="CUS_ORG_PHONE" class="text"/>
+		</div>
+		</div>
+		
+		
+		<div id="text" class=" line-row context_self" style="width:99%;margin-left:0.5%;display:none;">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">审验信息</span>
+	    </div>
+	<div class="">
+			<label class="control-label">审验意见</label> 
+			<textarea style="width:400px; height:100px;margin-left:130px" type="text"  id="verufylist" class="text"/>
+		</div>
+		
+		
+		</div>
+	
+	
+	<div id="selectDelWorkerModal" class="modal hide fade popwindow" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div>请指定工单处理人员</div>
+		<div class="content-box">
+		<!-- 在table标签中新建class名selectable的含义为：只有包含此class名的datatable表格可以进行选中行的操作，详情见js包中的common包中的commonInit.js -->
+			<table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="selectDelWorkerResult">
+				<thead>
+					<tr>
+						<th>用户ID</th>
+						<th>用户姓名</th>
+						<th>手机号码</th>
+						<th>所属区域</th>
+						<th>用户状态</th>
+					</tr>
+				</thead>
+				<tbody align="center">
+					<tr>
+						<td colspan="5" class="dataTables_empty">........</td>
+					</tr>
+				</tbody>
+			</table>
+			 <div>请输入审批信息</div>
+	         <textarea rows="3" style="width:95%"/>
+	         <div>
+	         	<a id="window_confirm" class="btn btn-primary">确认</a>
+			    <a id="window_concel" class="btn btn-primary">取消</a>
+	         </div>
+	   </div>
+	</div>
+	<div id="commModal" class="modal hide fade popwindow" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="content-box">
+		     <div id="prompt"></div>
+			 <div>请输入审批信息</div>
+	         <textarea rows="3" style="width:95%"/>
+	         <div>
+	         	<a id="window_confirm" class="btn btn-primary">确认</a>
+			    <a id="window_concel" class="btn btn-primary">取消</a>
+	         </div>
+	   </div>
+	</div>
+	<div>
+	    <!--<button name="PROCESS" class="btn btn-primary" id="PROCESS">查看当前流程</button>-->
+		<button name="verify" class="btn btn-primary" id="verify" style="display:none">审验通过</button>
+		<button name="notverify" class="btn btn-primary" id="notverify" style="display:none">审验不通过</button>
+		<button name="RET" class="btn btn-primary" id="RET">返回</button>
+	</div>
+		
+</div>
+<script type="text/javascript" src="<%=basePath%>/oa/verify/verifyinfo2.js"></script>
+
+
+

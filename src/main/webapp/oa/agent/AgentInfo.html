@@ -1,0 +1,187 @@
+﻿
+
+<!-- 代理商管理 agent-->
+<div class="container" >
+<div class="">
+
+<form class="queryForm" id="agentQueryForm"  action="" method="post">
+  <div class="line-row ">
+  <div class="">
+    <label class="control-label">代理商编号</label>
+    <input type="text" name="AGENTA_ID" id="AGENTA_ID" class="text"/>
+  </div>
+  <div class="">
+    <label class="control-label" >代理商名称</label>
+    <input type="text" name="AGENTA_NAME" id="AGENTA_NAME" class="text">
+  </div>
+   <div class="">
+    <label class="control-label" >联系人</label>
+    <input type="text" name="LINKMAN" id="LINKMAN" class="text" maxlength="20">
+  </div>
+  		<!-- <button id="agent_search" name="agent_search" class="btn btn-primary">查询</button>-->
+    	<button type="button" name="agent_search" id="agent_search" class="btn btn-primary">查询</button>
+  </div>
+ </form>
+
+<div class=" "><!-- 左侧开始 -->
+	<div>
+   		<button  name="ADD" class="btn btn-primary"  id="ADD">增加</button>
+     	<button  name="EDIT" class="btn btn-primary"  id="EDIT">修改</button>
+       	<button  name="DELETE" class="btn btn-primary"  id="DELETE">删除</button>
+	</div>
+<!--   <input type="button" name="ADD" value="增加" id="ADD" class="btn" role="button"/>
+  <input type="button" name="EDIT" value="修改" id="EDIT" class=""/>
+   <input type="button" name="DELETE" value="删除" id="DELETE" class=""/>
+   -->
+ 
+  <div class="content-box">
+   <table cellpadding="0" cellspacing="0" border="0" class="display selectable" id="agentInfo">
+	<thead>
+		<tr>
+			<th>代理商编号</th>
+			<th>代理商名称</th>
+			<th>代理商地址</th>
+			<th>联系人</th>
+			<th>邮箱</th>
+			<th>电话</th>
+		</tr>
+	</thead>
+	<tbody  align="center">
+		<tr>
+			<td colspan="7" class="dataTables_empty">........</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		
+	</tfoot>
+</table>
+ </div>
+
+</div>
+
+</div>
+
+<!-- 弹出增加代理商窗口 -->
+<div id="addAgentModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">增加代理商</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="addAgentForm"  action="">
+  <div class="line-row ">
+
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>代理商编号</label>
+    <input type="text" name="AGENTA_ID" id="AGENTA_ID" class="text" maxlength="10" />
+  </div>
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>代理商名称</label>
+    <input type="text" name="AGENTA_NAME" id="AGENTA_NAME" class="text" maxlength="30">
+  </div>
+
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>联系人</label>
+    <input type="text" name="LINKMAN" id="LINKMAN" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>邮箱</label>
+    <input type="text" name="EMAIL" id="EMAIL" class="text" maxlength="20">
+  </div>
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>电话</label>
+    <input type="text" name="TEL" id="TEL" class="text" maxlength="15">
+  </div>
+  <br/>
+  <div class="" style="width:500px">
+    <label class="control-label" ><span style="color:red;">*</span>代理商地址</label>
+    <input type="text" name="AGENT_ADDRESS" id="AGENT_ADDRESS" class="text" style="width:350px" maxlength="50">
+  </div>
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="add_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+
+
+
+
+<!-- 弹出编辑用户窗口-->
+<div id="editAgentModal" class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel">编辑代理商</h3>
+  </div>
+  <div class="modal-body">
+
+<form id="editAgentForm"  action="">
+  <div class="line-row ">
+
+  <div class="" sytle="align:right">
+       <label class="control-label"><span style="color:red;">*</span>代理商编号</label>
+    <input type="text" name="AGENTA_ID" id="AGENT_ID" class="text" readonly="readonly" maxlength="10" />
+  </div>
+  <div class="">
+    <label class="control-label"><span style="color:red;">*</span>代理商名称</label>
+    <input type="text" name="AGENTA_NAME" id="AGENT_NAME" class="text">
+  </div>
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>联系人</label>
+    <input type="text" name="LINKMAN" id="LINKMAN" class="text" maxlength="20">
+  </div>
+ <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>邮箱</label>
+    <input type="text" name="EMAIL" id="EMAIL" class="text" maxlength="20">
+  </div> 
+  <div class="">
+    <label class="control-label" ><span style="color:red;">*</span>电话</label>
+    <input type="text" name="TEL" id="TEL" class="text" maxlength="15" >
+  </div>
+    <br/>
+  <div class="" style="width:500px">
+    <label class="control-label" ><span style="color:red;">*</span>代理商地址</label>
+    <input type="text" name="AGENT_ADDRESS" id="AGENT_ADDRESS" class="text" style="width:350px" maxlength="50">
+  </div>
+  </div>  
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button id="edit_save" class="btn btn-primary">保存</button>
+  </div>
+</div>
+
+</div>
+
+<!-- 底部工具条-->
+<div class="footer navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="footer-container">
+          <div class="">
+            <ul class="nav">
+              <li class="cancel ">
+                <a id="cancel" class="icon" href="javascript:void(0);"></a>
+                <div class="icontext">取消</div>
+              </li>
+              <li class="split"></li>
+              
+            </ul>
+          </div>
+          <div class=" pull-right">
+            <ul class="nav">
+          
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+   <script type="text/javascript" src="<%=basePath%>/oa/agent/AgentInfo.js"></script>
+ 

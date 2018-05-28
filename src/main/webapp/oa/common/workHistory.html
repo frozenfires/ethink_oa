@@ -1,0 +1,155 @@
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #e1e1e8;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+
+</style>
+<!--工单历史记录-->
+<div class="context_self show" style="width: 99%;" id="workHistoryDetails">
+	<div class="title_self">工单处理详细情况</div>
+	<div class=" line-row context_self" style="width:99%;margin-left:0.5%;">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">基础信息</span>
+	    </div>
+		<div>
+			<label class="control-label">接单人所属部门</label> 
+			<input type="text" id="ADDRESS_NAME" class="text" readonly="readonly"/>
+		</div>
+		<div>
+			<label class="control-label">接单人</label>
+			<input type="text" id="USER_NAME" class="text" readonly="readonly"/>
+		</div>
+		<div>
+			<label class="control-label">处理登记时间</label>
+			<input type="text" id="REGISTER_TIME" class="text" readonly="readonly"/>
+		</div>
+		<div>
+			<label class="control-label">处理状态</label>
+			<input type="text" id="DEAL_STATUS" class="text" readonly="readonly"/>
+		</div>
+		<div>
+			<label class="control-label">开始时间</label>
+			<input type="text"  id="START_TIME" class="text" readonly="readonly"/>
+		</div>
+		<div>
+			<label class="control-label">完成时间</label>
+			<input type="text"  id="END_TIME" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">设备类型</label>
+			<input type="text"  id="DEVICE_TYPE" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">设备型号</label>
+			<input type="text"  id="DEVICE_MODEL" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">设备编号</label>
+			<input type="text"  id="DEVICE_ID" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">设备名称</label>
+			<input type="text"  id="DEVICE_NAME" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">设备序列号</label>
+			<input type="text"  id="HOST_NUM" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">设备IP</label>
+			<input type="text"  id="DEVICE_IP" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">子网掩码</label>
+			<input type="text"  id="SUBNET_MASK" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">网关</label>
+			<input type="text"  id="GATEWAY" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">MAC</label>
+			<input type="text"  id="MAC" class="text" readonly="readonly"/>
+		</div>
+		<div class="install move" style="display:none">
+			<label class="control-label">安装点类型</label>
+			<input type="text"  id="SETUP_TYPE" class="text" readonly="readonly"/>
+		</div>
+		<div class="check" style="display:none">
+			<label class="control-label">验收类型</label>
+			<input type="text"  id="WORK_ACCEPT_TYPE_DESC" class="text" readonly="readonly"/>
+		</div>
+		<div class="check" style="display:none">
+			<label class="control-label">验收结果</label>
+			<input type="text"  id="CHECK_RESULT" class="text" readonly="readonly"/>
+		</div>
+		<div class="repair" style="display:none">
+			<label class="control-label">故障类别</label>
+			<input type="text"  id="FAULT_TYPE_DESC" class="text" readonly="readonly"/>
+		</div>
+		<div class="repair" style="display:none">
+			<label class="control-label">故障原因</label>
+			<input type="text"  id="FAULT_REASON_DESC" class="text" readonly="readonly"/>
+		</div>
+		<br/>
+        <div style="width:98%;">
+            <label class="control-label">处理描述</label>
+            <textarea id="DEAL_DES" style="width: 80%;height: 30px;resize: none;" readonly="readonly"></textarea>
+        </div>
+		<br/>
+        <div class="train" style="width:98%;display:none">
+            <label class="control-label">培训内容</label>
+            <textarea id="TRANING_CONT" style="width: 80%;height: 30px;resize: none;" readonly="readonly"></textarea>
+        </div>
+	</div>
+	<div class=" line-row context_self enclosure" style="width:99%;margin-left:0.5%;display:none">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">附件图片</span>
+	    </div>
+	    <div id="imageInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+            <div id="ImgShow" class="line-row" style="width: 97%">
+                <div id="_showimg" class="line-row" style="height:auto;width: 97%"/>
+            </div>
+        </div>
+	</div>
+	<div class=" line-row context_self enclosure" style="width:99%;margin-left:0.5%;display:none">
+	    <div style="width: 98%">
+	       <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+	       <span style="margin-left: 10px">附件文档</span>
+	    </div>
+	    <div id="fileInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+            <div id="fileShow" class="line-row" style="width: 97%">
+                <div id="_showfile" class="line-row" style="height:auto;width: 97%"/>
+            </div>
+        </div>
+	</div>
+	<div style="margin-top:30px;text-align:center">
+		<button class="btn btn-primary" id="RET">返回</button>
+	</div>
+	<div id="imgshowInfo"class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+           <image id="bigimgshow" style="width: auto;height: auto;max-width: 80%;max-height: 80%;" src=""/>
+           <image id="closeimgshow" style="width: 42px;height: 42px;margin-top: -300px;" src="../oa/appwork/upfile/close.png"/>
+    </div>
+</div>
+
+<script type="text/javascript" src="<%=basePath%>/oa/common/workHistory.js"></script>
+
+
+

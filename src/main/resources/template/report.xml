@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reports>
+	<report reportId="cashNo" reportName="cashNo" templateFileName="template.html">
+		<sheet name="Sheet1">
+			<column dbColumn="SUBLOG_ID" excelColumn="平台流水号"/>
+			<column dbColumn="ORG_ID_P" excelColumn="机构"/>
+			<column dbColumn="USER_ID_P" excelColumn="柜员"/>
+			<column dbColumn="SNO" excelColumn="冠字号"/>
+			<column dbColumn="CONSUMER_ACCOUNT" excelColumn="交易账号"/>
+			<column dbColumn="MODULE_NAME" excelColumn="交易类型"/>
+			<column dbColumn="CCY" excelColumn="币种"/>
+			<column dbColumn="AMTTYPE" excelColumn="面额"/>
+			<column dbColumn="DEVICE_ID" excelColumn="设备编号"/>
+			<column dbColumn="CLIENTID" excelColumn="客户端编号"/>
+			<column dbColumn="INSERT_TIME" excelColumn="交易时间"/>
+		</sheet>
+	</report>
+</reports>

@@ -1,0 +1,68 @@
+body {
+        /*padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;*/
+        background: url(../img/bg.png);
+        background-size: 1366px 768px;
+	   	height:100%;
+	   	overflow:hidden
+}
+
+.xtest{border: 1px solid red}
+
+/**定义模态窗口背景色透明度*/
+.modal-backdrop, .modal-backdrop.fade.in {opacity: 0.2;filter: alpha(opacity=80);}
+
+span.amt{color:red}
+
+table.pad {margin-left:15px;margin-right:15px;width:100%;font-size:25px}
+table.pad td,table.pad th{width:130px;height:42px;font-weight: bold;font-align:center;
+	border-bottom:solid 1px #000000;border-right:solid 1px #000000;text-align:center;text-valign:center;}
+table.pad tr td {text-align:center;text-valign:center}
+.amt{text-align:right;font-align:right}
+table.pad td{vertical-align:middle;}
+table.pad tr#amt{height:80px}
+table.pad tr#amt td{text-align:right}
+
+.table-bordered {border: 1px solid #000000;}
+      /*
+table.pad tr{font-size:43px; height:60px; padding-top:7px}
+      */
+
+.btn[disabled] {opacity: 0.38;}
+
+.info {padding:20px;font-align:center;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  height: 180px;
+  margin: -150px 0 0 -280px;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+   left: 0;
+   margin: 0;
+   padding: 0 20%;
+   padding-left:90px;
+   width: 80%;
+   border: 0;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}

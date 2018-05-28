@@ -1,0 +1,262 @@
+<style>
+    .context_self {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding-left: -20px;
+        overflow: visible;
+        margin-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .title_self {
+        background-color: #e1e1e8;
+        padding-top: -20px;
+        height: 25px;
+        font-family: 微软雅黑;
+        font-size: 15px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+    .showleft{
+    float: left;
+    }
+    #imgshowInfo{
+        border:none;
+        background-color: transparent;
+
+    }
+
+</style>
+<div id="searchworkdetailModal" class="context_self" style="width: 99%;" >
+  <div class="line-row show" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">基本信息</span>
+                </div>
+ <br/>
+  
+ <div class="">
+			    	<label class="control-label">工单号</label>
+					<input type="text" readonly="readonly"   name="ID" id="ID" class="text">
+			    </div>
+			     <div class="queryhide">
+			    	<label class="control-label">工单类型</label>
+					<input type="text" readonly="readonly"   name="WORKTYPENAME" id="WORKTYPENAME" class="text">
+			    </div>
+     <div class="">
+			    	<label class="control-label">工单紧急度</label>
+					<input type="text" readonly="readonly"   name="WORK_URGENTNAME" id="WORK_URGENTNAME" class="text">
+			    </div>
+			    <div class="queryhide">
+			    	<label class="control-label">工单状态</label>
+					<input type="text" readonly="readonly"   name="WORKSTATUS" id="WORKSTATUS" class="text">
+			    </div>
+			    <div class="queryhide">
+			    	<label class="control-label">申请人所属部门</label>
+					<input type="text" readonly="readonly"   name="WORK_DEPARTMENT" id="WORK_DEPARTMENT" class="text">
+			    </div>
+			    <div class="queryhide">
+			    	<label class="control-label">申请人</label>
+					<input type="text" readonly="readonly"   name="USER_NAME" id="USER_NAME" class="text">
+			    </div>
+			     <div class="queryhide">
+			    	<label class="control-label">提出申请时间</label>
+					<input type="text" readonly="readonly"   name="WORK_APPTIME" id="WORK_APPTIME" class="text">
+			    </div>
+			      <div class="queryhide">
+			    	<label class="control-label">申请备注</label>
+					<input type="text" readonly="readonly"   name="WORK_APPMARK" id="WORK_APPMARK" class="text">
+			    </div>
+			    </div>
+			   
+	 <div id=""  class="line-row show context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">设备信息</span>
+                </div>
+                <br>
+			      <div class="queryhide">
+			    	<label class="control-label">设备编号</label>
+					<input type="text" readonly="readonly"   name="DEVICE_NO" id="DEVICE_NO" class="text">
+			    </div>
+			      <div class="queryhide">
+			    	<label class="control-label">设备名称</label>
+					<input type="text" readonly="readonly"   name="DEVICE_NAME" id="DEVICE_NAME" class="text">
+			    </div>
+			      <div class="queryhide">
+			    	<label class="control-label">设备型号</label>
+					<input type="text" readonly="readonly"   name="DEVICE_MODEL_NAME" id="DEVICE_MODEL_NAME" class="text">
+			    </div>
+			      <div class="queryhide">
+			    	<label class="control-label">设备类型</label>
+					<input type="text" readonly="readonly"   name="DEVICE_TYPE_NAME" id="DEVICE_TYPE_NAME" class="text">
+			    </div>
+			    </div>
+			    	   
+	 <div class="line-row show context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">客户信息</span>
+                </div>
+                <br>
+			     <div class="queryhide">
+			    	<label class="control-label">客户代号</label>
+					<input type="text" readonly="readonly"   name="CUS_ORG_ID" id="CUS_ORG_ID" class="text">
+			    </div>
+     <div class="queryhide">
+    <label class="control-label" >客户名称</label>
+    <input type="text" name="CUS_ORG_NAME" id="CUS_ORG_NAME"  readonly="readonly"class="text">
+  </div>
+    <div class="queryhide">
+    <label class="control-label" >联系人</label>
+    <input type="text" name="CUS_NAME" id="CUS_NAME" readonly="readonly" class="text">
+  </div>
+    <div class="queryhide">
+    <label class="control-label" >联系电话</label>
+    <input type="text" name="CUS_ORG_PHONE" id="CUS_ORG_PHONE" readonly="readonly" class="text">
+  </div>
+  </div>
+  	   
+	<div id="imageInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加图片信息</span>
+                </div>
+                <br/>
+
+                <div id="ImgShow" class="line-row" style="width: 97%">
+                    <div id="_showimg" class="line-row" style="height:auto;width: 97%">
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+  	
+
+        <div id="fileInfo" class="line-row content-box" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加文件信息</span>
+                </div>
+                <br/>
+
+                <div id="fileShow" class="line-row" style="width: 97%">
+                    <div id="_showfile" class="line-row" style="height:auto;width: 97%">
+
+
+
+                    </div>
+                </div>
+
+            </div>
+  	 
+<div  id="attachsow"class="line-row show context_self" style="width: 99%;margin-left: 0.5%;">
+                <div>
+                    <div style="background-color: #00B83F;width: 5px;height: 12px;margin-left: -10px;"></div>
+                    <span style="margin-left: 10px">附加业务信息</span>
+                </div>
+                <br>
+               
+                
+                <div class="queryhide">
+			    	<label class="control-label">工单类型</label>
+					<input type="text" readonly="readonly"   name="WORKTYPENAME" id="WORKTYPENAME" class="text">
+			    </div>
+    <div class="checkupshow">
+    <label class="control-label" >验收日期</label>
+    <input type="text" name="WORK_ACCEPT_TIME" id="WORK_ACCEPT_TIME" readonly="readonly" class="text">
+  </div>
+  <div class="checkupshow">
+    <label class="control-label" >验收类型</label>
+    <input type="text" name="ACCEPT_TYPE" id="ACCEPT_TYPE" readonly="readonly" class="text">
+  </div>
+    <div class="installshow">
+    <label class="control-label" >设备型号</label>
+    <input type="text" name="WORK_ACCEPT_TIME" id="DEVICE_MODEL_NAME" readonly="readonly" class="text">
+  </div>
+  <div class="installshow">
+    <label class="control-label" >设备类型</label>
+    <input type="text" name="WORK_ACCEPT_TYPE" id="DEVICE_TYPE_NAME" readonly="readonly" class="text">
+  </div>
+ 
+ 
+                
+            
+    <div class="trainshow">
+    <label class="control-label" >培训日期</label>
+    <input type="text" name="WORK_TRAIN_TIME" id="WORK_TRAIN_TIME" readonly="readonly" class="text">
+  </div>
+
+
+  
+  
+                
+              
+    <div class="maintainshow" >
+    <label class="control-label" >故障发生时间</label>
+    <input type="text" name="WORK_REPAIR_TIME" id="WORK_REPAIR_TIME" readonly="readonly" class="text">
+  </div>
+  <div class="maintainshow">
+    <label class="control-label" >故障类别</label>
+    <input type="text" name="oachtype" id="oachtype" readonly="readonly" class="text">
+  </div>
+   
+
+
+                 
+              
+    <div class="routeshow">
+    <label class="control-label" >巡检说明</label>
+    <input type="text" name="WORK_PARTOL_TYPE" id="WORK_PARTOL_TYPE" readonly="readonly" class="text">
+  </div>
+
+
+     
+                
+            
+    <div class="moveshow">
+    <label class="control-label" >客户代号</label>
+    <input type="text" name="CUS_ORG_ID" id="CUS_ORG_ID" readonly="readonly" class="text">
+  </div>
+  <div class="moveshow">
+    <label class="control-label" >客户名称</label>
+    <input type="text" name="CUS_ORG_NAME" id="CUS_ORG_NAME" readonly="readonly" class="text">
+  </div>
+    <div class="moveshow">
+    <label class="control-label" >客户地址</label>
+    <input type="text" name="CUS_ORG_ADDRESS" id="CUS_ORG_ADDRESS" readonly="readonly" class="text">
+  </div>
+    <div class="moveshow">
+    <label class="control-label" >联系人</label>
+    <input type="text" name="CUS_NAME" id="CUS_NAME" readonly="readonly" class="text">
+  </div>
+    <div class="moveshow">
+    <label class="control-label" >联系电话</label>
+    <input type="text" name="CUS_ORG_PHONE" id="CUS_ORG_PHONE" readonly="readonly" class="text">
+  </div>
+  <div class="moveshow" style="margin-left: 90px">
+    <label >培训内容</label>
+    <input type="text" name="WORK_TRAIN_INFO" id="WORK_TRAIN_INFO" readonly="readonly"  style="width: 300px;height: 200px" >
+  </div>
+   <div class="maintainshow"style="margin-left: 90px">
+    <label >故障描述</label>
+    <input type="text" name="WORK_REPAIR_DESCRIBE" id="WORK_REPAIR_DESCRIBE" readonly="readonly" style="width: 300px;height: 200px">
+  </div>
+  </div>
+
+   
+
+<div id="imgshowInfo"class="modal hide fade popwindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <image id="bigimgshow" style="width: auto;height: auto;max-width: 80%;max-height: 80%;" src=""/>
+                <image id="closeimgshow" style="width: 42px;height: 42px;margin-top: -300px;" src="../oa/appwork/upfile/close.png"/>
+        </div>
+        <div style="padding-top: 20px;">
+            <a class="btn btn-primary" id="backwork">返回</a>
+        </div>
+
+    </div>
+
+        <script type="text/javascript" src="<%=basePath%>/oa/queryAllWork/queryAllworksdetail.js"></script>

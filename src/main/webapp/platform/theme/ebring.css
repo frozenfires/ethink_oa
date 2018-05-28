@@ -1,0 +1,396 @@
+html{background-color: #fff;height: 100%;}
+/* body{height:auto!important; height:500px; min-height:500px; padding-bottom: 100px;font-family: 微软雅黑;} */
+body{min-height:500px; padding-bottom: 100px;font-family: 微软雅黑;}
+body{padding:0px;height:100%;}
+/*-------- 综合管理端主页样式 Home -------*/
+.adminContainer{
+	height: 100%;
+	width: 100%;
+	background-image: url(images/kj_07.jpg);
+    background-repeat: no-repeat;
+}
+
+.container{
+	padding-top:20px;
+}
+
+.userClass{
+	width:100%;
+	height:100%;
+	/* border:1px solid red; */ 
+}
+.loginClass {
+	width: 230px;
+	position: relative;
+	top: 25px;
+	left: 25px;
+}
+.tableClass1{
+	width:100%;
+}
+.tableClass2{
+	width:100%;
+}
+.welcomeClass{
+	background-image: url(images/kouhao.png);
+	background-repeat: no-repeat;
+	width:497px; 
+	height: 81px;
+	position: relative;
+	top: 100px;
+	margin: auto;
+}
+.tranClass{
+	background-image: url(images/wcydjy.png);
+	background-repeat: no-repeat;
+	width: 766px;
+	height: 200px;
+	position: relative;
+	margin-top: 200px;
+	padding-top: 50px;
+}
+.footerClass{
+	width:280px;
+	position: fixed;
+	bottom: 25px;
+	left: 25px;
+	text-align: left;
+}
+.mContent{
+	/* height:100%; */
+}
+
+/*底部工具栏不需要了*/
+.navbar-fixed-bottom{
+	position: fixed; display: none;
+}
+.orgclass1{width:75px;}
+.orgclass2{width:200px;}
+.textRight{text-align: right;}
+.show{height: 100%;}
+.overflow-y{overflow-y: auto;overflow-x: hidden;}
+/*-------- 综合管理端主页样式 End -------*/
+/* 密码重置模块样式 Home*/
+.container.passReset {
+	width: 400px;
+	margin-top: 20px;
+}
+
+/* 密码重置模块样式 End*/
+.xtest{border: 1px solid red}
+/**居中*/
+.center{text-align:center}
+/*div居中*/
+.divauto {width:auto;margin:0 30px 0 30px;}
+
+/**默认字体样式*/
+.font0{font-family: 微软雅黑;font-size: 14px; font-weight: 200;}
+h4{font-family: 微软雅黑;font-size: 18px; font-weight: 200;}
+
+/**主交易区域*/
+#mainContent{padding: 0px;height: 100%; overflow-y: auto;}
+#mainContent div.container{width: 100%; }
+
+/**主交易区域*/
+#linkContent{padding: 0px;height: 100%; overflow-y: auto;}
+#linkContent div.container{width: 100%; }
+
+/**定义头信息*/
+.header{ border-bottom:1px solid #DBDBDB;width: 100%;height:60px;
+	background-color: #fff;z-index: 935;position: fixed;top: 0px;
+}
+.header .header-left,.header .header-right{display:inline-block; _zoom:1;*display:inline; vertical-align: bottom;}
+.header .header-left{float: left;}
+.header .header-right{float: right; padding-right: 20px; }
+.header a.control{color:#fff;}
+.header a.control:hover{color:#000;}
+.header .control {margin: 0px; font-size: 21px; font-family: 微软雅黑; font-weight: 500; padding-top: 10px;}
+.header a.luck {color: #fff;}
+.header a.luck:hover{color:#000;}
+.header .luck {margin: 0px;font-size: 21px;font-family: 微软雅黑;font-weight: 500;padding-top: 10px;}
+/**头部左边样式定义*/
+.header .userInfo{display: inline-block;font-size: 26px; padding: 5px 0px 1px 0px; font-family: 微软雅黑; 
+	text-align: right;}
+/**机构名称，交易名称样式定义*/
+.header .userInfo span{display:inline-block; _zoom:1;*display:inline; line-height: 36px;}
+.header .orgName{font-weight: 800; font-size: 25px;}
+/**交易名称*/
+.header .tranName{padding: 0px 0px 0px 0px; font-size: 23px; font-weight: 800; }
+.header span.tophtml{display: none;}
+
+.header li{line-height:40px; }
+.header a.info {color: #fff;}
+
+/**hub菜单*/
+/* .hub{width: 100%;height: 100%;} */
+/* .hub{display:inline-block; width:auto!important; padding: 10px 0px 100px 0px; min-width:970px; text-align: -webkit-center;} */
+.hgroup{padding-left: 20px; }
+.hub .hmenu4{clear:both; overflow:hidden; margin-top:5px; width:970px;}
+.hub .hmenu4 .title{float:left;/* width:140px;height:50px; */line-height:50px;font-size:25px;font-family:微软雅黑;}
+.hub .hmenu4 .title span{float:right;}
+.hub .hmenu4 .hgroup .hitem{float:left; width:810px;}
+.hub .hmenu4 .hgroup .hitem:nth-child(2),.hub .hmenu4 .hgroup .hitem:nth-child(3){margin-top: 8px}
+.hub .hmenu4 .hgroup .hitem a{background-color: #009216;margin:0px 3px 3px 0px;float:left;width:176px;height:50px;display:block;
+        line-height:50px;text-align:center;font-size:23px;font-family:微软雅黑;color:#ffffff;text-decoration:none;
+        border:3px solid transparent;}
+.hub .hmenu4 .hgroup .hitem a:hover{text-decoration:none;border:solid 3px #165B60;}
+.hub .hmenu4 .hgroup .hitem a.s{width:192px;}
+
+
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor0{background:#009216;}
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor1{background:#D9512B;}
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor2{background:#2583E3;}
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor3{background:#6235C3;}
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor4{background:#034889;}
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor5{background:#77B700;}
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor6{background:#AE2948;}
+.hub .hmenu4 .hgroup .hitem a.tranopen.menucolor7{background:#009AAC;}		
+/**定义各个磁块的颜色
+.tranopen#T1004{background:#009216;}
+.tranopen#T1002{background:#009216;}
+.tranopen#T1004_1{background:#d9512b;}
+.tranopen#CashPay{background:#623dbe;}
+.tranopen#Cash_Exchange{background:#623dbe;}
+
+.tranopen#T1006_1{background:#034889;}
+.tranopen#T1007_1{background:#009216;}
+.tranopen#T1006_2{background:#EA7027;}
+.tranopen#C007{background:#034889;}
+.tranopen#C001{background:#009216;}
+.tranopen#cash_transfers{background:#2583e3;}
+.tranopen#BoxToDevice{background:#2583e3;}
+.tranopen#DeviceToBox{background:#623dbe;}
+.tranopen#T1008{background:#d9512b;}
+.tranopen#C008{background:#d9512b;}
+.tranopen#C004{background:#034889;}
+
+.tranopen#C005{background:#009216;}
+.tranopen#C002{background:#2583e3;}
+
+.tranopen#F001{background:#EA7027;}
+.tranopen#F004{background:#034889;}
+.tranopen#F002{background:#EA7027;}
+.tranopen#F006{background:#623dbe;}
+.tranopen#F005{background:#d9512b;}
+.tranopen#F003{background:#d9512b;}
+*/
+/**模态窗口默认位置*/
+.modal {top: 60%;}
+/**模态窗口底部按钮字体位置*/
+.Alert button.btn{font-size:16px; width: 120px}
+/**弹出窗口样式定义*/
+/**弹出窗口样式定义*/
+.modal-backdrop {_filter: alpha(opacity=60);}
+.popwindow{left: 43%; width: 700px; top:-190px;}
+.modal-footer { padding: 14px 15px 15px; margin-bottom: 0; border-top: 1px solid #ddd; background-color: #fff;
+		text-align: right; box-shadow: inset 0 1px 0 #ffffff; *zoom: 1;}
+.modal-footer .btn{width:120px; font-family: 微软雅黑; font-size: 18px; height:45px; margin-left: 10px;}
+.modal-header {padding: 9px 15px; border-bottom: 1px solid #eee; }
+.modal-header h3{font-size: 28;font-weight: 400}
+.modal-body { overflow-y: auto; max-height: 400px; width:auto;}
+.modal-body h3{font-weight: 400;}
+
+
+
+/**充满全屏的模态窗口*/
+.largeModal-backdrop{z-index: 1030;}
+.largeModal{position: absolute; left:0; top:0; width:100%; height:100%; margin-left: 0px; z-index: 1035; padding-left: 0px; overflow: auto;}
+
+
+
+/*===============================控件样式定义==================================================*/
+/**输入框整体样式*/
+input.text, input.date{height:27px; line-height: 27px; border: solid 1px; border-color: #999999; color: #444444; font-family: 微软雅黑;}
+/**单选框、复选框样式*/
+input.radio, input.checkbox{width:20px;}
+
+/** 按钮hover样式 **/
+.btn:hover{background-position: 0 -32px;}
+.btn {border-radius: 0px;}
+
+.resetCBox{width:auto;padding:0px;margin:0px;text-align:left;}
+
+/**手风琴样式*/
+.loading {display: none;}
+.accordion h5{line-height: 20px; padding:3px; padding-left:6px; width: 100%; }
+.accordion {border: 1px solid #ccc; width:  100%;}
+.accordion li h5 a {background: #fff;border-bottom:1px solid #333;border-top:1px solid #ccc;color:#000;display:block;
+                    font-style: normal;margin: 0;padding:5px 10px; width:100%;}
+.accordion li.active h5 a {background:#fff;border-bottom:1px solid #036;border-top: 1px solid #9cf;text-shadow:0 -1px 2px #036, #9cf 0 1px 2px; width:100%;}
+.accordion li.locked h5 a {background: #fff;border-bottom:1px solid #630;border-top: 1px solid #fc9;text-shadow: 0 -1px 2px #630, #fc9 0 1px 2px; width:100%;}
+.accordion li h5 {margin: 0;padding:0;}
+.accordion .panel div{padding:10px; background: #fff;}
+
+/**下拉列表控件样式*/
+.select{border: solid 0px; border-color: #7F9DB9; padding: 0px; display:inline-block;}
+.select .item{height:35px; line-height: 35px; width:187px; background-color: #fff; border-color: #999;
+    display:inline-block; _zoom:1;*display:inline;
+    font-size: 15px; padding-left: 0px; padding-top: 0px; margin-bottom: 0px; text-align: left; 
+    font-family: 微软雅黑; font-size: 14px; color: #444444}
+.select .dropdown-toggle{height: 35px; width:34px; margin-top: 0px; margin-right: 1px; background:url(./images/caret.PNG);}
+.select .caret{margin-top:9px; background-color: #B7D3FC;}
+/**行模式查询，下拉列表自定义*/
+div.line-row div input,div.line-row div select{display:inline-block; _zoom:1;*display:inline; width:140px; padding: 0px; margin: 0px;}
+div.line-row .select{margin-left: 0px;}
+div.line-row .select .dropdown-toggle{height: 28px; width:29px; margin-top: 0px; }
+div.line-row .select .item{height:28px; line-height: 28px; width:114px; max-width: 114px; margin-top: 0px;}
+
+/**表格样式定义*/
+.table th{background-color: #E6E6E6; color: #444; border-top-width: 0px; font-family: 微软雅黑; font-size: 14px;}
+.table td{font-family: 微软雅黑; font-size: 14px;}
+td input {width:100%; }
+
+/**错误提示信息样式*/
+label.error{color:#FF4400; width:257px; text-align: right;}
+/**树定义*/
+ul.ztree {margin-top: 3px;margin-left: 30px;border: 1px solid #617775;background: #f0f6e4;width:220px;height:240px;overflow-y:scroll;overflow-x:auto;}
+
+
+/**横向样式*/
+hr.hr-line{margin: 0px;}
+
+/**公共控件高度*/
+input[type=text],
+input[type=password]
+{height: 29px; line-height: 29px; padding: 0px;}
+
+label, input, button, select, textarea {font-size: 12px;font-weight: normal;line-height: 20px;}
+select {font-size: 12px;}
+/**默认按钮样式*/
+.ebtn{border: solid 1px #00884A;background-color: #1a9b00;color: #fff;
+	font-size: 12px;font-family: songti; padding: 4px 10px;
+}
+/**控件的总体样式*/
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], 
+input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], 
+input[type="week"], input[type="number"], input[type="email"], input[type="url"], 
+input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+	display: inline-block;
+	padding: 4px 6px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	line-height: 20px;
+	color: #555555;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 0px;
+	vertical-align: middle;
+	border: solid 1px #999;
+}
+
+form{margin: 0px;}
+
+.form-horizontal .controls input[type=text],
+.form-horizontal .controls input[type=password],
+.form-horizontal .controls select{
+	width:206px;
+}
+
+/*===============================控件样式定义结束==================================================*/
+
+/*===============================容器类样式定义==================================================*/
+/**查询表单样式*/ 
+.queryForm{border-bottom: 0px solid #444444; padding-bottom: 15px; background-color: #EAFCEB;}
+/**标签页控件样式*/
+.tabStyle { text-align: center; font-size: 24px; width: 100%; background-color: #E6E6E6;
+    padding-top: 10px; padding-left: 20px; margin-bottom: 50px;
+}
+.tab-pane{padding-top: 6px;}
+/** 行模式查询容器 */
+div.line-row{width:100%;}
+div.line-row label{display:inline-block; _zoom:1;*display:inline;}
+/*div.line-row div{display:inline-block; _zoom:1;*display:inline; margin-left: 30px; margin-top:9px; width:290px;}*/
+div.line-row div{display:inline-block; _zoom:1;*display:inline; margin-left: 30px; margin-top:9px; width:290px;}
+div.line-row div label.control-label{width:110px; text-align: right;margin-right: 3px;}
+div.line-row input.smalltext{width:70px;}
+
+/**只作展示用的容器 值对行的展示 */
+div.onlyShow div.control-group{margin-bottom: 0px; height:30px; padding: 0px;}
+div.onlyShow div.control-group div.controls{padding-top: 5px}
+div.onlyShow div.control-group label{margin-top:2px;}
+
+/**control-group容器排列定义*/
+div.control-group div.controls{display: inline-block; _zoom:1; *display:inline; margin-left: 10px;}
+div.control-group label{display: inline-block; _zoom:1; *display:inline;}
+
+/**表格容器边框*/
+.content-box{background:#fff;   border:1px solid #ccc;  margin-bottom:20px; padding-left: -20px;overflow:auto; margin-top:5px;}
+
+/**底部工具条定义*/
+.footer .footer-container,.footer .navbar-inner{background-color:#3F3F3F; height:100px;}
+.footer-container{padding-top: 10px; padding-left:80px; padding-right:80px;}
+.footer .navbar-inner{padding: 0px;}
+.footer li{width: 80px; text-align: center; }
+/**图标分割线*/
+li.split{height: 63px; width:2px; margin-left: 35px; margin-right: 35px; background-color: #ffffff; }
+/**底部工具图标按钮定义*/
+.footer a.icon{cursor:pointer; display: inline-block;width:33px; height: 43px;}
+.icontext{font-size: 18px; font-family: 微软雅黑; color: #ffffff; width: 100%; margin-top: 0px;}
+
+/**导出Excel图标*/
+.doexport a.icon,.deviceStatus a.icon:link{background:url(./images/Icon_E_normal.gif) no-repeat;}
+.doexport a.icon:active{background:url(./images/Icon_E_press.gif) no-repeat;}
+/**取消图标*/
+.cancel a.icon,.cancel a.icon:link{background:url(./images/Icon_cancel_normal.gif) no-repeat;}
+.cancel a.icon:active{background:url(./images/Icon_cancel_press.GIF) no-repeat;}
+/**设备余额图标*/
+.queryDev a.icon,.queryDev a.icon:link{background:url(./images/Icon_search_normal.GIF) no-repeat;}
+.queryDev a.icon:active{background:url(./images/Icon_search_press.gif) no-repeat;}
+/**提交按钮图标*/
+.submit a.icon,.submit a.icon:link{background:url(./images/Icon_done_normal.gif) no-repeat;}
+.submit a.icon:active{background:url(./images/Icon_done_press .gif) no-repeat;}
+/**设备状态正常图标*/
+.deviceStatusHEALTHY a.icon,.deviceStatus a.icon:link{background:url(./images/Icon_cnj_normal.gif) no-repeat;}
+.deviceStatusHEALTHY a.icon:active{background:url(./images/Icon_cnj_hover .gif) no-repeat;}
+/**设备状态正常图标*/
+.deviceStatusError a.icon,.deviceStatus a.icon:link{background:url(./images/Icon_cnjyc_normal.gif) no-repeat;}
+.deviceStatusError a.icon:active{background:url(./images/Icon_cnjyc_hover .gif) no-repeat;}
+/**修正计数器图标*/
+.setCounter a.icon,.deviceStatus a.icon:link{background:url(./images/Icon_fix_normal.gif) no-repeat;}
+.setCounter a.icon:active{background:url(./images/Icon_fix_press.gif) no-repeat;}
+/**打印图标*/
+.doprint a.icon,.deviceStatus a.icon:link{background:url(./images/Icon_print_normal.gif) no-repeat;}
+.doprint a.icon:active{background:url(./images/Icon_print_press.gif) no-repeat;}
+
+/*==========================特殊交易样式定义==================================*/
+/**余额查询样式*/
+#C003_CONTAINER{margin-top: 30px; margin-right: 0px; margin-bottom: 100px; margin-left: 0px;}
+.C003Table{max-width: 100%; background-color: #fff;border-collapse: collapse; border-spacing: 0;
+    border:0px solid #999;}
+.C003Table th{background-color: #9E9AE7; border:1px solid #fff; color: #fff;}
+.C003Table td{background-color: #E3E4FF; padding-top:3px; padding-bottom: 3px; border-color: #fff;}
+.C003Tab .tab-pane{margin-top: 0px; padding-top: 10px;}
+.tabStyle{margin-bottom: 0px;}
+#myTab{padding-left: 0px;}
+#myTab #tabli{margin-left: 12px;}
+
+/**修改余额查询样式，表格表头需要居中*/
+.C003Table th{text-align:center; vertical-align:middle;}
+
+/**交易确认交易截图宽度*/
+.sourceTran{width:1000px;}
+
+/*-------- 用户交接页面样式 Home -------*/
+.handover-div{width:100%;}
+.handover-table{width: 600px;margin: auto;margin-top: 30px;}
+.handover-input{width:650px;margin: auto;margin-top: 30px;}
+
+div.line-row div label.control-label1{width:120px; text-align: right;margin-right: 3px;}
+div.line-row .handover-style{display:inline-block; _zoom:1;*display:inline; margin-left: 10px; margin-top:9px; width:290px;}
+
+/** 行模式查询条件排列 */
+/*div.line-row div{display:inline-block; _zoom:1;*display:inline; margin-left: 30px; margin-top:9px; width:290px;}*/
+div.line-row div{display:inline-block; _zoom:1;*display:inline; margin-left: 20px; margin-top:9px; width:290px;}
+div.line-row div.control-group{width:auto;}
+div.line-row div.controls{ display: inline-table;width: auto;margin-left: 10px;}
+div.line-row div label.control-label{width:130px; text-align: right;margin-right: 3px;}
+div.line-row div input,div.line-row div select{display:inline-block; _zoom:1;*display:inline; width:140px; padding: 0px; margin: 0px;}
+div.line-row input.smalltext{width:70px;}
+div.line-row .select{margin-left: 0px;}
+div.line-row .select .dropdown-toggle{height: 29px; width:27px; margin-top: 0px; margin-right: 1px;}
+div.line-row .select .item{height:29px; line-height: 29px; width:114px; max-width: 114px;}
+
+/*为dataTables增加横滚动条*/
+div.dataTables_scroll{width: 1800px;}
+
+/*-------- 用户交接页面样式 End -------*/

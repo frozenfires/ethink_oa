@@ -1,0 +1,1577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- TCRC 基础自有功能配置区 -->
+<mapper namespace="com.ebring.tcrc.trans.base.dao.ITcrcBaseManageDao">
+
+    <!-- 不加缓存
+    <cache />
+     -->
+
+    <!--用户信息查询  -->
+    <select id="selectUserPage" parameterType="hashmap" resultType="hashmap">
+        SELECT USER_ID,USER_NAME,OFFICEPHONE,MOBILEPHONE,ADDRESS_NAME,EMAIL,FREEZE_USER FROM BASE_USER A,OA_ADDRESS B WHERE 1=1
+        <if test="USER_ID_P != null and USER_ID_P !='' ">
+            AND USER_ID LIKE CONCAT('%',#{USER_ID_P},'%')
+        </if>
+        <if test="USER_NAME_P != null and USER_NAME_P !='' ">
+            AND USER_NAME LIKE CONCAT('%',#{USER_NAME_P},'%')
+        </if>
+        <if test="ADDRESS_ID != null and ADDRESS_ID !='' ">
+            AND A.ADDRESS_ID = #{ADDRESS_ID}
+        </if>
+        AND A.ADDRESS_ID = B.ADDRESS_ID
+        ORDER BY UPDATE_TIME DESC
+    </select>
+
+    <!-- 区域信息查询 -->
+    <select id="selectAddress" parameterType="hashmap" resultType="hashmap">
+      SELECT ADDRESS_ID K, ADDRESS_NAME V FROM OA_ADDRESS
+  </select>
+
+    <!-- 插入用户信息 -->
+    <insert id="insertUser" parameterType="hashmap">
+	INSERT INTO	BASE_USER (USER_ID,USER_NAME,MOBILEPHONE,EMAIL,PASSWORD,ROLE_ID,
+		FREEZE_USER,ADDRESS_ID,NATION,SEX,MARRIAGED,POLITICS,EDUCATION,DRIVER,
+		BIRTHDAY,SCHOOL,MAJOR,WORKTIME,ADDRESS,CONTRACTNUM,APTITUDE,HOMEPHONE,
+		OFFICEPHONE,URGENTPHONE,IDNUMBER,JOINTIME,UPDATE_TIME)
+		VALUES (
+			#{USER_ID_P,jdbcType=VARCHAR},
+			#{USER_NAME_P,jdbcType=VARCHAR},
+			#{MOBILEPHONE_P,jdbcType=VARCHAR},
+			#{EMAIL,jdbcType=VARCHAR},
+			#{PASSWORD,jdbcType=VARCHAR},
+			#{ROLE_ID_P,jdbcType=VARCHAR},
+			#{FREEZE_USER,jdbcType=VARCHAR},
+			#{ADDRESS_ID,jdbcType=INTEGER},
+			#{NATION,jdbcType=VARCHAR},
+			#{SEX,jdbcType=VARCHAR},
+			#{MARRIAGED,jdbcType=VARCHAR},
+			#{POLITICS,jdbcType=VARCHAR},
+			#{EDUCATION,jdbcType=VARCHAR},
+			#{DRIVER,jdbcType=VARCHAR},
+			#{BIRTHDAY,jdbcType=DATE},
+			#{SCHOOL,jdbcType=VARCHAR},
+			#{MAJOR,jdbcType=VARCHAR},
+			#{WORKTIME,jdbcType=DATE},
+			#{ADDRESS,jdbcType=VARCHAR},
+			#{CONTRACTNUM,jdbcType=VARCHAR},
+			#{APTITUDE,jdbcType=VARCHAR},
+			#{HOMEPHONE,jdbcType=VARCHAR},
+			#{OFFICEPHONE,jdbcType=VARCHAR},
+			#{URGENTPHONE,jdbcType=VARCHAR},
+			#{IDNUMBER,jdbcType=VARCHAR},
+			#{JOINTIME,jdbcType=DATE},
+			now()
+		)
+	</insert>
+
+    <!-- 编辑用户信息 -->
+    <insert id="updateUser" parameterType="hashmap">
+		 UPDATE BASE_USER SET
+				USER_NAME=#{USER_NAME_P},
+				MOBILEPHONE=#{MOBILEPHONE_P},
+				EMAIL=#{EMAIL},
+				ROLE_ID=#{ROLE_ID_P},
+		        FREEZE_USER=#{FREEZE_USER},
+		        ADDRESS_ID=#{ADDRESS_ID},
+		        NATION=#{NATION},
+		        SEX=#{SEX},
+		        MARRIAGED=#{MARRIAGED},
+		        POLITICS=#{POLITICS},
+		        EDUCATION=#{EDUCATION},
+		        DRIVER=#{DRIVER},
+		        BIRTHDAY=#{BIRTHDAY},
+		        SCHOOL=#{SCHOOL},
+		        MAJOR=#{MAJOR},
+		        WORKTIME=#{WORKTIME},
+		        ADDRESS=#{ADDRESS},
+		        CONTRACTNUM=#{CONTRACTNUM},
+		        APTITUDE=#{APTITUDE},
+		        HOMEPHONE=#{HOMEPHONE},
+		        OFFICEPHONE=#{OFFICEPHONE},
+		        URGENTPHONE=#{URGENTPHONE},
+		        IDNUMBER=#{IDNUMBER},
+		        JOINTIME=#{JOINTIME},
+				UPDATE_TIME=now()
+		 WHERE USER_ID=#{USER_ID_P}
+	</insert>
+
+    <!-- 删除用户信息 -->
+    <delete id="deleteUser" parameterType="hashmap">
+      DELETE FROM BASE_USER WHERE USER_ID=#{USER_ID_P}
+  </delete>
+
+    <!-- 清空所有用户信息 -->
+    <delete id="deleteUserAll" parameterType="hashmap">
+  	  DELETE FROM BASE_USER
+  </delete>
+
+    <!--用户明细信息查询  -->
+    <select id="selectUserDetail" parameterType="hashmap" resultType="hashmap">
+        select a.USER_ID USER_ID_P,a.ADDRESS_ID ADDRESS_ID_P,a.USER_NAME USER_NAME_P,a.ORG_ID ORG_ID_P,b.org_name org_name_p,
+        a.TELEPHONE,a.MOBILEPHONE,a.EMAIL,a.PASSWORD, a.ROLE_ID ROLE_ID_P, a.UPDATE_TIME UPDATE_TIME_P, a.ORG_ADMIN ORG_ADMIN_P,a.FREEZE_USER
+        from BASE_USER a left join BASE_ORG b on a.org_id = b.org_id
+        where a.USER_ID=#{USER_ID_P}
+        <!-- and a.FREEZE_USER='正常'-->
+    </select>
+  <!--用户明细信息查询  -->
+    <select id="selectUsername" parameterType="hashmap" resultType="hashmap">
+        select USER_NAME   from BASE_USER 
+        where USER_ID=#{USER_ID}
+       
+    </select>
+    <!--用户明细信息查询  -->
+    <select id="selectUserDetailInfo" parameterType="hashmap" resultType="hashmap">
+    select USER_ID USER_ID_P,ADDRESS_ID,USER_NAME USER_NAME_P,
+        MOBILEPHONE MOBILEPHONE_P, EMAIL,ROLE_ID ROLE_ID_P,FREEZE_USER,
+		NATION,SEX,MARRIAGED,POLITICS,EDUCATION,DRIVER,DATE_FORMAT(BIRTHDAY,'%Y-%m-%d') "BIRTHDAY",SCHOOL,MAJOR,
+		DATE_FORMAT(WORKTIME,'%Y-%m-%d') "WORKTIME",ADDRESS,CONTRACTNUM,APTITUDE,HOMEPHONE,OFFICEPHONE,URGENTPHONE,
+		IDNUMBER,DATE_FORMAT(JOINTIME,'%Y-%m-%d') "JOINTIME"
+   from BASE_USER
+   where USER_ID=#{USER_ID_P}
+  </select>
+
+    <select id="selectUserAll" resultType="String">
+  	 SELECT USER_ID FROM BASE_USER
+  </select>
+
+    <!-- 根据用户ID查询用户密码 -->
+    <select id="selectUserPwdByID" parameterType="hashmap" resultType="String">
+        <if test="USER_ID_P != null and USER_ID_P !='' ">
+            SELECT PASSWORD FROM BASE_USER WHERE USER_ID = #{USER_ID_P}
+        </if>
+    </select>
+
+    <!-- 根据用户ID更新用户密码 -->
+    <update id="changePwdByID" parameterType="hashmap">
+  	UPDATE BASE_USER SET PASSWORD = #{REPASSWORD} WHERE USER_ID = #{USER_ID_P}
+  </update>
+
+    <!--资源信息查询  -->
+    <select id="selectResourcePage" parameterType="hashmap" resultType="hashmap">
+        select MODULE_ID,MODULE_NAME,PARENT_MODULE_ID,MODULE_ORDER,MODULE_STATUS,MODULE_LEVEL,MODULE_URL,UPDATE_DATE from BASE_RESOURCE where 1=1
+        <if test="MODULE_ID != null and MODULE_ID !='' ">
+            and MODULE_ID like CONCAT('%',#{MODULE_ID},'%')
+        </if>
+        <if test="MODULE_NAME != null and MODULE_NAME !='' ">
+            and MODULE_NAME like CONCAT('%',#{MODULE_NAME},'%')
+        </if>
+        ORDER BY UPDATE_DATE DESC
+    </select>
+
+    <!-- 插入资源信息 -->
+    <insert id="insertResource" parameterType="hashmap">
+      INSERT INTO BASE_RESOURCE(MODULE_ID,MODULE_NAME,PARENT_MODULE_ID,MODULE_ORDER,MODULE_STATUS,MODULE_LEVEL,MODULE_URL,UPDATE_DATE) VALUES(#{MODULE_ID},#{MODULE_NAME},
+     #{PARENT_MODULE_ID},#{MODULE_ORDER},#{MODULE_STATUS},#{MODULE_LEVEL},#{MODULE_URL},now())
+  </insert>
+
+    <!-- 编辑资源信息 -->
+    <insert id="updateResource" parameterType="hashmap">
+      UPDATE BASE_RESOURCE SET MODULE_NAME=#{MODULE_NAME},PARENT_MODULE_ID=#{PARENT_MODULE_ID},MODULE_ORDER=#{MODULE_ORDER},
+      MODULE_STATUS=#{MODULE_STATUS},MODULE_LEVEL=#{MODULE_LEVEL},MODULE_URL=#{MODULE_URL},UPDATE_DATE=now() WHERE MODULE_ID=#{MODULE_ID}
+  </insert>
+
+    <!-- 删除资源信息 -->
+    <delete id="deleteResource" parameterType="hashmap">
+      DELETE FROM BASE_RESOURCE WHERE MODULE_ID=#{MODULE_ID}
+  </delete>
+
+
+    <!--资源明细信息查询  -->
+    <select id="selectResourceDetail" parameterType="hashmap" resultType="hashmap">
+        <if test="MODULE_ID == 'adminMain' ">
+            select 'adminMain' ID, '首页' NAME, '' PID, '' AUTH, '1' STATUS, 1 MODULE_ORDER, '/platform/adminMain/adminMain.html' MODULE_URL from dual
+        </if>
+        <if test="MODULE_ID != 'adminMain' ">
+            select MODULE_ID ID,MODULE_NAME NAME,PARENT_MODULE_ID PID,MODULE_AUTH AUTH,MODULE_STATUS STATUS,MODULE_ORDER,MODULE_URL from BASE_RESOURCE where MODULE_ID=#{MODULE_ID}
+        </if>
+    </select>
+
+
+    <!--设备类型信息查询  -->
+    <select id="selectTypePage" parameterType="hashmap" resultType="hashmap">
+        select TYPE_ID,TYPE_NAME from BASE_DEVICE_TYPE where 1=1
+        <if test="TYPE_ID != null and TYPE_ID !='' ">
+            and TYPE_ID like CONCAT('%',#{TYPE_ID},'%')
+        </if>
+        <if test="TYPE_NAME != null and TYPE_NAME !='' ">
+            and TYPE_NAME like CONCAT('%',#{TYPE_NAME},'%')
+        </if>
+        ORDER BY UPDATE_DATE DESC
+
+    </select>
+
+    <!-- 插入设备类型信息 -->
+    <insert id="insertType" parameterType="hashmap">
+       INSERT INTO BASE_DEVICE_TYPE(TYPE_ID,TYPE_NAME,UPDATE_DATE) VALUES(#{TYPE_ID},#{TYPE_NAME},now())
+  </insert>
+
+    <!-- 编辑设备类型信息 -->
+    <insert id="updateType" parameterType="hashmap">
+   
+      UPDATE BASE_DEVICE_TYPE SET TYPE_NAME=#{TYPE_NAME},UPDATE_DATE=now() WHERE TYPE_ID=#{TYPE_ID}	 
+   
+  </insert>
+
+    <!-- 删除设备类型信息 -->
+    <delete id="deleteType" parameterType="hashmap">
+      DELETE FROM BASE_DEVICE_TYPE WHERE TYPE_ID=#{TYPE_ID}
+  </delete>
+
+    <!-- 查询设备型号 -->
+    <select id="selectDeviceModelPage" parameterType="hashmap" resultType="hashmap">
+  	select DEVICE_TYPE, DEVICE_MODEL FROM BASE_DEVICE_MODEL where 1=1
+  </select>
+
+    <!--资源设备型号信息查询  -->
+    <select id="selectTypeDetail" parameterType="hashmap" resultType="hashmap">
+      select TYPE_ID,TYPE_NAME from BASE_DEVICE_TYPE where TYPE_ID=#{TYPE_ID}
+  </select>
+
+
+    <!--设备信息查询  -->
+    <select id="selectDeviceinfoPage" parameterType="hashmap" resultType="hashmap">
+        SELECT D.DEVICE_ID DEVICE_ID,D.DEVICE_NAME DEVICE_NAME,D.DEVICE_IP DEVICE_IP,D.TERMINAL_IP TERMINAL_IP, D.TERMINAL_IP2 TERMINAL_IP2,A.AREA_NAME AREA_NAME,D.DEVICE_ADMIN DEVICE_ADMIN,
+        D.DEVICE_AREA_ID DEVICE_AREA_ID,F.FIX_NAME FIX_NAME,
+        B.BRAND_NAME BRAND_NAME,T.TYPE_NAME TYPE_NAME,M.DEVICE_MODEL DEVICE_MODEL,P.PROVIDER_NAME PROVIDER_NAME,D.DEVICE_STATUS DEVICE_STATUS,D.DEVICE_ADDRESS DEVICE_ADDRESS,
+        D.COMMENTS COMMENTS,D.ORG_ID ORG_ID
+        FROM BASE_DEVICE_INFO D
+        LEFT JOIN BASE_DEVICE_AREA A ON D.DEVICE_AREA_ID = A.AREA_ID
+        LEFT JOIN BASE_DEVICE_FIX_TYPE F ON D.FIX_TYPE = F.FIX_TYPE
+        LEFT JOIN BASE_DEVICE_BRAND B ON D.BRAND_ID = B.BRAND_ID
+        LEFT JOIN BASE_DEVICE_PROVIDER P ON D.DEVICE_PROVIDER_ID = P.PROVIDER_ID
+        LEFT JOIN BASE_DEVICE_MODEL M ON D.DEVICE_MODEL_ID = M.DEVICE_TYPE
+        LEFT JOIN BASE_DEVICE_TYPE T ON D.DEVICE_TYPE = T.TYPE_ID
+        <if test="DEVICE_ID != null and DEVICE_ID !='' ">
+            and D.DEVICE_ID like CONCAT('%',#{DEVICE_ID_P},'%')
+        </if>
+        <if test="DEVICE_NAME != null and DEVICE_NAME !='' ">
+            and D.DEVICE_NAME like CONCAT('%',#{DEVICE_NAME},'%')
+        </if>
+        ORDER BY D.UPDATE_DATE DESC
+    </select>
+
+    <!--设备信息查询不分页  -->
+    <select id="selectDeviceinfo" parameterType="hashmap" resultType="hashmap">
+        select DEVICE_ID,DEVICE_NAME,DEVICE_IP,DEVICE_ADMIN,DEVICE_AREA_ID,FIX_TYPE,
+        BRAND_ID,DEVICE_TYPE,DEVICE_MODEL_ID,DEVICE_PROVIDER_ID,DEVICE_STATUS,DEVICE_ADDRESS,TERMINAL_IP,
+        COMMENTS from BASE_DEVICE_INFO WHERE 1=1
+        <if test="DEVICE_ID != null and DEVICE_ID !='' ">
+            and DEVICE_ID = #{DEVICE_ID}
+        </if>
+    </select>
+
+    <!-- 查询终端IP是否已绑定设备  -->
+    <select id="selectDeviceinfoByTerminal" parameterType="hashmap" resultType="hashmap">
+      select * from BASE_DEVICE_INFO 
+      where (TERMINAL_IP = #{TERMINAL_IP} OR TERMINAL_IP2 = #{TERMINAL_IP}) and DEVICE_ID!=#{DEVICE_ID_P}
+  </select>
+
+    <!-- 查询终端IP2是否已绑定设备 -->
+    <select id="selectDeviceinfoByTerminal2" parameterType="hashmap" resultType="hashmap">
+      select * from BASE_DEVICE_INFO 
+      where (TERMINAL_IP = #{TERMINAL_IP2} OR TERMINAL_IP2 = #{TERMINAL_IP2}) and DEVICE_ID!=#{DEVICE_ID_P}
+  </select>
+
+    <!-- 查询设备是否绑定双终端IP -->
+    <select id="selectIsTowTeller" parameterType="hashmap" resultType="hashmap">
+  	select * from BASE_DEVICE_INFO where LENGTH(TERMINAL_IP) > 0 and LENGTH(TERMINAL_IP2) > 0 and DEVICE_ID=#{DEVICE_ID_P}
+  </select>
+
+    <!-- 插入设备信息  -->
+    <insert id="insertDeviceinfo" parameterType="hashmap">
+       INSERT INTO BASE_DEVICE_INFO(DEVICE_ID,DEVICE_NAME,DEVICE_IP,DEVICE_ADMIN,DEVICE_AREA_ID,FIX_TYPE,
+      BRAND_ID,DEVICE_TYPE,DEVICE_MODEL_ID,DEVICE_PROVIDER_ID,DEVICE_STATUS,DEVICE_ADDRESS,
+      COMMENTS,TERMINAL_IP,TERMINAL_IP2,ORG_ID,UPDATE_DATE) VALUES(#{DEVICE_ID_P},#{DEVICE_NAME},#{DEVICE_IP},#{DEVICE_ADMIN,jdbcType=VARCHAR},#{DEVICE_AREA_ID,jdbcType=VARCHAR},
+      #{FIX_TYPE,jdbcType=VARCHAR},#{BRAND_ID,jdbcType=VARCHAR},#{DEVICE_TYPE,jdbcType=VARCHAR},#{DEVICE_MODEL_ID,jdbcType=VARCHAR},#{DEVICE_PROVIDER_ID,jdbcType=VARCHAR},
+      #{DEVICE_STATUS,jdbcType=VARCHAR},#{DEVICE_ADDRESS,jdbcType=VARCHAR},#{COMMENTS,jdbcType=VARCHAR},#{TERMINAL_IP},#{TERMINAL_IP2,jdbcType=VARCHAR},#{ORG_GID,jdbcType=VARCHAR},now())
+  </insert>
+
+    <!-- 编辑设备信息 -->
+    <insert id="updateDeviceinfo" parameterType="hashmap">
+      UPDATE BASE_DEVICE_INFO SET DEVICE_NAME=#{DEVICE_NAME},DEVICE_IP=#{DEVICE_IP},DEVICE_ADMIN=#{DEVICE_ADMIN},
+      DEVICE_AREA_ID=#{DEVICE_AREA_ID},FIX_TYPE=#{FIX_TYPE},BRAND_ID=#{BRAND_ID},DEVICE_TYPE=#{DEVICE_TYPE},
+      DEVICE_MODEL_ID=#{DEVICE_MODEL_ID},DEVICE_PROVIDER_ID=#{DEVICE_PROVIDER_ID},DEVICE_STATUS=#{DEVICE_STATUS},DEVICE_ADDRESS=#{DEVICE_ADDRESS},
+      COMMENTS=#{COMMENTS},ORG_ID=#{ORG_GID},TERMINAL_IP=#{TERMINAL_IP},TERMINAL_IP2=#{TERMINAL_IP2},UPDATE_DATE=now() WHERE DEVICE_ID=#{DEVICE_ID_P}
+  </insert>
+
+    <!-- 删除设备信息 -->
+    <delete id="deleteDeviceinfo" parameterType="hashmap">
+      DELETE FROM BASE_DEVICE_INFO WHERE DEVICE_ID=#{DEVICE_ID}
+  </delete>
+
+
+    <!--资源设备信息查询  -->
+    <select id="selectDeviceinfoDetail" parameterType="hashmap" resultType="hashmap">
+       select DEVICE_ID DEVICE_ID_P,DEVICE_NAME,DEVICE_IP,DEVICE_ADMIN,DEVICE_AREA_ID,FIX_TYPE,
+      BRAND_ID,DEVICE_TYPE,DEVICE_MODEL_ID,DEVICE_PROVIDER_ID,DEVICE_STATUS,DEVICE_ADDRESS,
+      COMMENTS,TERMINAL_IP,TERMINAL_IP2,ORG_ID from BASE_DEVICE_INFO where DEVICE_ID=#{DEVICE_ID_P}
+  </select>
+
+    <!--资源设备信息查询  -->
+    <select id="selectDeviceinfoDetailByDeviceIp" parameterType="hashmap" resultType="hashmap">
+       select DEVICE_ID DEVICE_ID_P,DEVICE_NAME,DEVICE_IP,DEVICE_ADMIN,DEVICE_AREA_ID,FIX_TYPE,
+      BRAND_ID,DEVICE_TYPE,DEVICE_MODEL_ID,DEVICE_PROVIDER_ID,DEVICE_STATUS,DEVICE_ADDRESS,
+      COMMENTS,TERMINAL_IP,TERMINAL_IP2,ORG_ID from BASE_DEVICE_INFO 
+      where DEVICE_IP=#{DEVICE_IP} and DEVICE_ID!=#{DEVICE_ID_P}
+  </select>
+
+    <!--角色信息查询  -->
+    <select id="selectRolePage" parameterType="hashmap" resultType="hashmap">
+        select ROLE_ID,ROLE_NAME,ROLE_DESC from BASE_ROLE where 1=1
+        <if test="ROLE_ID != null and ROLE_ID !='' ">
+            and ROLE_ID like CONCAT('%',#{ROLE_ID},'%')
+        </if>
+        <if test="ROLE_NAME != null and ROLE_NAME !='' ">
+            and ROLE_NAME like CONCAT('%',#{ROLE_NAME},'%')
+        </if>
+
+    </select>
+
+    <select id="selectRoleAll" resultType="String">
+  	SELECT ROLE_ID FROM BASE_ROLE
+  </select>
+
+    <!-- 角色信息列表查询 -->
+    <select id="selectRole" parameterType="hashmap" resultType="hashmap">
+      select ROLE_ID K,ROLE_NAME V,ROLE_DESC from BASE_ROLE
+  </select>
+
+    <!-- 插入角色信息 -->
+    <insert id="insertRole" parameterType="hashmap">
+      INSERT INTO BASE_ROLE(ROLE_ID,ROLE_NAME,ROLE_DESC) VALUES(#{ROLE_ID},#{ROLE_NAME},#{ROLE_DESC})
+  </insert>
+
+    <!-- 编辑角色信息 -->
+    <insert id="updateRole" parameterType="hashmap">
+      UPDATE BASE_ROLE SET ROLE_NAME=#{ROLE_NAME},ROLE_DESC=#{ROLE_DESC} WHERE ROLE_ID=#{ROLE_ID}
+  </insert>
+
+    <!-- 删除角色信息 -->
+    <delete id="deleteRole" parameterType="hashmap">
+      DELETE FROM BASE_ROLE WHERE ROLE_ID=#{ROLE_ID}
+  </delete>
+
+    <!-- 清空所有角色信息 -->
+    <delete id="deleteRoleAll" parameterType="hashmap">
+      DELETE FROM BASE_ROLE
+  </delete>
+
+
+    <!--角色明细信息查询  -->
+    <select id="selectRoleDetail" parameterType="hashmap" resultType="hashmap">
+      select ROLE_ID,ROLE_NAME,ROLE_DESC FROM BASE_ROLE where ROLE_ID=#{ROLE_ID}
+  </select>
+
+    <!-- 角色权限查询 -->
+    <select id="selectRoleAuth" parameterType="hashmap" resultType="hashmap">
+      select b.USER_ID, a.ROLE_ID, a.MODULE_ID from BASE_ROLE_RESOURCE a, base_user b
+	where a.role_id = b.role_Id
+          and b.user_Id = #{USER_ID}
+  </select>
+
+    <!--现金账户信息查询  -->
+    <select id="selectAccountPage" parameterType="hashmap" resultType="hashmap">
+        select ACCOUNT_ID,ACCOUNT_DESC,DEVICE_ID,ORGID,TELLER_BOX,DEVICE_BALANCE,BOX_BALANCE,USER_ID from BASE_CASH_ACCOUNT where 1=1
+        <if test="ACCOUNT_ID != null and ACCOUNT_ID !='' ">
+            and ACCOUNT_ID like CONCAT('%',#{ACCOUNT_ID},'%')
+        </if>
+        <if test="ACCOUNT_DESC != null and ACCOUNT_DESC !='' ">
+            and ACCOUNT_DESC like CONCAT('%',#{ACCOUNT_DESC},'%')
+        </if>
+    </select>
+
+    <!-- 查询现金账户详情 -->
+    <select id="selectAccountInfo" parameterType="hashmap" resultType="hashmap">
+        SELECT A.ACCOUNT_ID, A.DEVICE_ID, A.TELLER_BOX FROM BASE_CASH_ACCOUNT A, BASE_USER U WHERE A.USER_ID = U.USER_ID
+        <if test="ORGID != null and ORGID != '' ">
+            and U.ORG_ID = #{ORGID}
+        </if>
+        <if test="USER_ID_ != null and USER_ID_ != '' ">
+            and U.USER_ID = #{USER_ID_}
+        </if>
+    </select>
+
+    <!-- 插入现金账户信息 -->
+    <insert id="insertAccount" parameterType="hashmap">
+      INSERT INTO BASE_CASH_ACCOUNT(ACCOUNT_ID,ACCOUNT_DESC,DEVICE_ID,TELLER_BOX,DEVICE_BALANCE,BOX_BALANCE,USER_ID,TERMINAL_IP) VALUES(#{ACCOUNT_ID},
+     #{ACCOUNT_DESC,jdbcType=VARCHAR},#{DEVICE_ID},#{TELLER_BOX,jdbcType=VARCHAR},#{DEVICE_BALANCE},#{BOX_BALANCE},#{USER_ID,jdbcType=VARCHAR},#{TERMINAL_IP})
+  </insert>
+
+    <!-- 编辑现金账户信息 -->
+    <insert id="updateAccount" parameterType="hashmap">
+      UPDATE BASE_CASH_ACCOUNT SET ACCOUNT_DESC=#{ACCOUNT_DESC},DEVICE_ID=#{DEVICE_ID},TELLER_BOX=#{TELLER_BOX},
+      USER_ID=#{USER_ID},TERMINAL_IP=#{TERMINAL_IP} WHERE ACCOUNT_ID=#{ACCOUNT_ID}
+  </insert>
+
+    <!-- 删除现金账户信息 -->
+    <delete id="deleteAccount" parameterType="hashmap">
+      DELETE FROM BASE_CASH_ACCOUNT WHERE ACCOUNT_ID=#{ACCOUNT_ID}
+  </delete>
+
+
+    <!--现金账户明细信息查询  -->
+    <select id="selectAccountDetail" parameterType="hashmap" resultType="hashmap">
+     select ACCOUNT_ID,ACCOUNT_DESC,DEVICE_ID,ORGID,TELLER_BOX,DEVICE_BALANCE,BOX_BALANCE,USER_ID from BASE_CASH_ACCOUNT where ACCOUNT_ID=#{ACCOUNT_ID}
+  </select>
+
+
+    <!--品牌信息查询  -->
+    <select id="selectBrandPage" parameterType="hashmap" resultType="hashmap">
+        select BRAND_ID,BRAND_NAME,ENG_NAME,TELEPHONE,MOBILEPHONE,EMAIL,CONTRACT_NO,CONTACTS from BASE_DEVICE_BRAND where 1=1
+        <if test="BRAND_NAME != null and BRAND_NAME !='' ">
+            and BRAND_NAME like CONCAT('%',#{BRAND_NAME},'%')
+        </if>
+        <if test="CONTACTS != null and CONTACTS !='' ">
+            and CONTACTS like CONCAT('%',#{CONTACTS},'%')
+        </if>
+        ORDER BY UPDATE_TIME DESC
+    </select>
+
+    <!-- 插入品牌信息 -->
+    <insert id="insertBrand" parameterType="hashmap">
+      INSERT INTO BASE_DEVICE_BRAND(BRAND_ID,BRAND_NAME,ENG_NAME,TELEPHONE,MOBILEPHONE,EMAIL,CONTRACT_NO,CONTACTS,UPDATE_TIME) VALUES(#{BRAND_ID},#{BRAND_NAME},
+     #{ENG_NAME},#{TELEPHONE},#{MOBILEPHONE},#{EMAIL},#{CONTRACT_NO},#{CONTACTS},now())
+  </insert>
+
+    <!-- 编辑品牌信息 -->
+    <insert id="updateBrand" parameterType="hashmap">
+      UPDATE BASE_DEVICE_BRAND SET BRAND_NAME=#{BRAND_NAME},ENG_NAME=#{ENG_NAME},TELEPHONE=#{TELEPHONE},
+      MOBILEPHONE=#{MOBILEPHONE},EMAIL=#{EMAIL},CONTRACT_NO=#{CONTRACT_NO},CONTACTS=#{CONTACTS},UPDATE_TIME=now() WHERE BRAND_ID=#{BRAND_ID}
+  </insert>
+
+    <!-- 删除品牌信息 -->
+    <delete id="deleteBrand" parameterType="hashmap">
+      DELETE FROM BASE_DEVICE_BRAND WHERE BRAND_ID=#{BRAND_ID}
+  </delete>
+
+
+    <!--品牌明细信息查询  -->
+    <select id="selectBrandDetail" parameterType="hashmap" resultType="hashmap">
+      select BRAND_ID,BRAND_NAME,ENG_NAME,TELEPHONE,MOBILEPHONE,EMAIL,CONTRACT_NO,CONTACTS from BASE_DEVICE_BRAND where BRAND_ID=#{BRAND_ID}
+  </select>
+
+    <!--客户信息查询  -->
+    <select id="selectOrgPage" parameterType="hashmap" resultType="hashmap">
+        select oacusinfo.ORG_ID_P,oacusinfo.ORG_NAME,cusname.PORG_NAME ,ORG_ADDRESS,ORG_PHONE,AREA_ID,PARENT_ORG_ID,LINKMAN,EMAIL,REMARK1 ,REMARK2 , ORG_TYPE,oacusinfo.AGENT_ID,CUSTOMER_TYPE,OAAGENT.AGENT_NAME,OAaddress.ADDRESS_NAME from OA_CUSTOMER_INFO oacusinfo left outer join (select ORG_NAME PORG_NAME ,ORG_ID_P from OA_CUSTOMER_INFO ) cusname on cusname.ORG_ID_P =oacusinfo.PARENT_ORG_ID left outer join (select ADDRESS_NAME ,ADDRESS_ID from oa_address )
+        OAaddress on oacusinfo.AREA_ID=OAaddress.ADDRESS_ID left outer join (select AGENT_ID ,AGENT_NAME from oa_agent ) OAAGENT on oacusinfo.AGENT_ID=OAAGENT.AGENT_ID
+        where 1=1
+        <if test="QueryORG_TREE != null and QueryORG_TREE !='' ">
+            and oacusinfo.ORG_ID_P = #{QueryORG_TREE}
+
+            
+
+   
+        </if>
+        <if test="CUSTOMER_TTYPE != null and CUSTOMER_TTYPE !='' ">
+            and oacusinfo.ORG_ID_P like CONCAT('%',#{CUSTOMER_TYPE},'%')
+        </if>
+        <if test="CUSTOMER_TYPE != null and CUSTOMER_TYPE !='' ">
+            and oacusinfo.CUSTOMER_TYPE=#{CUSTOMER_TYPE}
+        </if>
+        <if test="AREA_ID != null and AREA_ID !='' ">
+            and oacusinfo.AREA_ID =#{AREA_ID}
+        </if>
+        <if test="LINKMANN != null and LINKMANN !='' ">
+            and oacusinfo.LINKMAN like CONCAT('%',#{LINKMANN},'%')
+        </if>
+        ORDER BY UPDATE_DATE DESC
+    </select>
+    <!--客户信息查询  -->
+    <select id="selectOrgid" parameterType="hashmap" resultType="hashmap">
+ select ORG_ID_P  ,ORG_NAME from oa_customer_info where 1=1
+      
+        ORDER BY UPDATE_DATE DESC
+  </select>
+    <!--根据输入id查询客户信息行记录  -->
+    <select id="selectCuscountTByID" parameterType="hashmap" resultType="hashmap">
+select   COUNT(*) CUSINFOCOUNT  from oa_customer_info    where oa_customer_info.ORG_ID_P=#{ORG_ID_P}
+  </select>
+    <!--区域信息查询  -->
+    <select id="selectAddressPage" parameterType="hashmap" resultType="hashmap">
+        SELECT ADDRESS_ID,ADDRESS_NAME,ADDRESS_UPNAME,ADDRESS_UPID FROM OA_ADDRESS where 1=1
+        <if test="ADDRESS_ID != null and ADDRESS_ID !='' ">
+            and ADDRESS_ID like CONCAT('%',#{ADDRESS_ID},'%')
+        </if>
+        <if test="ADDRESS_NAME != null and ADDRESS_NAME !='' ">
+            and ADDRESS_NAME like CONCAT('%',#{ADDRESS_NAME},'%')
+        </if>
+    </select>
+
+    <!-- 所有机构ID查询 -->
+    <select id="selectOrgAll" resultType="String">
+  	SELECT ORG_ID FROM BASE_ORG
+  </select>
+
+    <!-- 机构树查询 -->
+    <select id="selectOrgTree" resultType="hashmap">
+  	SELECT ORG_ID_P AS ID, PARENT_ORG_ID AS PID, ORG_NAME AS NAME FROM  oa_customer_info
+  	
+  </select>
+
+    <!-- 插入机构信息 -->
+    <insert id="insertOrg" parameterType="hashmap">
+      INSERT INTO oa_customer_info(ORG_ID_P,ORG_NAME,CUSTOMER_TYPE,ORG_ADDRESS,ORG_TYPE,PARENT_ORG_ID,ORG_PHONE,UPDATE_DATE,AREA_ID,EMAIL,LINKMAN,AGENT_ID,REMARK1,REMARK2) 
+      VALUES(#{ORG_ID_P,jdbcType=VARCHAR},#{BRANCH_NAME,jdbcType=VARCHAR},#{CUSTOMER_TYPE,jdbcType=VARCHAR},#{BRANCH_ADDRESS,jdbcType=VARCHAR},#{ORG_TYPE,jdbcType=VARCHAR},#{ORG_TREE,jdbcType=VARCHAR},#{ORG_PHONE,jdbcType=VARCHAR},now(),#{AREA_ID,jdbcType=VARCHAR},#{EMAIL,jdbcType=VARCHAR},#{LINKMAN,jdbcType=VARCHAR},#{AGENT_ID,jdbcType=VARCHAR},#{REMARK1,jdbcType=VARCHAR},#{REMARK2,jdbcType=VARCHAR})
+  </insert>
+
+    <!-- 插入区域信息 -->
+    <insert id="insertAddressOrg" parameterType="hashmap">
+        <!--INSERT INTO OA_ADDRESS(ADDRESS_NAME,ADDRESS_UPNAME,ADDRESS_UPID) VALUES(#{ADDRESS_NAME,jdbcType=VARCHAR},#{ADDRESS_UPNAME,jdbcType=VARCHAR},
+       #{ADDRESS_UPID,jdbcType=VARCHAR})-->
+        INSERT INTO OA_ADDRESS(ADDRESS_NAME,ADDRESS_UPNAME,ADDRESS_UPID) VALUES(#{ADDRESS_NAME,jdbcType=VARCHAR},#{ADDRESS_UPNAME,jdbcType=VARCHAR},#{BRACH_TREE,jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 编辑客户信息 -->
+    <insert id="updateOrg" parameterType="hashmap">
+      UPDATE oa_customer_info SET ORG_NAME=#{BRANCH_NAME,jdbcType=VARCHAR},CUSTOMER_TYPE=#{CUSTOMER_TYPE,jdbcType=VARCHAR},ORG_TYPE=#{ORG_TYPE,jdbcType=VARCHAR},
+      PARENT_ORG_ID=#{EDITORG_TREE,jdbcType=VARCHAR},ORG_ADDRESS=#{ORG_ADDRESS,jdbcType=VARCHAR},ORG_PHONE=#{ORG_PHONE,jdbcType=VARCHAR},AREA_ID=#{AREA_ID,jdbcType=VARCHAR},LINKMAN=#{LINKMAN,jdbcType=VARCHAR},EMAIL=#{EMAIL,jdbcType=VARCHAR},REMARK1=#{REMARK1,jdbcType=VARCHAR},REMARK2=#{REMARK2,jdbcType=VARCHAR},AGENT_ID=#{AGENT_ID,jdbcType=VARCHAR},UPDATE_DATE=now() WHERE ORG_ID_P=#{ORG_ID_P}
+  </insert>
+
+    <!-- 编辑区域信息 -->
+    <insert id="upAddressOrg" parameterType="hashmap">
+      UPDATE OA_ADDRESS SET ADDRESS_NAME=#{ADDRESS_NAME,jdbcType=VARCHAR},ADDRESS_UPNAME=#{ADDRESS_UPNAME,jdbcType=VARCHAR},ADDRESS_UPID=#{BRACH_TREE_EDIT,jdbcType=VARCHAR} WHERE ADDRESS_ID=#{ADDRESS_ID}  
+  </insert>
+
+    <!-- 删除机构信息 -->
+    <delete id="deleteOrg" parameterType="hashmap">
+      DELETE FROM oa_customer_info WHERE ORG_ID_P=#{ORGG_ID}
+  </delete>
+
+    <!-- 删除区域信息 -->
+    <delete id="deleteAddress" parameterType="hashmap">
+      DELETE FROM OA_ADDRESS WHERE ADDRESS_ID=#{ADDRESS_ID}
+  </delete>
+
+    <!-- 清空所有机构信息 -->
+    <delete id="deleteOrgAll" parameterType="hashmap">
+      DELETE FROM oa_customer_info
+  </delete>
+
+    <!--区域明细信息查询  -->
+    <select id="selectAddressDetail" parameterType="hashmap" resultType="hashmap">
+       SELECT ADDRESS_ID,ADDRESS_NAME,ADDRESS_UPNAME ADDRESS_UPNAME_EDIT,ADDRESS_UPID FROM OA_ADDRESS where ADDRESS_ID=#{ADDRESS_ID}
+  </select>
+
+    <!--客户明细信息查询  -->
+    <select id="selectOrgDetail" parameterType="hashmap" resultType="hashmap">
+     select oacusinfo.ORG_ID_P ORG_ID_P,oacusinfo.ORG_NAME BRANCH_NAME ,cusname.PORG_NAME ,ORG_ADDRESS,ORG_PHONE,AREA_ID,PARENT_ORG_ID,LINKMAN,EMAIL,REMARK1 ,REMARK2 , ORG_TYPE,AGENT_ID,CUSTOMER_TYPE from OA_CUSTOMER_INFO oacusinfo left outer join (select ORG_NAME PORG_NAME ,ORG_ID_P from OA_CUSTOMER_INFO ) cusname on cusname.ORG_ID_P =oacusinfo.PARENT_ORG_ID where oacusinfo.ORG_ID_P=#{ORGG_ID}
+  </select>
+
+    <!--地域信息查询  -->
+    <select id="selectDeviceArea" parameterType="hashmap" resultType="hashmap">
+       select AREA_ID,AREA_NAME from BASE_DEVICE_AREA 
+  </select>
+
+    <!--安装点类型查询  -->
+    <select id="selectFixTypePage" parameterType="hashmap" resultType="hashmap">
+       select FIX_TYPE,FIX_NAME from BASE_DEVICE_FIX_TYPE 
+  </select>
+
+    <!--根据IP获取现金帐户  -->
+    <select id="selectAccountFromIP" parameterType="hashmap" resultType="hashmap">
+      SELECT B.ACCOUNT_ID, A.DEVICE_ID,A.ORG_ID 
+      FROM BASE_DEVICE_INFO A,BASE_CASH_ACCOUNT B
+      WHERE (A.TERMINAL_IP = B.TERMINAL_IP OR A.TERMINAL_IP2 = B.TERMINAL_IP)
+      AND (A.TERMINAL_IP = #{TERMINAL_IP} OR A.TERMINAL_IP2 = #{TERMINAL_IP})
+  </select>
+
+    <!-- 交易类型查询 -->
+    <select id="selectTrantype" parameterType="hashmap" resultType="hashmap">
+        SELECT MODULE_ID, MODULE_NAME FROM BASE_RESOURCE
+        <!-- WHERE MODULE_AUTH = 'device' -->
+    </select>
+
+    <!-- 更新用户表中对应的现金帐户 -->
+    <update id="updateUserAccount" parameterType="hashmap">
+     UPDATE BASE_USER SET ACCOUNT_ID=#{ACCOUNT_ID} WHERE USER_ID=#{USER_ID}
+  </update>
+
+    <!-- 解绑现金账户 -->
+    <update id="unbindAccountUser" parameterType="hashmap">
+     UPDATE BASE_CASH_ACCOUNT SET USER_ID='' WHERE USER_ID=#{USER_ID}
+    </update>
+
+    <!-- 更新现金帐户中对应的用户 -->
+    <update id="updateAccountUser" parameterType="hashmap">
+     UPDATE BASE_CASH_ACCOUNT SET USER_ID=#{USER_ID} WHERE TERMINAL_IP=#{TERMINAL_IP}
+    </update>
+
+    <!-- 更新现金账户中对应的终端IP -->
+    <update id="updateAccountIp" parameterType="hashmap">
+    	UPDATE BASE_CASH_ACCOUNT SET TERMINAL_IP=#{TERMINAL_IP},USER_ID=#{USER_ID} WHERE ACCOUNT_ID=#{DEVICE_ID_P}
+    </update>
+
+    <!-- 资源树查询 -->
+    <select id="selectResourceTree" parameterType="hashmap" resultType="hashmap">
+     select module_id ID,parent_module_id PID,module_name NAME from BASE_RESOURCE where module_status != 'hide' and module_status != '0'
+  </select>
+
+    <!-- 插入角色与资源信息 -->
+    <insert id="insertRoleResource" parameterType="hashmap">
+      INSERT INTO BASE_ROLE_RESOURCE(ROLE_ID,MODULE_ID) VALUES(#{ROLE_ID},#{MODULE_ID})
+  </insert>
+
+    <!-- 删除角色与资源信息 -->
+    <delete id="deleteRoleResource" parameterType="hashmap">
+     DELETE FROM BASE_ROLE_RESOURCE WHERE ROLE_ID=#{ROLE_ID}
+  </delete>
+
+    <!-- 查询已有角色对应的资源树查询 -->
+    <select id="selectResourceTreeForRole" parameterType="hashmap" resultType="hashmap">
+    select  MODULE_ID from BASE_ROLE_RESOURCE where ROLE_ID=#{ROLE_ID}
+  </select>
+
+    <!-- 查询当前用户的菜单 -->
+    <select id="selectUserMenu" parameterType="hashmap" resultType="hashmap">
+        <if test="MODULE_LEVEL != 1">
+            select * from (
+        </if>
+        select 'adminMain' ID, '首页' NAME, '' PID, '' AUTH, '1' STATUS, 1 MODULE_ORDER, '/views/adminMain/adminMain.html' URL from dual
+        union
+        SELECT A.MODULE_ID ID,MODULE_NAME NAME,PARENT_MODULE_ID PID, MODULE_AUTH AUTH,
+        MODULE_STATUS STATUS, MODULE_ORDER,B.MODULE_URL URL
+        FROM BASE_ROLE_RESOURCE A,BASE_RESOURCE B ,BASE_USER C
+        where A.module_id=B.module_id
+        and module_status != '0'
+        and A.ROLE_ID=C.ROLE_ID
+        and C.USER_ID=#{USER_ID}
+        <if test="MODULE_LEVEL != null and MODULE_LEVEL !='' ">
+            and MODULE_LEVEL = #{MODULE_LEVEL}
+        </if>
+
+        <if test="MODULE_LEVEL != 1">
+            union
+            SELECT MODULE_ID ID,MODULE_NAME NAME,PARENT_MODULE_ID PID, MODULE_AUTH AUTH,
+            MODULE_STATUS STATUS, MODULE_ORDER,MODULE_URL url
+            from BASE_RESOURCE where module_status = 'hide' order by ID
+            ) a
+        </if>
+        order by ID
+    </select>
+
+    <!-- 删除序列号信息 -->
+    <delete id="deleteSeqNo" parameterType="hashmap">
+     DELETE FROM BASE_SEQNO
+  </delete>
+
+    <!-- 插入序列号信息 -->
+    <insert id="insertSeqNo" parameterType="hashmap">
+    INSERT INTO BASE_SEQNO VALUES(#{SEQNO_DATE},#{SEQNO})
+  </insert>
+
+    <!-- 修改序列号信息 -->
+    <update id="updateSeqNo" parameterType="hashmap">
+     update BASE_SEQNO set SEQNO=#{SEQNO} WHERE  SEQNO_DATE=#{SEQNO_DATE}
+  </update>
+
+    <!-- 修改序列号信息 -->
+    <select id="selectSeqNo" parameterType="hashmap" resultType="hashmap">
+     select * from  BASE_SEQNO  WHERE  SEQNO_DATE=#{SEQNO_DATE}
+  </select>
+
+    <!--查询某机构所有用户  -->
+    <select id="selectUser" parameterType="hashmap" resultType="hashmap">
+        select a.USER_ID USER_ID_P,a.USER_NAME USER_NAME_P,a.ORG_ID ORG_ID_P,a.ORG_ADMIN ORG_ADMIN_P
+        from BASE_USER a
+        where 1=1
+        <if test="ORG_ID_P != null and ORG_ID_P !='' ">
+            and a.ORG_ID =#{ORG_ID_P}
+        </if>
+    </select>
+
+    <!-- 查询服务商 -->
+    <select id="selectProviderPage" parameterType="hashmap" resultType="hashmap">
+  	SELECT PROVIDER_ID, PROVIDER_NAME FROM BASE_DEVICE_PROVIDER WHERE 1=1
+  </select>
+
+
+    <!-- 插入序列号信息 -->
+    <insert id="insertSystemUseTime" parameterType="hashmap">
+    insert into BASE_SYSTEM_USE_TIME (ID, ORG_ID, DEVICE_NUM, USE_TIME, TIME_QUANTUM) 
+    values(#{ID},#{ORG_ID},#{DEVICE_NUM},#{USE_TIME},#{TIME_QUANTUM})
+  </insert>
+
+    <!-- 查询使用时间设置全部数据 -->
+    <select id="findAllSystemUseTime" parameterType="hashmap" resultType="hashmap">
+        select ID,ORG_ID, DEVICE_NUM, USE_TIME,TIME_QUANTUM from BASE_SYSTEM_USE_TIME
+        where 1=1
+        <if test="POINT!= null and POINT !='' ">
+            and ORG_ID =#{POINT}
+        </if>
+        <if test="EQUIPMENT!= null and EQUIPMENT!='' ">
+            and DEVICE_NUM =#{EQUIPMENT}
+        </if>
+    </select>
+
+    <!-- 删除时间设定表中的选定行 -->
+    <delete id="deleteRows" parameterType="hashmap">
+     DELETE FROM BASE_SYSTEM_USE_TIME WHERE ID=#{ID}
+  </delete>
+
+
+    <!-- 设备信息列表查询-->
+    <select id="selectDeviceid" parameterType="hashmap" resultType="hashmap">
+      select DEVICE_ID K,DEVICE_ID V from BASE_DEVICE_INFO
+  </select>
+    <!-- 对应网点下设备几条记录-->
+    <select id="selectDevCountByid" parameterType="hashmap" resultType="hashmap">
+     select COUNT(*) TOTALDEV from  oa_device where   SETUP_BRANCH_ID=#{ORGG_ID}
+  </select>
+    <!-- 根据传进来的网点号查询相应的设备号 -->
+    <select id="findByORG_ID" parameterType="hashmap" resultType="hashmap">
+        select d.DEVICE_ID K,d.DEVICE_ID V from BASE_DEVICE_INFO d,BASE_ORG o where d.ORG_ID = o.ORG_ID
+        <!--  select DEVICE_ID from BASE_DEVICE_INFO -->
+        <!-- where 1=1 -->
+        <if test="ORG_ID!=null and ORG_ID!='' ">
+            and o.ORG_ID = #{ORG_ID2}
+            <!--  and ORG_ID =#{value} -->
+        </if>
+    </select>
+
+    <!-- 使用时间设置模块的update数据修改 -->
+    <!-- 特别注意#{}中的数据是服务传回的map键值对的键(key) -->
+    <update id="updateUseTimeDate" parameterType="hashmap">
+      UPDATE BASE_SYSTEM_USE_TIME SET USE_TIME=#{USE_TIME},TIME_QUANTUM=#{TIME_QUANTUM} WHERE ID=#{ID}
+    </update>
+
+    <!-- 判断使用时间设置模块的save数据是否重复提交 -->
+    <select id="InspectionSaveDateSubmit" parameterType="hashmap" resultType="hashmap">
+        select ORG_ID, DEVICE_NUM, USE_TIME,TIME_QUANTUM from BASE_SYSTEM_USE_TIME WHERE ID!=#{ID} AND ORG_ID=#{ORG_ID} AND DEVICE_NUM=#{DEVICE_NUM} AND USE_TIME=#{USE_TIME}
+        <!-- <if test="TIME_QUANTUM!=null and TIME_QUANTUM!='' ">
+        and TIME_QUANTUM = #{TIME_QUANTUM}
+        </if>  -->
+    </select>
+
+    <!-- 查询各个功能模块是否需要做时间判断 -->
+    <select id="selectBaseSourceIsY" parameterType="hashmap" resultType="String">
+      select IS_USE_TIME from BASE_RESOURCE where MODULE_ID=#{MODULE_ID}
+  </select>
+
+
+    <!-- 根据网点号和设备号查询相应的时间参数 -->
+    <select id="SelectBaseSystemUseTimeByORG_IDAndDEVICE_ID" parameterType="hashmap" resultType="hashmap">
+        select USE_TIME,TIME_QUANTUM from BASE_SYSTEM_USE_TIME where 1=1
+        <if test="ORG_ID!=null and ORG_ID!='' ">
+            and ORG_ID = #{ORG_ID}
+        </if>
+        <if test="DEVICE_NUM!=null and DEVICE_NUM!='' ">
+            and DEVICE_NUM = #{DEVICE_NUM}
+        </if>
+    </select>
+    <!-- 根据网点号查询相应的时间参数 -->
+    <select id="SelectBaseSystemUseTimeByORG_IDA" parameterType="hashmap" resultType="hashmap">
+        select USE_TIME,TIME_QUANTUM from BASE_SYSTEM_USE_TIME where 1=1 and DEVICE_NUM is null
+        <if test="ORG_ID!=null and ORG_ID!='' ">
+            and ORG_ID = #{ORG_ID}
+        </if>
+
+    </select>
+
+    <!-- 根据网点号查询相应的时间参数 -->
+    <select id="SelectBaseSystemUseTimeByempty" resultType="hashmap">
+      select USE_TIME,TIME_QUANTUM from BASE_SYSTEM_USE_TIME where ORG_ID is null and DEVICE_NUM is null
+    </select>
+
+    <!-- 插入用户交接交易数据 -->
+    <insert id="insertUserHandoverLog" parameterType="hashmap">
+    insert into BASE_USERHANDOVER_LOG (ID,ORG_ID, DEVICE_ID, CURRENTUSER, CURRENTDATE, DEVICE_AMT, TAILBOX_AMT, RECEIVE_USER) values(#{UUID},#{ORG_ID},#{DEVICE_ID},#{USER_ID},to_date(#{currentDate},'YYYY-MM-DD hh24:mi'),#{deviceAmt},#{tailBoxAmt},#{userId})
+  </insert>
+
+    <!-- 查询交接查询所有记录 -->
+    <select id="findAllUserhandover_log" parameterType="hashmap" resultType="hashmap">
+        select ORG_ID,DEVICE_ID, CURRENTUSER, TO_CHAR(CURRENTDATE,'YYYY-MM-DD') AS CURRENTDATE
+        , DEVICE_AMT, TAILBOX_AMT, RECEIVE_USER from BASE_USERHANDOVER_LOG
+        where 1=1
+        <if test="POINT!= null and POINT !='' ">
+            and ORG_ID =#{POINT}
+        </if>
+        <if test="EQUIPMENT!= null and EQUIPMENT!='' ">
+            and DEVICE_ID =#{EQUIPMENT}
+        </if>
+        <if test="DATE!= null and DATE!='' ">
+            and CURRENTDATE =to_date(#{DATE},'YYYY-MM-DD')
+        </if>
+        order by ORG_ID,DEVICE_ID,CURRENTDATE desc
+    </select>
+
+    <!-- 交接查询表中的网点号查询 -->
+    <select id="selecHanderOvertid" parameterType="hashmap" resultType="hashmap">
+      select distinct ORG_ID K,ORG_ID V from BASE_USERHANDOVER_LOG
+  </select>
+
+    <!-- 根据传进来的查询表中的网点号查询相应的设备号 -->
+    <select id="findByHandOver_ID" parameterType="hashmap" resultType="hashmap">
+        select distinct DEVICE_ID K,DEVICE_ID V from BASE_USERHANDOVER_LOG
+        where 1=1
+        <if test="ORG_ID!=null and ORG_ID!='' ">
+            and ORG_ID = #{ORG_ID2}
+        </if>
+    </select>
+
+    <!-- 通过传入的网点号和设备号查出BASE_SYSTEM_USE_TIME表中的USE_TIME字段的数据 -->
+    <select id="selectUSE_TIME" parameterType="hashmap" resultType="hashmap">
+   select USE_TIME
+      from BASE_SYSTEM_USE_TIME
+   where 
+     ORG_ID=#{ORG_ID}
+     and DEVICE_NUM=#{DEVICE_NUM}
+  </select>
+
+    <!-- 通过传入的主键列uuid和网点号、设备号查出BASE_SYSTEM_USE_TIME表中的不包含本uuid的USE_TIME字段的数据-->
+    <select id="updateSelectUSE_TIME" parameterType="hashmap" resultType="hashmap">
+   select USE_TIME
+      from BASE_SYSTEM_USE_TIME
+   where 
+     ORG_ID=#{ORG_ID}
+     and DEVICE_NUM=#{DEVICE_NUM}
+     and ID!=#{ID}
+  </select>
+
+
+    <!--代理商信息查询  -->
+    <select id="selectAgentPage" parameterType="hashmap" resultType="hashmap">
+        select AGENT_ID,AGENT_NAME,AGENT_ADDRESS,LINKMAN,EMAIL,TEL from OA_AGENT where 1=1
+        <if test="AGENTA_ID != null and AGENTA_ID !='' ">
+            and AGENT_ID like CONCAT('%',#{AGENTA_ID},'%')
+        </if>
+        <if test="AGENTA_NAME != null and AGENTA_NAME !='' ">
+            and AGENT_NAME like CONCAT('%',#{AGENTA_NAME},'%')
+        </if>
+         <if test="LINKMAN != null and LINKMAN !='' ">
+            and LINKMAN like CONCAT('%',#{LINKMAN},'%')
+        </if>
+    </select>
+
+    <!-- 插入代理商信息 -->
+    <insert id="insertAgent" parameterType="hashmap">
+		INSERT INTO	OA_AGENT(AGENT_ID,AGENT_NAME,AGENT_ADDRESS,LINKMAN,EMAIL,TEL) 
+		VALUES(#{AGENTA_ID,jdbcType=VARCHAR},
+		#{AGENTA_NAME,jdbcType=VARCHAR},#{AGENT_ADDRESS,jdbcType=VARCHAR},#{LINKMAN,jdbcType=VARCHAR},
+		#{EMAIL,jdbcType=VARCHAR},#{TEL,jdbcType=VARCHAR})
+	</insert>
+
+    <!-- 编辑代理商信息 -->
+    <insert id="updateAgent" parameterType="hashmap">
+		UPDATE OA_AGENT SET
+		AGENT_ID=#{AGENTA_ID,jdbcType=VARCHAR},AGENT_NAME=#{AGENTA_NAME,jdbcType=VARCHAR},AGENT_ADDRESS=#{AGENT_ADDRESS,jdbcType=VARCHAR},LINKMAN=#{LINKMAN,jdbcType=VARCHAR},EMAIL=#{EMAIL,jdbcType=VARCHAR},TEL=#{TEL,jdbcType=VARCHAR}			
+		WHERE AGENT_ID=#{AGENTA_ID}
+	</insert>
+
+    <!-- 删除代理商信息 -->
+    <delete id="deleteAgent" parameterType="hashmap">
+      DELETE FROM OA_AGENT WHERE AGENT_ID=#{AGENTA_ID}
+  </delete>
+
+    <!--代理商明细查询  -->
+    <select id="selectAgentDetail" parameterType="hashmap" resultType="hashmap">
+    select AGENT_ID,AGENT_NAME,AGENT_ADDRESS,LINKMAN,EMAIL,TEL from OA_AGENT where AGENT_ID=#{AGENTA_ID}   
+  </select>
+    <!--代理商下拉框查询 -->
+    <select id="selectAgent" parameterType="hashmap" resultType="hashmap">
+    select AGENT_ID K,AGENT_NAME V from OA_AGENT 
+  </select>
+
+    <!--代理商下忘带你查询 -->
+    <select id="selecCusByAgentID" parameterType="hashmap" resultType="hashmap">
+    select ORG_ID_P from OA_CUSTOMER_INFO WHERE AGENT_ID=#{ID}
+  </select>
+
+    <!--设备信息查询,注意此处的DEVICE_ID有可能跟上面的DEVICE_ID冲突  -->
+    <select id="selectDevPage" parameterType="hashmap" resultType="hashmap">
+        SELECT a.ID,a.DEVICE_ID,a.MANAGER_NAME,a.MANAGER_TEL,a.SETUP_MAN,a.SETUP_MAN_TEL,DATE_FORMAT(START_TIME,'%Y-%m-%d %H:%i:%s') START_TIME,SERVICER,DATE_FORMAT(LICENSE_TIME,'%Y-%m-%d %H:%i:%s') LICENSE_TIME,a.SETUP_BRANCH_ID,a.SETUP_BRANCH_ID_PRESENT,b.ORG_NAME ORG_NAME,c.OA_EXP_TIME_NAME EXP_TIME FROM OA_DEVICE a
+        LEFT JOIN OA_CUSTOMER_INFO b ON a.SETUP_BRANCH_ID=b.ORG_ID_P
+        LEFT JOIN OA_EXP_TIME c ON a.EXP_TIME=c.ID WHERE 1=1
+        <if test="DEVICED_ID != NULL and DEVICED_ID !='' ">
+            AND a.DEVICE_ID LIKE CONCAT('%',#{DEVICED_ID},'%')
+        </if>
+        <if test="SETUP_MAN != NULL and SETUP_MAN !='' ">                   
+            AND a.SETUP_MAN LIKE CONCAT('%',#{SETUP_MAN},'%')
+        </if>
+        <if test="SETUP_BRACH_Q != NULL and SETUP_BRACH_Q !='' ">                   
+            AND b.ORG_NAME LIKE CONCAT('%',#{SETUP_BRACH_Q},'%')
+        </if>
+        <if test="SETUP_TIME_Q != NULL and SETUP_TIME_Q !='' ">                   
+            AND a.SETUP_TIME LIKE CONCAT('%',#{SETUP_TIME_Q},'%')
+        </if>
+        ORDER BY SETUP_TIME DESC
+    </select>
+
+    <!-- 插入设备信息 -->
+    <insert id="insertDev" parameterType="hashmap">
+	INSERT INTO	OA_DEVICE(ID,DEVICE_ID,DEVICE_TYPE,DEVICE_NAME,DEVICE_MODEL,HOST_NUM,TCR_NUM,MANAGER_NAME,MANAGER_TEL,ARRIVE_TIME,SETUP_TIME,SETUP_BRANCH_ID,SETUP_BRANCH_ID_PRESENT,SETUP_MAN,SETUP_MAN_TEL,SETUP_TYPE,ACCPET_TIME,START_TIME,OUTOF_TIME,EXP_TIME,SERVICER,REPAIR_STATUS,OUT_OF_SIGN,LICENSE_TIME)
+		VALUES(#{ID,jdbcType=VARCHAR},#{DEVICED_ID,jdbcType=VARCHAR},#{DEVICE_TYPE,jdbcType=VARCHAR},#{DEVICE_NAME,jdbcType=VARCHAR},#{DEVICE_MODEL,jdbcType=VARCHAR},#{HOST_NUM,jdbcType=VARCHAR},#{TCR_NUM,jdbcType=VARCHAR},#{MANAGER_NAME,jdbcType=VARCHAR},#{MANAGER_TEL,jdbcType=VARCHAR},#{ARRIVE_TIME,jdbcType=TIMESTAMP},#{SETUP_TIME,jdbcType=TIMESTAMP},#{BRACH_TREE,jdbcType=VARCHAR},#{SETUP_BRANCH_ID_PRESENT,jdbcType=VARCHAR},#{SETUP_MAN,jdbcType=VARCHAR},#{SETUP_MAN_TEL,jdbcType=VARCHAR},#{SETUP_TYPE,jdbcType=VARCHAR},#{ACCPET_TIME,jdbcType=TIMESTAMP},#{START_TIME,jdbcType=TIMESTAMP},#{OUTOF_TIME,jdbcType=TIMESTAMP},#{EXP_TIME,jdbcType=VARCHAR},#{SERVICER,jdbcType=VARCHAR},#{REPAIR_STATUS,jdbcType=VARCHAR},#{OUT_OF_SIGN,jdbcType=VARCHAR},#{LICENSE_TIME,jdbcType=TIMESTAMP})
+	</insert>
+
+    <!-- 编辑设备信息 -->
+    <insert id="updateDev" parameterType="hashmap">
+		UPDATE OA_DEVICE SET
+		DEVICE_ID=#{DEVICED_ID,jdbcType=VARCHAR},DEVICE_TYPE=#{DEVICE_TYPE,jdbcType=VARCHAR},DEVICE_NAME=#{DEVICE_NAME,jdbcType=VARCHAR},DEVICE_MODEL=#{DEVICE_MODEL,jdbcType=VARCHAR},HOST_NUM=#{HOST_NUM,jdbcType=VARCHAR},TCR_NUM=#{TCR_NUM,jdbcType=VARCHAR},MANAGER_NAME=#{MANAGER_NAME,jdbcType=VARCHAR},MANAGER_TEL=#{MANAGER_TEL,jdbcType=VARCHAR},ARRIVE_TIME=#{ARRIVE_TIME,jdbcType=VARCHAR},SETUP_TIME=#{SETUP_TIME,jdbcType=VARCHAR},SETUP_TIME=#{SETUP_TIME,jdbcType=TIMESTAMP},SETUP_BRANCH_ID=#{BRACH_TREE_EDIT_ID,jdbcType=VARCHAR},SETUP_BRANCH_ID_PRESENT=#{BRACH_TREE_EDIT,jdbcType=VARCHAR},SETUP_MAN=#{SETUP_MAN,jdbcType=VARCHAR},SETUP_MAN_TEL=#{SETUP_MAN_TEL,jdbcType=VARCHAR},SETUP_TYPE=#{SETUP_TYPE,jdbcType=VARCHAR},ACCPET_TIME=#{ACCPET_TIME,jdbcType=TIMESTAMP},START_TIME=#{START_TIME,jdbcType=TIMESTAMP},OUTOF_TIME=#{OUTOF_TIME,jdbcType=TIMESTAMP},EXP_TIME=#{EXP_TIME,jdbcType=VARCHAR},SERVICER=#{SERVICER,jdbcType=VARCHAR},REPAIR_STATUS=#{REPAIR_STATUS,jdbcType=VARCHAR},OUT_OF_SIGN=#{OUT_OF_SIGN,jdbcType=VARCHAR},LICENSE_TIME=#{LICENSE_TIME,jdbcType=VARCHAR}
+		WHERE ID=#{ID}
+	</insert>
+
+    <!-- 删除设备信息 -->
+    <delete id="deleteDev" parameterType="hashmap">
+      DELETE FROM OA_DEVICE WHERE ID=#{ID}
+  </delete>
+	
+	<!-- 通过网点ID查询网点名称 -->
+    <select id="selectCusNameById" parameterType="hashmap" resultType="hashmap">
+     select ORG_NAME from OA_CUSTOMER_INFO WHERE ORG_ID_P=#{ID}
+  </select>
+    <!--设备信息明细查询    暂未修改sql语句-->
+    <select id="selectDevDetail" parameterType="hashmap" resultType="hashmap">
+    select a.ID ID,a.DEVICE_ID DEVICED_ID,a.DEVICE_TYPE DEVICE_TYPE,a.DEVICE_NAME DEVICE_NAME,a.DEVICE_MODEL DEVICE_MODEL,a.HOST_NUM HOST_NUM,a.TCR_NUM TCR_NUM,a.MANAGER_NAME MANAGER_NAME,a.MANAGER_TEL MANAGER_TEL,DATE_FORMAT(ARRIVE_TIME,'%Y-%m-%d') ARRIVE_TIME,DATE_FORMAT(SETUP_TIME,'%Y-%m-%d') SETUP_TIME,a.SETUP_BRANCH_ID SETUP_BRANCH_ID,a.SETUP_BRANCH_ID_PRESENT SETUP_BRANCH_ID_PRESENT,a.SETUP_MAN SETUP_MAN,a.SETUP_MAN_TEL SETUP_MAN_TEL,a.SETUP_TYPE SETUP_TYPE,DATE_FORMAT(ACCPET_TIME,'%Y-%m-%d') ACCPET_TIME,DATE_FORMAT(START_TIME,'%Y-%m-%d') START_TIME,DATE_FORMAT(OUTOF_TIME,'%Y-%m-%d %H:%i:%s') OUTOF_TIME,a.EXP_TIME EXP_TIME,a.SERVICER SERVICER,a.REPAIR_STATUS REPAIR_STATUS,a.OUT_OF_SIGN OUT_OF_SIGN,DATE_FORMAT(LICENSE_TIME,'%Y-%m-%d') LICENSE_TIME,
+    b.ORG_NAME ORG_NAME_A,
+	c.ORG_NAME ORG_NAME_B,
+	d.ORG_NAME ORG_NAME_C,
+	e.ORG_NAME ORG_NAME_D  
+    FROM OA_DEVICE a 
+    LEFT JOIN  OA_CUSTOMER_INFO b ON b.ORG_ID_P=#{ORG_ID_A}
+    LEFT JOIN  OA_CUSTOMER_INFO c ON c.ORG_ID_P=#{ORG_ID_B}
+    LEFT JOIN  OA_CUSTOMER_INFO d ON d.ORG_ID_P=#{ORG_ID_C}
+    LEFT JOIN  OA_CUSTOMER_INFO e ON e.ORG_ID_P=#{ORG_ID_D}
+    where a.ID=#{ID}
+  </select>
+
+    <!-- 设备信息资源树查询 -->
+    <select id="selectBranchTree" parameterType="hashmap" resultType="hashmap">
+     select ORG_ID_P ID,PARENT_ORG_ID PID,ORG_NAME NAME from OA_CUSTOMER_INFO
+  </select>
+
+    <!-- 设备-->
+    <select id="selectAllDev" parameterType="hashmap" resultType="hashmap">
+     select COUNT(DEVICE_ID) from OA_DEVICE WHERE DEVICE_ID=#{DEVICED_ID}
+  </select>
+   <!-- 设备类型列表查询 -->
+    <select id="selectDecice_type" parameterType="hashmap" resultType="hashmap">
+      select ID K,DEVICE_TYPE_NAME V from OA_DEVICE_TYPE
+  </select>
+  <!-- 设备型号列表查询 -->
+    <select id="selectDecice_model" parameterType="hashmap" resultType="hashmap">
+      select ID K,DEVICE_MODEL_NAME V from OA_DEVICE_MODEL
+  </select>
+  <!-- 设备安装类型列表查询 -->
+    <select id="selectSetup_type" parameterType="hashmap" resultType="hashmap">
+      select ID K,SETUP_TYPE_NAME V from OA_SETUP_TYPE
+  </select>
+  <!-- 质保期列表查询 -->
+    <select id="selectExp_time" parameterType="hashmap" resultType="hashmap">
+      select ID K,OA_EXP_TIME_NAME V from OA_EXP_TIME
+  </select>
+  
+    <!-- 插入工单信息 -->
+    <insert id="insertAppWork" parameterType="hashmap">
+        INSERT INTO	OA_WORKAPP(ID,WORK_TYPE,WORK_URGENT,WORK_STATUS,WORK_DEPARTMENT,WORK_APPTIME,WORK_APPMARK,WORK_DEV_NO,WORK_CUS_NO,WORK_APPEND,WORK_CREATER_ID,WORK_INSTALL_DEVTYPE,WORK_INSTALL_MODEL,WORK_REPAIR_TIME,WORK_REPAIR_TYPE,WORK_REPAIR_DESCRIBE,WORK_PARTOL_TYPE,WORK_MOVEDEV_NAME,WORK_MOVEDEV_ADDRESS,WORK_MOVEDEV_CONTACTS,WORK_MOVEDEV_PHONE,WORK_ACCEPT_TIME,WORK_ACCEPT_TYPE,WORK_TRAIN_INFO,WORK_TRAIN_TIME)
+        VALUES(#{WORK_ID,jdbcType=VARCHAR},#{WORK_TYPE,jdbcType=VARCHAR},#{WORK_URGENT,jdbcType=VARCHAR},#{WORK_STATUS,jdbcType=VARCHAR},#{WORK_DEPARTMENT,jdbcType=VARCHAR},#{WORK_APPTIME,jdbcType=TIMESTAMP},#{WORK_APPMARK,jdbcType=VARCHAR},#{WORK_DEV_NO,jdbcType=VARCHAR},#{WORK_CUS_NO,jdbcType=VARCHAR},#{WORK_APPEND,jdbcType=VARCHAR},#{USER_ID,jdbcType=VARCHAR},#{WORK_INSTALL_TYPE,jdbcType=VARCHAR},#{WORK_INSTALL_MODEL,jdbcType=VARCHAR},#{WORK_REPAIR_TIME,jdbcType=TIMESTAMP},#{WORK_REPAIR_TYPE,jdbcType=VARCHAR},#{WORK_REPAIR_DESCRIBE,jdbcType=VARCHAR},#{WORK_PARTOL_TYPE,jdbcType=VARCHAR},#{WORK_MOVEDEV_NAME,jdbcType=VARCHAR},#{WORK_MOVEDEV_ADDRESS,jdbcType=VARCHAR},#{WORK_MOVEDEV_CONTACTS,jdbcType=VARCHAR},#{WORK_MOVEDEV_PHONE,jdbcType=VARCHAR},#{WORK_ACCEPT_TIME,jdbcType=TIMESTAMP},#{WORK_ACCEPT_TYPE,jdbcType=VARCHAR},#{WORK_TRAIN_INFO,jdbcType=VARCHAR},#{WORK_TRAIN_TIME,jdbcType=TIMESTAMP})
+    </insert>
+
+    <!--更新启动工作流id-->
+    <insert id="updateAppwork" parameterType="hashmap">
+        UPDATE OA_WORKAPP SET WORK_FLOW_ID=#{WORK_FLOW_ID,jdbcType=VARCHAR} WHERE ID=#{ID_P}
+    </insert>
+
+    <!-- 区域信息资源树查询 -->
+    <select id="selectAddressTree" parameterType="hashmap" resultType="hashmap">
+     SELECT ADDRESS_ID ID,ADDRESS_NAME NAME,ADDRESS_UPID PID from OA_ADDRESS
+  </select>
+
+    <!--查询用户信息根据当前登录用户名 -->
+    <select id="QueryUserInfo" parameterType="hashmap" resultType="hashmap">
+        SELECT u.USER_ID,u.USER_NAME,a.ADDRESS_NAME,a.ADDRESS_UPNAME  FROM BASE_USER u,OA_ADDRESS a  WHERE u.USER_ID=#{USER_ID} AND a.ADDRESS_ID =u.ADDRESS_ID
+    </select>
+
+    <!--查询设备信息表 -->
+    <select id="QueryDevInfo" parameterType="hashmap" resultType="hashmap">
+        SELECT d.DEVICE_ID,d.DEVICE_NAME,devty.DEVICE_TYPE_NAME DEVICE_TYPE,devmo.DEVICE_MODEL_NAME DEVICE_MODEL,c.ORG_ID_P,c.ORG_NAME,c.ORG_ADDRESS,c.ORG_PHONE,c.LINKMAN,c.AREA_ID
+        FROM OA_DEVICE d 
+        LEFT JOIN OA_CUSTOMER_INFO c ON d.SETUP_BRANCH_ID = c.ORG_ID_P
+        LEFT JOIN OA_DEVICE_TYPE devty ON devty.ID = d.DEVICE_TYPE
+        LEFT JOIN OA_DEVICE_MODEL devmo ON devmo.ID = d.DEVICE_MODEL
+        WHERE d.DEVICE_ID= #{DEV_ID_P}
+    </select>
+
+ 	<select id="selectWorkOrder" resultType="hashmap">
+ 	SELECT 
+		wok.ID ID,
+		IFNULL (wok.ID, '') WORK_ID,
+		IFNULL (wok.WORK_FLOW_ID, '') WORK_FLOW_ID,
+		IFNULL (wok.WORK_TYPE, '') WORK_TYPE,
+		IFNULL (wokstype.WORK_TYPE, '') WORK_TYPE_NAME,
+		IFNULL (wok.WORK_URGENT, '') WORK_URGENT,
+		IFNULL (wokurgent.WORK_URGENT, '') WORK_URGENT_NAME,
+		IFNULL (wok.WORK_STATUS, '') WORK_STATUS,
+		IFNULL (wok.WORK_APPMARK, '') WORK_APPMARK,
+		IFNULL (wok.WORK_DEPARTMENT, '') WORK_DEPARTMENT,
+		IFNULL (wok.WORK_CREATER_ID, '') PROPOSER_ID,
+		IFNULL (wok.WORK_APPTIME, '') WORK_APPTIME,
+		IFNULL (wok.WORK_LASTDEAL_ID, '') WORK_LASTDEAL_ID,
+		IFNULL (dealusr.USER_NAME, '') WORK_LASTDEAL_NAME,
+		IFNULL (wok.WORK_REPAIR_TYPE, '') WORK_REPAIR_TYPE,
+		IFNULL (wok.WORK_REPAIR_DESCRIBE, '') WORK_REPAIR_DESCRIBE,
+		IFNULL (wok.WORK_PARTOL_TYPE, '') WORK_PARTOL_TYPE,
+		IFNULL (DATE_FORMAT(wok.WORK_ACCEPT_TIME,"%Y-%m-%d"), '') WORK_ACCEPT_TIME,
+		IFNULL (DATE_FORMAT(wok.WORK_TRAIN_TIME,"%Y-%m-%d"), '') WORK_TRAIN_TIME,
+		IFNULL (DATE_FORMAT(wok.WORK_REPAIR_TIME,"%Y-%m-%d %H:%i:%s"), '') WORK_REPAIR_TIME,
+		IFNULL (wok.WORK_TRAIN_INFO, '') WORK_TRAIN_INFO,
+		IFNULL (wok.WORK_ACCEPT_TYPE, '') WORK_ACCEPT_TYPE,
+		IFNULL (usr.USER_NAME, '') PROPOSER_NAME,
+		IFNULL (address.ADDRESS_NAME, '') PROPOSER_AREA,
+		IFNULL (wok.WORK_DEV_NO, '') DEVICE_NO,
+		IFNULL (dev.DEVICE_NAME, '') DEVICE_NAME,
+		IFNULL (dev.DEVICE_MODEL, '') DEVICE_MODEL,
+		IFNULL (devmodel.DEVICE_MODEL_NAME, '') DEVICE_MODEL_NAME,
+		IFNULL (installdevmodel.DEVICE_MODEL_NAME, '') INSTALL_DEVICE_MODEL_NAME,
+		IFNULL (installdevtype.DEVICE_TYPE_NAME, '') INSTALL_DEVICE_TYPE_NAME,
+		IFNULL (dev.DEVICE_TYPE, '') DEVICE_TYPE,
+		IFNULL (devtype.DEVICE_TYPE_NAME, '') DEVICE_TYPE_NAME,
+		IFNULL (wok.WORK_CUS_NO, '') CUS_ID,
+		IFNULL (cus.ORG_ID_P, '') CUS_ORG_ID,
+		IFNULL (cus.AREA_ID, '') CUS_AREA_ID,
+		IFNULL (cus.ORG_ADDRESS, '') CUS_ORG_ADDRESS,
+		IFNULL (cus.ORG_NAME, '') CUS_ORG_NAME,
+		IFNULL (cus.ORG_PHONE, '') CUS_ORG_PHONE,
+		IFNULL (cus.LINKMAN, '') CUS_NAME,
+		IFNULL (workSatus.WORK_STATUS, '') WORK_STATUS_DESC,
+		IFNULL (faultType.CHINESE, '') FAULT_TYPE_DESC,
+		IFNULL (worksaccepttype.ACCEPT_TYPE, '') WORK_ACCEPT_TYPE_DESC
+    FROM oa_workapp wok
+    LEFT JOIN oa_device dev ON wok.WORK_DEV_NO = dev.DEVICE_ID
+    LEFT JOIN base_user usr ON wok.WORK_CREATER_ID = usr.USER_ID
+    LEFT JOIN base_user dealusr ON wok.WORK_LASTDEAL_ID = dealusr.USER_ID
+    LEFT JOIN base_user checkuser ON wok.WORK_CHECKPERSON_ID = checkuser.USER_ID
+    LEFT JOIN base_user appruser ON wok.WORK_APPROVER_ID = appruser.USER_ID
+    LEFT JOIN oa_customer_info cus ON wok.WORK_CUS_NO = cus.ORG_ID_P
+    LEFT JOIN oa_address address ON usr.ADDRESS_ID = address.ADDRESS_ID
+    LEFT JOIN oa_device_model devmodel ON devmodel.ID = dev.DEVICE_MODEL
+    LEFT JOIN oa_device_model installdevmodel ON installdevmodel.ID = wok.WORK_INSTALL_MODEL
+    LEFT JOIN oa_device_type devtype ON devtype.ID = dev.DEVICE_TYPE
+    LEFT JOIN oa_device_type installdevtype ON installdevtype.ID = wok.WORK_INSTALL_DEVTYPE
+    LEFT JOIN oa_workstype wokstype ON wokstype.ID = wok.WORK_TYPE
+    LEFT JOIN oa_worksurgent wokurgent ON wokurgent.ID = wok.WORK_URGENT
+    LEFT JOIN oa_fault_type faultType on faultType.ID = wok.WORK_REPAIR_TYPE
+    LEFT JOIN oa_workstatus workSatus on workSatus.ID = wok.WORK_STATUS
+    LEFT JOIN oa_worksaccepttype worksaccepttype on worksaccepttype.ID = wok.WORK_ACCEPT_TYPE
+    WHERE wok.ID IN        
+(SELECT DISTINCT RES.BUSINESS_KEY_ FROM ACT_HI_PROCINST RES
+LEFT OUTER JOIN ACT_RE_PROCDEF DEF
+ON RES.PROC_DEF_ID_ = DEF.ID_ and DEF.KEY_ = 'work-form'
+WHERE (EXISTS( SELECT LINK.USER_ID_ FROM ACT_HI_IDENTITYLINK LINK
+            WHERE USER_ID_ = #{USER_ID}
+            AND LINK.PROC_INST_ID_ = RES.ID_) ))
+    
+    <if test="Q_WORK_ID != null and Q_WORK_ID !='' ">
+            AND wok.ID like CONCAT('%',#{Q_WORK_ID},'%')
+    </if>
+    <if test="Q_WORK_TYPE != null and Q_WORK_TYPE !='' ">
+            AND wok.WORK_TYPE = #{Q_WORK_TYPE}
+    </if>
+    <if test="Q_WORK_STATUS != null and Q_WORK_STATUS !='' ">
+    		<if test="Q_WORK_STATUS == '2,5,6,7'">
+    			AND wok.WORK_STATUS IN ('2','5','6','7')
+    		</if>
+    		<if test="Q_WORK_STATUS == '6,7'">
+    			AND wok.WORK_STATUS IN ('6','7')
+    		</if>
+    		<if test="Q_WORK_STATUS != '2,5,6,7' and Q_WORK_STATUS != '6,7'">
+    			AND wok.WORK_STATUS = #{Q_WORK_STATUS}
+    		</if>
+    </if>
+    <if test="Q_LINKMAN != null and Q_LINKMAN !='' ">
+            AND cus.LINKMAN like CONCAT('%',#{Q_LINKMAN},'%')
+    </if>
+    <if test="Q_CUS_ORG_NAME != null and Q_CUS_ORG_NAME !='' ">
+            AND cus.ORG_NAME like CONCAT('%',#{Q_CUS_ORG_NAME},'%')
+    </if>
+    <if test="Q_DEVICE_ID != null and Q_DEVICE_ID !='' ">
+            AND wok.WORK_DEV_NO like CONCAT('%',#{Q_DEVICE_ID},'%')
+    </if>
+    <if test="Q_DEVICE_TYPE != null and Q_DEVICE_TYPE !='' ">
+            AND dev.DEVICE_TYPE = #{Q_DEVICE_TYPE}
+    </if>
+    <if test="Q_DEVICE_MODEL != null and Q_DEVICE_MODEL !='' ">
+            AND dev.DEVICE_MODEL = #{Q_DEVICE_MODEL}
+    </if>
+    <if test="Q_WORK_APPTIME_BEGIN != null and Q_WORK_APPTIME_BEGIN !='' ">
+            <![CDATA[ AND wok.WORK_APPTIME >= DATE_FORMAT(CONCAT(#{Q_WORK_APPTIME_BEGIN},' 00:00:00'),'%Y-%m-%d %H:%i:%s')]]>  
+    </if>
+    <if test="Q_WORK_APPTIME_END != null and Q_WORK_APPTIME_END !='' ">
+            <![CDATA[ AND wok.WORK_APPTIME <= DATE_FORMAT(CONCAT(#{Q_WORK_APPTIME_END},' 23:59:59'),'%Y-%m-%d %H:%i:%s')]]>
+    </if>
+    <if test="Q_WORK_DEPARTMENT != null and Q_WORK_DEPARTMENT !='' ">
+            AND cus.AREA_ID = #{Q_WORK_DEPARTMENT}
+    </if>
+    <if test="Q_PROPOSER_AREA != null and Q_PROPOSER_AREA !='' ">
+            AND usr.ADDRESS_ID = #{Q_PROPOSER_AREA}
+    </if>
+    <if test="Q_PROPOSER_NAME != null and Q_PROPOSER_NAME !='' ">
+            AND usr.USER_NAME like CONCAT('%',#{Q_PROPOSER_NAME},'%')
+    </if>
+    <if test="Q_RECVPERSON_NAME != null and Q_RECVPERSON_NAME !='' ">
+    	    AND wok.WORK_LASTDEAL_ID IN (SELECT USER_ID FROM base_user WHERE base_user.USER_NAME like CONCAT('%',#{Q_RECVPERSON_NAME},'%'))
+    </if>
+    
+    <!-- 此处加了两个条件 ，通过审批人/部门  ,审验人/部门查询 ,暂时可能会有问题-->
+    <if test="Q_WORK_ASSIGN_DEPARTMENT != null and Q_WORK_ASSIGN_DEPARTMENT !='' ">
+            AND checkuser.USER_NAME IN (SELECT USER_NAME FROM base_user  WHERE ADDRESS_ID=#{Q_WORK_ASSIGN_DEPARTMENT} AND ROLE_ID IN (SELECT distinct ROLE_ID FROM base_role_resource WHERE MODULE_ID = 'assignment'))
+    </if>
+    <if test="Q_ASSIGN_NAME != null and Q_ASSIGN_NAME !='' ">
+            AND checkuser.USER_NAME like CONCAT('%',#{Q_ASSIGN_NAME},'%')
+    </if>
+    <if test="Q_WORK_VERIFY_DEPARTMENT != null and Q_WORK_VERIFY_DEPARTMENT !='' ">
+            AND appruser.USER_NAME IN (SELECT USER_NAME FROM base_user  WHERE ADDRESS_ID=${Q_WORK_VERIFY_DEPARTMENT} AND ROLE_ID IN (SELECT distinct ROLE_ID FROM base_role_resource WHERE MODULE_ID = 'verify'))
+    </if>
+    <if test="Q_VERIFY_NAME != null and Q_VERIFY_NAME !='' ">
+            AND appruser.USER_NAME like CONCAT('%',#{Q_VERIFY_NAME},'%')
+    </if>
+    <if test="Q_BusinessType != null and Q_BusinessType !='' ">
+    	<if test="Q_BusinessType =='apply'">
+    		AND wok.WORK_CREATER_ID = #{USER_ID}
+    	</if>
+    	<if test="Q_BusinessType =='assignment'">
+    		AND (wok.WORK_CHECKPERSON_ID = #{USER_ID} OR wok.WORK_CHECKPERSON_ID is null)	
+    	</if>
+    	<if test="Q_BusinessType =='execute'">
+    	   	AND wok.WORK_LASTDEAL_ID = #{USER_ID}
+    	</if>
+    	<if test="Q_BusinessType =='verify'">
+    		AND  (wok.WORK_APPROVER_ID = #{USER_ID} OR wok.WORK_APPROVER_ID is null)
+    	</if>
+    </if>
+    ORDER BY ID DESC
+  </select>
+  
+    <!--查询所有工单-->
+  <select id="selectAllWork" resultType="hashmap">
+  	 		SELECT
+		wok.ID ID,
+		IFNULL (wok.WORK_TYPE, '') WORK_TYPE,
+		IFNULL (wok.WORK_FLOW_ID, '') WORK_FLOW_ID,
+		IFNULL (oad.DEVICE_NAME, '') DEVICE_NAME,
+		IFNULL (cus.ORG_NAME, '') ORG_NAME,
+		IFNULL (oad.DEVICE_MODEL_NAME, '') DEVICE_MODEL_NAME,
+		IFNULL (oad.DEVICE_TYPE_NAME, '') DEVICE_TYPE_NAME,
+		IFNULL (wok.WORK_URGENT, '') WORK_URGENT,
+		IFNULL (wok.WORK_STATUS, '') WORK_STATUS,
+		IFNULL (wok.WORK_CREATER_ID, '') PROPOSER_ID,
+		IFNULL (wok.WORK_APPMARK, '') WORK_APPMARK,
+     IFNULL (usr.USER_NAME, '') PROPOSER_NAME,
+		IFNULL (wok.WORK_DEV_NO, '') DEVICE_NO,
+		IFNULL (oad.DEVICE_TYPE, '') DEVICE_TYPE,
+		IFNULL (wok.WORK_CUS_NO, '') CUS_ID,
+		IFNULL (oagent.WORK_URGENT, '') WORK_URGENTNAME,
+		IFNULL (wok.WORK_APPTIME, '') WORK_APPTIME
+    FROM oa_workapp wok
+LEFT JOIN base_user usr ON wok.WORK_CREATER_ID = usr.USER_ID
+LEFT JOIN base_user apoverusr ON wok.WORK_APPROVER_ID = apoverusr.USER_ID
+LEFT JOIN base_user CHECKPERSONusr ON wok.WORK_CHECKPERSON_ID = CHECKPERSONusr.USER_ID
+    LEFT JOIN oa_customer_info cus ON wok.WORK_CUS_NO = cus.ORG_ID_P
+    LEFT JOIN (select dev.DEVICE_NAME,dev.DEVICE_TYPE,dev.DEVICE_ID,dev.DEVICE_MODEL,oadevmode.DEVICE_MODEL_NAME,oadevtype.DEVICE_TYPE_NAME from oa_device dev LEFT JOIN  oa_device_model oadevmode ON   oadevmode.ID=dev.DEVICE_MODEL LEFT JOIN  oa_device_type oadevtype  ON oadevtype.ID=dev.DEVICE_TYPE  )oad ON wok.WORK_DEV_NO = oad.DEVICE_ID
+   LEFT JOIN oa_worksurgent oagent  ON wok.WORK_URGENT=oagent.ID
+   
+  
+   
+   where 1=1
+   <if test="MYORG_NAME !=null and MYORG_NAME !=''">
+     and	cus.ORG_NAME  LIKE CONCAT('%',#{MYORG_NAME},'%')
+</if>
+   <if test="DEVICE_NO != NULL and DEVICE_NO !='' ">
+
+                and	wok.WORK_DEV_NO LIKE CONCAT('%',#{DEVICE_NO},'%')
+            </if>
+     <if test="WORK_ID != NULL and WORK_ID !='' ">
+
+                and	wok.ID LIKE CONCAT('%',#{WORK_ID},'%')
+            </if>
+             <if test="WORK_STATUS != NULL and WORK_STATUS !='' ">
+
+                and	wok.WORK_STATUS =#{WORK_STATUS}
+            </if>
+<if test="WORK_TYPE != NULL and WORK_TYPE !='' ">
+
+                and	wok.WORK_TYPE=#{WORK_TYPE}
+            </if>
+            <if test="appStart_time!=null and appStart_time!=''">
+    <![CDATA[   and DATE_FORMAT(wok.WORK_APPTIME, '%Y-%m-%d')>=  DATE_FORMAT(#{appStart_time}, '%Y-%m-%d')   ]]>
+</if>
+<if test="append_time!=null and append_time!=''">
+    <![CDATA[  and DATE_FORMAT(wok.WORK_APPTIME, '%Y-%m-%d') <= DATE_FORMAT(#{append_time}, '%Y-%m-%d')    ]]>
+</if>
+<if test="WORK_INSTALL_DEVTYPE!=null and WORK_INSTALL_DEVTYPE!=''">
+     and	oad.DEVICE_TYPE=#{WORK_INSTALL_DEVTYPE}
+</if>
+<if test="APPROVER_NAME !=null and APPROVER_NAME!=''">
+     and	apoverusr.USER_NAME=#{APPROVER_NAME}
+</if>
+<if test="WORK_CHECKPERSON_NAME !=null and WORK_CHECKPERSON_NAME!=''">
+     and	CHECKPERSONusr.USER_NAME=#{WORK_CHECKPERSON_NAME}
+</if>
+<if test="WORK_DEPARTMENT !=null  and WORK_DEPARTMENT!=''">
+     and	CHECKPERSONusr.ADDRESS_ID=#{WORK_DEPARTMENT}
+</if>
+<if test="APPLy_DEPARTMENT !=null and APPLy_DEPARTMENT!=''">
+     and	CHECKPERSONusr.ADDRESS_ID=#{APPLy_DEPARTMENT}
+</if>
+<if test="DEVICE_MODEL !=null and DEVICE_MODEL!=''">
+     and	oad.DEVICE_MODEL=#{DEVICE_MODEL}
+</if>
+
+    ORDER BY ID DESC
+  </select>
+  <!-- 某一个工单详情 查询-->
+  <select id="selectOneWorkDeail" resultType="hashmap">
+ 	SELECT
+		wok.ID ID,
+		IFNULL (wok.WORK_TYPE, '') WORK_TYPE,
+		IFNULL (wok.WORK_URGENT, '') WORK_URGENT,
+		IFNULL (wok.WORK_FLOW_ID, '') WORK_FLOW_ID,
+		IFNULL (wok.WORK_STATUS, '') WORK_STATUS,
+		IFNULL (wok.WORK_CREATER_ID, '') PROPOSER_ID,
+		IFNULL (wok.WORK_DEPARTMENT, '') WORK_DEPARTMENT,
+		IFNULL (oad.DEVICE_MODEL_NAME, '') DEVICE_MODEL_NAME,
+		IFNULL (oad.DEVICE_TYPE_NAME, '') DEVICE_TYPE_NAME,
+		IFNULL (usr.USER_NAME, '') PROPOSER_NAME,
+		IFNULL (oagent.WORK_URGENT, '') WORK_URGENTNAME,
+		IFNULL (wok.WORK_DEV_NO, '') DEVICE_NO,
+		IFNULL (dev.DEVICE_NAME, '') DEVICE_NAME,
+		IFNULL (dev.DEVICE_MODEL, '') DEVICE_MODEL,
+		IFNULL (dev.DEVICE_TYPE, '') DEVICE_TYPE,
+		IFNULL (wok.WORK_CUS_NO, '') CUS_ID,
+		IFNULL (cus.ORG_ID_P, '') CUS_ORG_ID,
+		IFNULL (cus.AREA_ID, '') CUS_AREA_ID,
+		IFNULL (cus.ORG_ADDRESS, '') CUS_ORG_ADDRESS,
+		IFNULL (cus.ORG_NAME, '') CUS_ORG_NAME,
+		IFNULL (cus.ORG_PHONE, '') CUS_ORG_PHONE,
+		IFNULL (cus.LINKMAN, '') CUS_NAME,
+		IFNULL (wok.WORK_APPTIME, '') WORK_APPTIME,
+		IFNULL (baseuser.USER_NAME, '') USER_NAME,
+		IFNULL (oaworktype.WORK_TYPE, '') WORKTYPENAME,
+		IFNULL (workstatus.WORK_STATUS, '') WORKSTATUS,
+		
+				  IFNULL (wok.WORK_ACCEPT_TIME, '') WORK_ACCEPT_TIME,
+      IFNULL (oaworkaccepttype.ACCEPT_TYPE, '') ACCEPT_TYPE,
+       IFNULL (wok.WORK_TRAIN_INFO, '') WORK_TRAIN_INFO,
+      IFNULL (wok.WORK_TRAIN_TIME, '') WORK_TRAIN_TIME,
+        IFNULL (wok.WORK_REPAIR_TIME, '') WORK_REPAIR_TIME,
+         IFNULL (wok.WORK_REPAIR_TYPE, '') WORK_REPAIR_TYPE,
+          IFNULL (wok.WORK_REPAIR_DESCRIBE, '') WORK_REPAIR_DESCRIBE,
+           IFNULL (oafaulttype.CHINESE, '') oachtype,
+             IFNULL (wok.WORK_PARTOL_TYPE, '') WORK_PARTOL_TYPE
+           
+    FROM oa_workapp wok
+    LEFT JOIN oa_device dev ON wok.WORK_DEV_NO = dev.DEVICE_ID
+    LEFT JOIN base_user usr ON wok.WORK_CREATER_ID = usr.USER_ID
+    LEFT JOIN oa_customer_info cus ON wok.WORK_CUS_NO = cus.ORG_ID_P
+     LEFT JOIN oa_workstype oaworktype ON wok.WORK_TYPE = oaworktype.ID
+    
+    LEFT JOIN base_user baseuser ON wok.WORK_CREATER_ID = baseuser.USER_ID
+     LEFT JOIN (select dev.DEVICE_NAME,dev.DEVICE_TYPE,dev.DEVICE_ID,dev.DEVICE_MODEL,oadevmode.DEVICE_MODEL_NAME,oadevtype.DEVICE_TYPE_NAME from oa_device dev LEFT JOIN  oa_device_model oadevmode ON   oadevmode.ID=dev.DEVICE_MODEL LEFT JOIN  oa_device_type oadevtype  ON oadevtype.ID=dev.DEVICE_TYPE  )oad ON wok.WORK_DEV_NO = oad.DEVICE_ID
+     LEFT JOIN oa_worksurgent oagent  ON wok.WORK_URGENT=oagent.ID
+      LEFT JOIN oa_worksaccepttype oaworkaccepttype  ON wok.WORK_ACCEPT_TYPE=oaworkaccepttype.ACCEPT_TYPE
+      LEFT JOIN oa_fault_type oafaulttype  ON wok.WORK_REPAIR_TYPE=oafaulttype.ID
+        LEFT JOIN oa_workstatus workstatus  ON wok.WORK_STATUS=workstatus.ID
+   where  wok.ID=#{ID} 
+  </select>
+   <!--查询工单表的主键工单号-->
+  <select id="selectWorkid" resultType="hashmap">
+   	SELECT  ID  from  oa_workapp  where   WORK_FLOW_ID=#{WORK_FLOW_ID}
+		
+  </select>
+     <!--查询历史处理的工单详情-->
+  <select id="selectWorhistoryDetai" resultType="hashmap">
+   	SELECT  ID,WORKAPP_ID,DEAL_STATUS,START_TIME,END_TIME,DEAL_DES,DEVICE_TYPE,DEVICE_MODEL,DEVICE_ID,DEVICE_NAME,HOST_NUM,TCR_NUM,DEVICE_IP,SUBNET_MASK,GATEWAY,MAC,SETUP_TYPE,CHECK_TYPE,CHECK_RESULT,TRANING_CONT,FAUILT_TYPE,FAUILT_REASON,REMARK1,REMARK2   from  oa_workapp_deal  where   WORKAPP_ID=#{WORKAPP_ID}
+		
+  </select>
+  <!--查询可分派人员-->
+  <select id="selectDelWorker" resultType="hashmap">
+  	SELECT user.*, address.ADDRESS_NAME ADDRESS_NAME, (SELECT COUNT(*) FROM oa_workapp WHERE WORK_LASTDEAL_ID = #{USER_ID} AND WORK_STATUS IN ('6','7')) DEALWORKNUM
+ 	FROM base_user user
+ 	LEFT JOIN oa_address address
+ 	ON user.ADDRESS_ID = address.ADDRESS_ID 
+ 	WHERE user.ADDRESS_ID IN ((SELECT distinct ADDRESS_UPID FROM oa_address WHERE ADDRESS_ID = #{AREA}), #{AREA})
+	AND user.ROLE_ID IN (SELECT distinct ROLE_ID FROM base_role_resource WHERE MODULE_ID = 'app_deal')
+  </select>
+
+    <!--可审批者查询-->
+    <select id="QueryApprover" parameterType="hashmap" resultType="hashmap">
+
+        SELECT USER.USER_ID
+ 	FROM base_user USER
+ 	LEFT JOIN oa_address address
+ 	ON user.ADDRESS_ID = address.ADDRESS_ID
+ 	WHERE user.ADDRESS_ID IN ((SELECT DISTINCT ADDRESS_UPID FROM oa_address WHERE ADDRESS_ID = #{ADDRESS_ID_P}), #{ADDRESS_ID_P})
+	AND user.ROLE_ID IN (SELECT DISTINCT ROLE_ID FROM base_role_resource WHERE MODULE_ID = 'assignment')
+    </select>
+
+    <!--查询工单信息-->
+    <select id="QueryWorksInfo" parameterType="hashmap" resultType="hashmap">
+        SELECT w.ID,w.WORK_TYPE,w.WORK_URGENT,w.WORK_STATUS,d.DEVICE_ID,d.DEVICE_NAME,d.DEVICE_MODEL,d.DEVICE_TYPE,d.MANAGER_NAME,DATE_FORMAT(w.WORK_APPTIME,'%Y-%m-%d %H:%i:%s') WORK_APPTIME FROM oa_workapp w,oa_device d  WHERE w.WORK_DEV_NO = d.DEVICE_ID
+    </select>
+
+    
+     <!--工单审批操作-->
+    <select id="updateAssignment" parameterType="hashmap">
+        UPDATE oa_workapp SET WORK_STATUS = 
+        <if test="OPERATION =='REBUT'">
+             '3',
+        </if>
+        <if test="OPERATION =='SUSPEND'">
+             '5',
+        </if>
+        <if test="OPERATION =='VETO'">
+             '4',
+        </if>
+        <if test="OPERATION =='DISPATCH'">
+             '6',
+              WORK_LASTDEAL_ID = #{WORKER},
+        </if>
+        
+        WORK_CHECKPERSON_ID = #{USER_ID}
+        WHERE ID = #{WORK_ID}
+        
+    </select>
+
+    <!--工单处理操作-->
+    <select id="updateWorkDeal" parameterType="hashmap" resultType="java.lang.Integer">
+        UPDATE oa_workapp SET WORK_STATUS = "8",WORK_LASTDEAL_ID_ALL = CONCAT(WORK_LASTDEAL_ID_ALL,",",#{USER_ID}) WHERE ID = #{WORKAPP_ID}
+    </select>
+    <!--工单处理,修改状态为处理中-->
+    <select id="updateWorkDeal_in" parameterType="hashmap" resultType="java.lang.Integer">
+        UPDATE oa_workapp SET WORK_STATUS = "7" ,WORK_LASTDEAL_ID_ALL = CONCAT(WORK_LASTDEAL_ID_ALL,",",#{USER_ID}) WHERE ID = #{WORKAPP_ID}
+    </select>
+  
+  	 <!-- 插入工单处理信息 -->
+    <insert id="intMessage_deal" parameterType="hashmap">
+        INSERT INTO	OA_WORKAPP_DEAL(ID,WORKAPP_ID,DEAL_MAN_ID,DEAL_STATUS,START_TIME,END_TIME,DEAL_DES,DEVICE_TYPE,DEVICE_MODEL,DEVICE_ID,DEVICE_NAME,HOST_NUM,TCR_NUM,DEVICE_IP,SUBNET_MASK,GATEWAY,MAC,SETUP_TYPE,CHECK_TYPE,CHECK_RESULT,FAUILT_TYPE,TRANING_CONT,FAUILT_REASON)
+        VALUES(#{ID,jdbcType=VARCHAR},#{WORKAPP_DEAL_ID,jdbcType=VARCHAR},#{USER_ID,jdbcType=VARCHAR},#{DEAL_STATUS,jdbcType=VARCHAR},#{START_TIME,jdbcType=VARCHAR},#{END_TIME,jdbcType=VARCHAR},#{DEAL_DES,jdbcType=VARCHAR},#{DEVICE_TYPE,jdbcType=TIMESTAMP},#{DEVICE_MODEL,jdbcType=VARCHAR},#{DEVICE_ID,jdbcType=VARCHAR},#{DEVICE_NAME,jdbcType=VARCHAR},#{HOST_NUM,jdbcType=VARCHAR},#{TCR_NUM,jdbcType=VARCHAR},#{DEVICE_IP,jdbcType=VARCHAR},#{SUBNET_MASK,jdbcType=VARCHAR},#{GATEWAY,jdbcType=VARCHAR},#{MAC,jdbcType=VARCHAR},#{SETUP_TYPE,jdbcType=VARCHAR},#{CHECK_TYPE,jdbcType=VARCHAR},#{CHECK_RESULT,jdbcType=VARCHAR},#{FAUILT_TYPE,jdbcType=VARCHAR},#{TRANING_CONT,jdbcType=VARCHAR},#{FAUILT_REASON,jdbcType=VARCHAR})
+    </insert>
+  	<insert id="insert_Accessory" parameterType="hashmap">
+        INSERT INTO	OA_ACCESSORY(ACCESSORY_ID,COMMON_ID,ACCESSORY_NAME,ACCESSORY_SIZE,ACCESSORY_LOC,UPLOAD_TIME)
+        VALUES(#{ACCESSORY_ID,jdbcType=VARCHAR},#{COMMON_ID,jdbcType=VARCHAR},#{ACCESSORY_NAME,jdbcType=VARCHAR},#{ACCESSORY_SIZE,jdbcType=VARCHAR},#{ACCESSORY_LOC,jdbcType=VARCHAR},now())
+    </insert>
+	
+	 <!--可审验者查询-->  
+    <select id="QueryVerify" parameterType="hashmap" resultType="hashmap">
+        SELECT USER.USER_ID FROM base_user USER LEFT JOIN oa_address address ON user.ADDRESS_ID = address.ADDRESS_ID
+ 		WHERE user.ADDRESS_ID IN ((SELECT DISTINCT ADDRESS_UPID FROM oa_address WHERE ADDRESS_ID = #{ADDRESS_ID_P}), #{ADDRESS_ID_P}) AND user.ROLE_ID IN (SELECT DISTINCT ROLE_ID FROM base_role_resource WHERE MODULE_ID = 'verify')
+    </select>
+    
+    
+     <!--工单审验操作-->
+    <select id="updateVerify" parameterType="hashmap" >
+        UPDATE oa_workapp SET WORK_STATUS ='10',WORK_APPROVER_ID = #{USER_ID}WHERE ID = #{WORKAPP_ID}
+    </select>
+    
+    <select id="updateNotVerify" parameterType="hashmap" >
+        UPDATE oa_workapp SET WORK_STATUS ='7',WORK_APPROVER_ID = #{USER_ID}WHERE ID = #{WORKAPP_ID}
+    </select>
+
+
+
+
+
+
+    <!--查询工单信息-->
+    <select id="QueryWorkappInfo" parameterType="hashmap" resultType="hashmap">
+		SELECT w.ID,w.WORK_FLOW_ID,w.ID WORK_ID,w.WORK_TYPE,w.WORK_URGENT,w.WORK_CUS_NO,wokstas.WORK_STATUS,user.USER_NAME WORK_CREATER_ID,w.WORK_DEPARTMENT,DATE_FORMAT(w.WORK_APPTIME,'%Y-%m-%d %H:%i:%s') WORK_APPTIME,
+		w.WORK_APPMARK,w.WORK_INSTALL_DEVTYPE,w.WORK_INSTALL_MODEL,w.WORK_REPAIR_TYPE,DATE_FORMAT(w.WORK_REPAIR_TIME,'%Y-%m-%d %H:%i:%s') WORK_REPAIR_TIME,w.WORK_FLOW_ID,w.WORK_REPAIR_DESCRIBE,w.WORK_PARTOL_TYPE,w.WORK_MOVEDEV_NAME,w.WORK_MOVEDEV_ADDRESS,w.WORK_MOVEDEV_CONTACTS,w.WORK_MOVEDEV_PHONE,w.WORK_ACCEPT_TYPE,
+		DATE_FORMAT(w.WORK_ACCEPT_TIME,'%Y-%m-%d %H:%i:%s') WORK_ACCEPT_TIME,DATE_FORMAT(w.WORK_TRAIN_TIME,'%Y-%m-%d %H:%i:%s') WORK_TRAIN_TIME,w.WORK_TRAIN_INFO,
+		d.DEVICE_ID DEVICE_ID_P ,d.DEVICE_NAME,d.DEVICE_MODEL,d.DEVICE_TYPE,c.ORG_ID_P,c.ORG_NAME,c.ORG_ADDRESS,c.ORG_PHONE,c.LINKMAN,c.AREA_ID,
+		devm.DEVICE_MODEL_NAME WORK_INSTALL_MODEL_SHOW,devt.DEVICE_TYPE_NAME WORK_INSTALL_TYPE_SHOW,wt.WORK_TYPE WORK_TYPE_SHOW,wat.ACCEPT_TYPE WORK_ACCEPT_TYPE_SHOW,
+		wu.WORK_URGENT WORK_URGENT_SHOW, devmode.DEVICE_MODEL_NAME DEVICE_MODEL_SHOW,devtype.DEVICE_TYPE_NAME DEVICE_TYPE_SHOW
+		FROM oa_workapp w
+		LEFT JOIN oa_device d ON w.WORK_DEV_NO = d.DEVICE_ID
+		LEFT JOIN oa_customer_info c ON  w.WORK_CUS_NO = c.ORG_ID_P
+		LEFT JOIN oa_device_model devm ON w.WORK_INSTALL_MODEL = devm.ID
+		LEFT JOIN oa_device_type devt ON w.WORK_INSTALL_MODEL = devt.ID
+		LEFT JOIN oa_workstype wt ON w.WORK_TYPE = wt.ID
+		LEFT JOIN oa_worksaccepttype wat ON w.WORK_ACCEPT_TYPE = wat.ID
+		LEFT JOIN oa_worksurgent wu ON w.WORK_URGENT = wu.ID
+		LEFT JOIN oa_device_model devmode ON d.DEVICE_MODEL = devmode.ID
+		LEFT JOIN oa_device_type devtype ON d.DEVICE_TYPE = devtype.ID
+		LEFT JOIN oa_workstatus wokstas ON w.WORK_STATUS = wokstas.ID
+		LEFT JOIN base_user user ON user.USER_ID = w.WORK_CREATER_ID
+		WHERE w.ID = #{WORK_ID_P}
+
+    </select>
+
+
+    <!--更新工单信息-->
+
+    <update id="updateworks" parameterType="hashmap">
+        UPDATE OA_WORKAPP SET WORK_URGENT=#{WORK_URGENT},WORK_APPMARK=#{WORK_APPMARK},
+        WORK_DEV_NO=#{DEVICE_ID_P},WORK_CUS_NO=#{ORG_ID_P},WORK_STATUS=#{WORK_STATUS_P},
+        WORK_INSTALL_DEVTYPE=#{WORK_INSTALL_DEVTYPE},WORK_INSTALL_MODEL=#{WORK_INSTALL_MODEL},
+        WORK_REPAIR_TIME=#{WORK_REPAIR_TIME},WORK_REPAIR_TYPE=#{WORK_REPAIR_TYPE},
+        WORK_REPAIR_DESCRIBE=#{WORK_REPAIR_DESCRIBE},WORK_REPAIR_DESCRIBE=#{WORK_REPAIR_DESCRIBE},
+        WORK_PARTOL_TYPE=#{WORK_PARTOL_TYPE},WORK_MOVEDEV_NAME=#{WORK_MOVEDEV_NAME},
+        WORK_MOVEDEV_ADDRESS=#{WORK_MOVEDEV_ADDRESS},WORK_MOVEDEV_CONTACTS=#{WORK_MOVEDEV_CONTACTS},
+        WORK_MOVEDEV_PHONE=#{WORK_MOVEDEV_PHONE},WORK_ACCEPT_TIME=#{WORK_ACCEPT_TIME},
+        WORK_ACCEPT_TYPE=#{WORK_ACCEPT_TYPE},WORK_LASTMODIFYTIME=#{WORK_LASTMODIFYTIME}
+        WHERE ID=#{WORK_ID_P}
+    </update>
+
+    <!--查询工单对应客户信息-->
+    <select id="QueryCusInfo" parameterType="hashmap" resultType="hashmap">
+            SELECT ORG_ID_P,ORG_NAME,ORG_ADDRESS,LINKMAN,ORG_PHONE,AREA_ID FROM oa_customer_info
+            <if test="cusid != NULL and cusid !='' ">
+
+                WHERE ORG_ID_P LIKE CONCAT('%',#{cusid},'%')
+            </if>
+            <if test="cusname != NULL and cusname !='' ">
+                <if test="cusid != NULL and cusid !='' ">
+                    AND ORG_NAME LIKE CONCAT('%',#{cusname},'%')
+                </if>
+                <if test="CUS_ID_P == NULL and CUS_ID_P =='' ">
+                    WHERE ORG_NAME LIKE CONCAT('%',#{cusname},'%')
+                </if>
+            </if>
+
+    </select>
+   
+    <!--查询所有客户信息，把相关信息置顶-->
+    <select id="QueryALLCusInfo" parameterType="hashmap" resultType="hashmap">
+        SELECT ORG_ID_P,ORG_NAME,ORG_ADDRESS,LINKMAN,ORG_PHONE,AREA_ID FROM oa_customer_info
+        ORDER BY 
+        <if test="cusid != NULL and cusid !='' ">
+        	ORG_ID_P NOT LIKE CONCAT('%',#{cusid},'%')
+        </if>
+        <if test="cusname != NULL and cusname !='' ">
+        	<if test="cusid != NULL and cusid !='' ">
+				AND
+            </if>
+        	ORG_NAME NOT LIKE CONCAT('%',#{cusname},'%')
+        </if>
+        <if test="cusid != NULL and cusid !='' or cusname != NULL and cusname !=''">
+        	,
+        </if>
+        ORG_ID_P ASC
+    </select>
+    
+    <!--查询所有用户信息-->
+    <select id="selectAllUserInfo" resultType="hashmap">
+           SELECT * FROM base_user;
+    </select>
+    
+    <!--查询所有工单信息-->
+    <select id="selectAllWorkInfo" resultType="hashmap">
+           SELECT * FROM oa_workapp;
+    </select>
+    
+    <!--查询附件相关信息-->
+    <select id="QueryAccessoryInfo" parameterType="hashmap" resultType="hashmap">
+      SELECT ACCESSORY_SIZE,ACCESSORY_NAME,ACCESSORY_LOC,DATE_FORMAT(UPLOAD_TIME,'%Y%m%d') UPLOAD_TIME,CONCAT(ACCESSORY_LOC,'/',ACCESSORY_NAME) abspath FROM oa_accessory WHERE COMMON_ID = #{COMM_ID_P}
+    </select>
+
+    <!--查询工单类型列表-->
+    <select id="selectworks_type" parameterType="hashmap" resultType="hashmap">
+        select ID K, WORK_TYPE V from OA_WORKSTYPE
+    </select>
+
+    <!--查询工单紧急程度列表-->
+    <select id="selectworks_urgent" parameterType="hashmap" resultType="hashmap">
+        select ID K, WORK_URGENT V from OA_WORKSURGENT
+    </select>
+    
+    <!--查询工单状态信息列表-->
+    <select id="selectworks_status" parameterType="hashmap" resultType="hashmap">
+        select ID K, WORK_STATUS V from oa_workstatus
+    </select>
+
+    <!--查询验收类型列表-->
+    <select id="selectworks_accepttype" parameterType="hashmap" resultType="hashmap">
+        select ID K, ACCEPT_TYPE V from OA_WORKSACCEPTTYPE
+    </select>
+ <select id="selectMailPath" parameterType="hashmap" resultType="hashmap">
+        select EMAIL FROM  BASE_USER WHERE USER_ID=#{USER_ID}
+    </select>
+
+
+
+
+    <!-- 删除附件相关信息信息 -->
+    <delete id="deleteAccessory" parameterType="hashmap">
+        DELETE FROM oa_accessory WHERE COMMON_ID=#{COMM_ID_P}
+    </delete>
+    
+    <!--查询历史记录详细情况-->
+    <select id="selectWorkHistoryDetails" resultType="hashmap">
+ 	SELECT 
+ 		IFNULL (wokDeal.ID, '') WORKDEAL_ID,
+		IFNULL (wokDeal.WORKAPP_ID, '') WORK_ID,
+		IFNULL (wokDeal.DEAL_STATUS, '') DEAL_STATUS,
+		IFNULL (DATE_FORMAT(wokDeal.START_TIME,"%Y-%m-%d %H:%i:%s"), '') START_TIME,
+		IFNULL (DATE_FORMAT(wokDeal.END_TIME,"%Y-%m-%d %H:%i:%s"), '') END_TIME,
+		IFNULL (wokDeal.DEAL_DES, '') DEAL_DES,
+		IFNULL (wokDeal.DEVICE_TYPE, '') DEVICE_TYPE,
+		IFNULL (wokDeal.DEVICE_MODEL, '') DEVICE_MODEL,
+		IFNULL (wokDeal.DEVICE_ID, '') DEVICE_ID,
+		IFNULL (wokDeal.DEVICE_NAME, '') DEVICE_NAME,
+		IFNULL (wokDeal.HOST_NUM, '') HOST_NUM,
+		IFNULL (wokDeal.TCR_NUM, '') TCR_NUM,
+		IFNULL (wokDeal.DEVICE_IP, '') DEVICE_IP,
+		IFNULL (wokDeal.SUBNET_MASK, '') SUBNET_MASK,
+		IFNULL (wokDeal.GATEWAY, '') GATEWAY,
+		IFNULL (wokDeal.MAC, '') MAC,
+		IFNULL (wokDeal.SETUP_TYPE, '') SETUP_TYPE,
+		IFNULL (wokDeal.CHECK_TYPE, '') CHECK_TYPE,
+		IFNULL (wokDeal.CHECK_RESULT, '') CHECK_RESULT,
+		IFNULL (wokDeal.TRANING_CONT, '') TRANING_CONT,
+		IFNULL (wokDeal.FAUILT_TYPE, '') FAUILT_TYPE,
+		IFNULL (wokDeal.FAUILT_REASON, '') FAUILT_REASON,
+		IFNULL (wok.WORK_TYPE, '') WORK_TYPE,
+		IFNULL (wokstype.WORK_TYPE, '') WORK_TYPE_DESC,
+		IFNULL (dealusr.USER_NAME, '') USER_NAME,
+		IFNULL (address.ADDRESS_NAME, '') ADDRESS_NAME,
+		IFNULL (worksaccepttype.ACCEPT_TYPE, '') WORK_ACCEPT_TYPE_DESC,
+		IFNULL (faultType.CHINESE, '') FAULT_TYPE_DESC,
+		IFNULL (faultReason.CHINESE, '') FAULT_REASON_DESC
+    FROM oa_workapp_deal wokDeal
+    LEFT JOIN oa_workapp wok ON wok.ID = wokDeal.WORKAPP_ID
+    LEFT JOIN oa_workstype wokstype ON wokstype.ID = wok.WORK_TYPE
+    LEFT JOIN base_user dealusr ON dealusr.USER_ID = wokDeal.DEAL_MAN_ID
+    LEFT JOIN oa_address address ON address.ADDRESS_ID = dealusr.ADDRESS_ID
+    LEFT JOIN oa_worksaccepttype worksaccepttype on worksaccepttype.ID = wokDeal.CHECK_TYPE
+    LEFT JOIN oa_fault_type faultType on faultType.ID = wokDeal.FAUILT_TYPE
+    LEFT JOIN oa_fault_reason faultReason on faultReason.ID = wokDeal.FAUILT_REASON
+    WHERE wokDeal.ID = #{WORKDEALID}    
+  </select>
+  
+    <!--查询故障类型列表-->
+    <select id="selectFaultType" parameterType="hashmap" resultType="hashmap">
+        SELECT ID K, CHINESE V FROM OA_FAULT_TYPE
+    </select>
+    
+    <!--查询故障原因列表-->
+    <select id="selectFaultReason" parameterType="hashmap" resultType="hashmap">
+        SELECT ID K, CHINESE V FROM OA_FAULT_REASON
+    </select>
+        <!--查询验收类型-->
+    <select id="selectACCEPT" parameterType="hashmap" resultType="hashmap">
+        SELECT ID K, ACCEPT_TYPE_VAL V FROM OA_ACCEPT_TYPE
+    </select>
+    
+    <select id="selectDevice" parameterType="hashmap" resultType="hashmap">
+        SELECT * FROM OA_DEVICE
+    </select>
+    
+      <select id="selectBranchPath" parameterType="hashmap" resultType="hashmap">
+        SELECT ORG_ID_P , ORG_NAME FROM oa_customer_info where ORG_ID_P=#{ORG_ID_P}
+    </select>
+    
+    <select id="selectOverInsuranceMail" parameterType="hashmap" resultType="hashmap">
+        SELECT 	EMAIL FROM base_user where ROLE_ID=#{ROLE_ID}
+    </select>
+    
+    <select id="mailContent" parameterType="hashmap" resultType="hashmap">
+    SELECT A.WORK_FLOW_ID, 	A.WORK_APPMARK ,A.WORK_TYPE,B.ORG_ID_P ,B.ORG_NAME,B.ORG_ADDRESS,B.ORG_PHONE,B.LINKMAN,C.DEVICE_ID,C.DEVICE_MODEL,C.DEVICE_TYPE ,C.DEVICE_NAME ,D.DEVICE_TYPE_NAME ,E.DEVICE_MODEL_NAME FROM OA_WORKAPP A LEFT JOIN oa_customer_info  B ON A.WORK_CUS_NO=B.ORG_ID_P LEFT JOIN  OA_DEVICE C ON 
+    A.WORK_DEV_NO=C.DEVICE_ID LEFT JOIN oa_device_type D ON C.DEVICE_TYPE=D.ID LEFT JOIN  oa_device_model E ON C.DEVICE_MODEL=E.ID WHERE A.ID=#{ID}
+    </select>
+    
+   
+
+    
+    
+</mapper>

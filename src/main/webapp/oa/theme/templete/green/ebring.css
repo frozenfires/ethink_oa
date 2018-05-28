@@ -1,0 +1,27 @@
+
+/**警告框样式定义*/
+.alert {background-color: #D44A26;border-color: #D44A26;color: #FFF;}
+
+/**标签页控件样式*/
+.tabStyle { text-align: center; font-size: 24px; width: 100%; background-color: #E6E6E6;
+    padding-top: 10px; padding-left: 20px; margin-bottom: 50px;
+}
+.tabStyle li{background-color: #6B6464; font-family: 微软雅黑; color:#fff;}
+.tabStyle li.active{background-color:#000; color:#30134B;}
+.nav-tabs li a {color:#fff; *border: 1px solid #9F9AE7; *background-color: #6B6464; *filter: chroma(color=#30134B);}
+.tabStyle li.active a{color:#30134B;}
+.nav-tabs li a:hover { color: #444444}
+
+/**按钮样式*/
+.btn.btn-primary {
+  background-color: #006dcc;
+  background-image: linear-gradient(to bottom, #006dcc, #006dcc);
+  border-color: #006dcc #006dcc #006dcc;
+  *background-color: #006dcc;
+}
+
+/**去掉表格th的上边框background-color: #30134b; color:#fff;*/
+.table th{background-color: #E6E6E6; color: #444; }
+
+/**查询表单样式*/ 
+.queryForm{border-bottom: 0px solid #444444; padding-bottom: 15px; background-color: #EAFCEB;}
